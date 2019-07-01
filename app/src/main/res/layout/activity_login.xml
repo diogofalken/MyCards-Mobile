@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/corFundo"
+    tools:context=".Activity_login">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="93dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="46dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="88dp"
+        android:text="My"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:fontFamily="@font/helveticaneue"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="105dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Cards"
+        android:textColor="#063057"
+        android:textSize="29sp"
+        app:fontFamily="@font/helveticaneue"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="0dp" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#e6e6e6"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="datetime|textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/senha"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#e6e6e6"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:paddingEnd="40dp"
+        android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <Button
+        android:id="@+id/entrar"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/corBaseAzul"
+        android:text="Entrar"
+        android:textColor="@android:color/white"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="@+id/senha"
+        app:layout_constraintStart_toStartOf="@+id/senha"
+        app:layout_constraintTop_toBottomOf="@+id/senha" />
+
+    <TextView
+        android:id="@+id/recuperar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Esqueceu-se da sua senha?"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/entrar"
+        app:layout_constraintStart_toStartOf="@+id/entrar"
+        app:layout_constraintTop_toBottomOf="@+id/entrar" />
+
+    <TextView
+        android:id="@+id/registar"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/border_top_register"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recuperar"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="@+id/recuperar"
+        app:layout_constraintTop_toBottomOf="@+id/recuperar"
+        app:layout_constraintVertical_bias="0.909" />
+
+    <ImageView
+        android:id="@+id/see_pass"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:onClick="see_not_see_password"
+        app:layout_constraintBottom_toBottomOf="@+id/senha"
+        app:layout_constraintEnd_toEndOf="@+id/senha"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="@+id/senha"
+        app:layout_constraintTop_toTopOf="@+id/senha"
+        app:layout_constraintVertical_bias="0.523"
+        app:srcCompat="@drawable/ic_not_see_password" />
+
+
+</android.support.constraint.ConstraintLayout>

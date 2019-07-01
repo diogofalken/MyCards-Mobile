@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border_layout_registo"
+    android:padding="1dp">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="46dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="#e6e6e6"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/senha"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#e6e6e6"
+                android:drawableLeft="@drawable/ic_password"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingEnd="40dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
+
+            <EditText
+                android:id="@+id/senha_again"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#e6e6e6"
+                android:drawableLeft="@drawable/ic_password"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Confirme a senha"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingEnd="40dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/senha"
+                app:layout_constraintStart_toStartOf="@+id/senha"
+                app:layout_constraintTop_toBottomOf="@+id/senha" />
+
+            <ImageView
+                android:id="@+id/see_pass"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="97dp"
+                android:layout_marginTop="-34dp"
+                app:layout_constraintBottom_toBottomOf="@+id/senha"
+                app:layout_constraintEnd_toEndOf="@+id/senha"
+                app:layout_constraintHorizontal_bias="0.964"
+                app:layout_constraintStart_toStartOf="@+id/senha"
+                app:layout_constraintTop_toTopOf="@+id/senha"
+                app:layout_constraintVertical_bias="0.523"
+                app:srcCompat="@drawable/ic_not_see_password" />
+
+            <ImageView
+                android:id="@+id/see_pass_again"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/senha_again"
+                app:layout_constraintEnd_toEndOf="@+id/senha_again"
+                app:layout_constraintHorizontal_bias="0.974"
+                app:layout_constraintStart_toStartOf="@+id/senha_again"
+                app:layout_constraintTop_toTopOf="@+id/senha_again"
+                app:srcCompat="@drawable/ic_not_see_password" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Dados Pessoais"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/senha"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/senha"
+                app:layout_constraintTop_toBottomOf="@+id/senha_again" />
+
+            <EditText
+                android:id="@+id/nome"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#e6e6e6"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="datetime|textPersonName"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView6"
+                app:layout_constraintHorizontal_bias="0.47"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <EditText
+                android:id="@+id/telemovel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#e6e6e6"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Telemóvel"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/nome"
+                app:layout_constraintStart_toStartOf="@+id/nome"
+                app:layout_constraintTop_toBottomOf="@+id/nome" />
+
+            <Button
+                android:id="@+id/data_nasc"
+                android:layout_width="0dp"
+                android:hint="Data de Nascimento"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#E6E6E6"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:drawablePadding="10dp"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                style="?android:attr/borderlessButtonStyle"
+                app:layout_constraintEnd_toEndOf="@+id/telemovel"
+                app:layout_constraintStart_toStartOf="@+id/telemovel"
+                app:layout_constraintTop_toBottomOf="@+id/telemovel" />
+
+            <Button
+                android:id="@+id/distrito"
+                android:layout_width="0dp"
+                android:hint="Distrito"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#E6E6E6"
+                android:drawableLeft="@drawable/ic_city"
+                android:drawablePadding="10dp"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                style="?android:attr/borderlessButtonStyle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/data_nasc"
+                app:layout_constraintStart_toStartOf="@+id/data_nasc"
+                app:layout_constraintTop_toBottomOf="@+id/data_nasc" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

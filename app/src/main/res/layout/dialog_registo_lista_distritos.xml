@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/corBranca"
+    tools:context=".Activity_registo">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:background="#a0cdf8"
+        android:text="Distrito"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/bottom_nav"
+        android:background="#b3b3b3"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:layout_editor_absoluteX="34dp"></View>
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/nao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/distrito1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Aveiro"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Beja"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Braga"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Bragança"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Castelo Branco"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Coimbra"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Évora"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Faro"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Guarda"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Leiria"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Lisboa"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Portalegre"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Porto"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Santarém"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Setúbal"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Viana do Castelo"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Vila Real"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+
+                <RadioButton
+                    android:id="@+id/distrito18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:background="@color/corBranca"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Viseu"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/corPreta" />
+            </RadioGroup>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/nao"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_cancel_pop_up"
+        android:text="Cancelar"
+        android:textAllCaps="false"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/enviar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/enviar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_ok_pop_up"
+        android:text="Ok"
+        android:textAllCaps="false"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nao"
+        app:layout_constraintTop_toBottomOf="@+id/scroll" />
+
+</android.support.constraint.ConstraintLayout>
