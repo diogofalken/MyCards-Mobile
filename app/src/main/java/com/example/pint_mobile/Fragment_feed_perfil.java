@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,12 +42,38 @@ public class Fragment_feed_perfil extends Fragment {
         nome.setText(sharedPreferences.getString("PrimeiroNome", "") + " " +  sharedPreferences.getString("UltimoNome", ""));
         email.setText(sharedPreferences.getString("Email", ""));
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
-
+        setRating(sharedPreferences.getString("Rating", ""));
 
 
         return view;
     }
 
+    private void setRating(String rat){
+        switch (rat) {
+            case "0":
+                rating.setImageResource(R.drawable.rating_user0);
+                break;
 
+            case "1":
+                rating.setImageResource(R.drawable.rating_user1);
+                break;
+
+            case "2":
+                rating.setImageResource(R.drawable.rating_user2);
+                break;
+
+            case "3":
+                rating.setImageResource(R.drawable.rating_user3);
+                break;
+
+            case "4":
+                rating.setImageResource(R.drawable.rating_user4);
+                break;
+
+            case "5":
+                rating.setImageResource(R.drawable.rating_user5);
+                break;
+        }
+    }
 
 }

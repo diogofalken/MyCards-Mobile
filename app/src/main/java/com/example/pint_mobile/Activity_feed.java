@@ -43,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +56,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     DrawerLayout drawerLayout;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String info;
-    float valor_rating = 0;
+    Integer x = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         setContentView(R.layout.activity_feed);
 
         sharedPreferences = getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         //remover action bar
         getSupportActionBar().hide();
@@ -89,9 +90,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         String id = getIntent().getStringExtra("id");
 
         //calcular rating
-        new Getrating().execute();
-
-
+        //new Getrating().execute();
+        //calcular_rating_cliente();
         }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -220,47 +220,64 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         return super.onKeyDown(keyCode, event);
     }
 
-    private class Getrating extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
-            // Making a request to url and getting response
-            String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/rating";
-            String jsonStr = sh.makeServiceCall(url);
-
-            if (jsonStr != null) {
-                try {
-                    JSONArray ratings = new JSONArray(jsonStr);
-
-                    for (int i = 0; i < ratings.length(); i++) {
-                        JSONObject c = ratings.getJSONObject(i);
-                        String valor = c.getString("valor");
-                        int x = Integer.parseInt(valor);
-                        valor_rating += x;
+    private void calcular_rating_cliente() {
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/rating";
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray ratings = new JSONArray(response);
+                            if(ratings != null) {
+                                for (int i = 0; i < ratings.length(); i++) {
+                                    JSONObject r = ratings.getJSONObject(i);
+                                    String valor = r.getString("Rating");
+                                    Integer integer = Integer.parseInt(valor);
+                                    x += integer;
+                                }
+                                x = x / ratings.length();
+                                String valor = String.valueOf(x);
+                                editor.putString("Rating", valor);
+                                editor.commit();
+                            }
+                            else{
+                                editor.putString("Rating", "0");
+                                editor.commit();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    valor_rating = valor_rating / ratings.length();
-                    //String z = String.
-                    //Toast.makeText(getApplicationContext()), valor_rating, Toast.LENGTH_SHORT).show();
-
-                } catch (final JSONException e) {
-                    Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                    Toast.makeText(Activity_feed.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    //This indicates that the request has either time out or there is no connection
+                    Log.i("VolleyError::", error.toString());
+                } else if (error instanceof AuthFailureError) {
+                    //Error indicating that there was an Authentication Failure while performing the request
+                    Log.i("AuthFailureError::", error.toString());
+                } else if (error instanceof ServerError) {
+                    //Indicates that the server responded with a error response
+                    Log.i("ServerError::", error.toString());
+                    Toast.makeText(Activity_feed.this, error.toString(), Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    //Indicates that there was network error while performing the request
+                    Log.i("NetworkError::", error.toString());
+                    Toast.makeText(Activity_feed.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    //Indicates that the server response could not be parsed
+                    Log.i("ParseError::", error.toString());
                 }
-
-            } else { //nenhum rating
-                valor_rating = 0;
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-        }
+        }) {
+        };
+        // requestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(postRequest);
     }
-
 }
