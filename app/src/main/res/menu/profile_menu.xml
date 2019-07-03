@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Gerir" >
+        <menu>
+            <item android:id="@+id/nav_edit_perfil"
+                android:icon="@drawable/ic_person"
+                android:title="O meu perfil"/>
+            <item android:id="@+id/nav_edit_notificacoes"
+                android:icon="@drawable/ic_notification"
+                android:title="Notificações"/>
+            <item android:id="@+id/nav_edit_preferencias"
+                android:icon="@drawable/ic_preferences"
+                android:title="Preferências"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Sair"></item>
+
+
+</menu>

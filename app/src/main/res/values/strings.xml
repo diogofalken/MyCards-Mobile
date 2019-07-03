@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PINT-Mobile</string>
+    <string name="nav_wallet">Wallet</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_person">Person</string>
+    <string name="text_register_preferencias1">As preferências do cliente ajudam-nos a escolher as melhores ofertas para si, assim irá encontrar mais rápido o que procura.</string>
+    <string name="text_register_preferencias2">Escolha as suas:</string>
+    <string name="text_register_notificacoes">Os utilizadores são livres de fazer as suas escolhas e portanto pode escolher que notificações pretende receber.</string>
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Fechar navigation drawer</string>
+</resources>

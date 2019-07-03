@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/corBranca"
+    tools:context=".Activity_registo">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/corBranca"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:text="Listar"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/bottom_nav"
+        android:background="#b3b3b3"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:layout_editor_absoluteX="34dp"></View>
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tentar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTipos"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@color/corBaseAzul"
+                android:drawableLeft="@drawable/ic_settings"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:drawableTint="@color/corLaranjaIcon"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:text="  Tipos de Descontos"
+                android:textColor="@color/corBranca"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutTipos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTipos"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="Todos"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox5"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="Raspadinhas"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="Cupões"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="Carimbos"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_above="@+id/bottom_nav"
+                android:background="#b3b3b3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutTipos"
+                tools:layout_editor_absoluteX="16dp"></View>
+
+            <TextView
+                android:id="@+id/textViewEmpresas"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@color/corBaseAzul"
+                android:checked="true"
+                android:drawableLeft="@drawable/ic_empresas"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:drawableTint="@color/corLaranjaIcon"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:text="  Empresas"
+                android:textColor="@color/corBranca"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutEmpresas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEmpresas"
+                tools:layout_editor_absoluteX="0dp">
+
+                <CheckBox
+                    android:id="@+id/checkBox6"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="Todos"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/aaaaaa"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="aaaaaaaa"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/bbbbbbb"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="bbbbb"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox7"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="ccccccccc"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="ddddddddddd"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox9"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="eeeeeeeeee"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox10"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="fffffffff"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox11"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="gggggggg"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+
+                <CheckBox
+                    android:id="@+id/checkBox12"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:button="@null"
+                    android:buttonTint="@color/corBaseAzul"
+                    android:checked="true"
+                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:text="hhhhhhhhh"
+                    android:textSize="14sp"
+                    android:theme="@style/CheckboxFiltros" />
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/tentar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_cancel_pop_up"
+        android:text="Cancelar"
+        android:textAllCaps="false"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sim"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/sim"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_ok_pop_up"
+        android:text="Aplicar"
+        android:textAllCaps="false"
+        android:textColor="@color/corBaseAzul"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tentar"
+        app:layout_constraintTop_toBottomOf="@+id/scroll" />
+
+</android.support.constraint.ConstraintLayout>
