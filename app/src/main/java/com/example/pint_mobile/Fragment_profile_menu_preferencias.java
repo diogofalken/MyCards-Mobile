@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +43,16 @@ public class Fragment_profile_menu_preferencias extends Fragment {
     TextView cancelar, guardar;
     SharedPreferences sharedPreferences;
     String preferencias = "";
+    ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_menu_profile_preferencias, container, false);
+
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+
         sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String auxPreferencias = sharedPreferences.getString("Preferencias", "");
         ConstraintLayout container1 = (ConstraintLayout)view.findViewById(R.id.constraintLayout4);
@@ -76,6 +82,9 @@ public class Fragment_profile_menu_preferencias extends Fragment {
 
         guardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                progressBar.setVisibility(View.VISIBLE);
+
                 ConstraintLayout container = (ConstraintLayout)view.findViewById(R.id.constraintLayout4);
 
                 for (int i = 0; i < container.getChildCount(); i++){
@@ -107,16 +116,19 @@ public class Fragment_profile_menu_preferencias extends Fragment {
                                         Intent i = new Intent(getContext(), Activity_feed.class);
                                         getContext().startActivity(i);
                                     } else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getContext(), "Update Errado!", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Update Errado", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressBar.setVisibility(View.GONE);
                         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                             //This indicates that the request has either time out or there is no connection
                             Log.i("VolleyError::", error.toString());

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,11 +41,16 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
     TextView cancelar, guardar;
     String Notificacoes ="";
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_menu_profile_notificacoes, container, false);
+
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+
         sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
         RadioGroup radioGroupaux = (RadioGroup)view.findViewById(R.id.radioGroup);
 
@@ -76,6 +82,9 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
 
         guardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                progressBar.setVisibility(View.VISIBLE);
+
                 RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.radioGroup);
 
                 int radioButtonID = radioGroup.getCheckedRadioButtonId();
@@ -105,7 +114,6 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
-                                    Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                                     if (jsonObject.getString("status").equals("true")) {
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("Notificacoes", Notificacoes);
@@ -115,16 +123,19 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
                                         Intent i = new Intent(getContext(), Activity_feed.class);
                                         getContext().startActivity(i);
                                     } else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getContext(), "Update Errado!", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Update Errado", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressBar.setVisibility(View.GONE);
                         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                             //This indicates that the request has either time out or there is no connection
                             Log.i("VolleyError::", error.toString());

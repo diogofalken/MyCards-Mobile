@@ -1,5 +1,6 @@
 package com.example.pint_mobile;
 
+import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -37,6 +39,7 @@ public class Fragment_feed_cartoes extends Fragment {
 
     ListView lv;
     View view;
+    ImageView add_cartao;
 
     ArrayList<HashMap<String, String>> cardsList;
 
@@ -44,6 +47,15 @@ public class Fragment_feed_cartoes extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_feed_cartoes, container, false);
+
+        add_cartao = view.findViewById(R.id.add_cartao);
+
+        add_cartao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_listar_empresas.class);
+                startActivity(intent);
+            }
+        });
 
         //getCards();
 

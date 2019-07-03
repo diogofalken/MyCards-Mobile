@@ -202,6 +202,7 @@ public class Activity_login extends AppCompatActivity {
                                 editor.putString("DataNascimento",cliente.getString("DataNascimento"));
                                 editor.putString("Preferencias",cliente.getString("Preferencias"));
                                 editor.putString("Notificacoes",cliente.getString("Notificacoes"));
+                                editor.putString("Rating", "0");
                                 editor.commit();
 
                                 Intent intent = new Intent(getApplicationContext(), Activity_feed.class);

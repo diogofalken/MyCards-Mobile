@@ -136,68 +136,75 @@ public class Activity_concluir_registo extends AppCompatActivity {
         concluir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String url = "https://www.mycards.dsprojects.pt/authentication/activate_cliente";
-                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    if (jsonObject.getString("status").equals("true")) {
-                                        editor.clear();
-                                        editor.commit();
-                                        Intent intent = new Intent(Activity_concluir_registo.this, Activity_login.class);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    } else {
+                if(!checkBox.isChecked()){
+                    Toast.makeText(getApplicationContext(), "Leia a política de privacidade!", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+                else {
+                    String url = "https://www.mycards.dsprojects.pt/authentication/activate_cliente";
+                    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(response);
+                                        if (jsonObject.getString("status").equals("true")) {
+                                            editor.clear();
+                                            editor.commit();
+                                            Intent intent = new Intent(Activity_concluir_registo.this, Activity_login.class);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        } else {
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Código de confirmação errado!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
                                         progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "Código de confirmação errado!", Toast.LENGTH_SHORT).show();
                                     }
-                                } catch (JSONException e) {Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
-                                    e.printStackTrace();
-                                    progressBar.setVisibility(View.GONE);
                                 }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressBar.setVisibility(View.GONE);
+                            ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                            if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
+                                Toast.makeText(Activity_concluir_registo.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                            } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                //This indicates that the request has either time out or there is no connection
+                                Log.i("VolleyError::", error.toString());
+                            } else if (error instanceof AuthFailureError) {
+                                //Error indicating that there was an Authentication Failure while performing the request
+                                Log.i("AuthFailureError::", error.toString());
+                            } else if (error instanceof ServerError) {
+                                //Indicates that the server responded with a error response
+                                Log.i("ServerError::", error.toString());
+                                Toast.makeText(Activity_concluir_registo.this, error.toString(), Toast.LENGTH_SHORT).show();
+                            } else if (error instanceof NetworkError) {
+                                //Indicates that there was network error while performing the request
+                                Log.i("NetworkError::", error.toString());
+                                Toast.makeText(Activity_concluir_registo.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                            } else if (error instanceof ParseError) {
+                                //Indicates that the server response could not be parsed
+                                Log.i("ParseError::", error.toString());
                             }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
-                        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-                        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-                            Toast.makeText(Activity_concluir_registo.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
-                        } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            //This indicates that the request has either time out or there is no connection
-                            Log.i("VolleyError::", error.toString());
-                        } else if (error instanceof AuthFailureError) {
-                            //Error indicating that there was an Authentication Failure while performing the request
-                            Log.i("AuthFailureError::", error.toString());
-                        } else if (error instanceof ServerError) {
-                            //Indicates that the server responded with a error response
-                            Log.i("ServerError::", error.toString());
-                            Toast.makeText(Activity_concluir_registo.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        } else if (error instanceof NetworkError) {
-                            //Indicates that there was network error while performing the request
-                            Log.i("NetworkError::", error.toString());
-                            Toast.makeText(Activity_concluir_registo.this, "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
-                        } else if (error instanceof ParseError) {
-                            //Indicates that the server response could not be parsed
-                            Log.i("ParseError::", error.toString());
                         }
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("email", sharedPreferences.getString("email", ""));
-                        params.put("password", sharedPreferences.getString("senha", ""));
-                        params.put("codigoativacao", codigo.getText().toString());
-                        return params;
-                    }
-                };
-                // requestQueue
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                requestQueue.add(postRequest);
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("email", sharedPreferences.getString("email", ""));
+                            params.put("password", sharedPreferences.getString("senha", ""));
+                            params.put("codigoativacao", codigo.getText().toString());
+                            return params;
+                        }
+                    };
+                    // requestQueue
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    requestQueue.add(postRequest);
+                }
             }
         });
 

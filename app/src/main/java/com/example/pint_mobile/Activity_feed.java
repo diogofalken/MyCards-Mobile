@@ -1,7 +1,11 @@
 package com.example.pint_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -11,13 +15,36 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_feed extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +54,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String info;
+    float valor_rating = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +86,12 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         open_fragment_descontos();
 
         navigationView.setNavigationItemSelectedListener(this);
-
         String id = getIntent().getStringExtra("id");
+
+        //calcular rating
+        new Getrating().execute();
+
+
         }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -149,7 +183,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         });
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
@@ -185,6 +218,49 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private class Getrating extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/rating";
+            String jsonStr = sh.makeServiceCall(url);
+
+            if (jsonStr != null) {
+                try {
+                    JSONArray ratings = new JSONArray(jsonStr);
+
+                    for (int i = 0; i < ratings.length(); i++) {
+                        JSONObject c = ratings.getJSONObject(i);
+                        String valor = c.getString("valor");
+                        int x = Integer.parseInt(valor);
+                        valor_rating += x;
+                    }
+                    valor_rating = valor_rating / ratings.length();
+                    //String z = String.
+                    //Toast.makeText(getApplicationContext()), valor_rating, Toast.LENGTH_SHORT).show();
+
+                } catch (final JSONException e) {
+                    Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
+                }
+
+            } else { //nenhum rating
+                valor_rating = 0;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
     }
 
 }
