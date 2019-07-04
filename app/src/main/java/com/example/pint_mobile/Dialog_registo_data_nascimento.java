@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 public class Dialog_registo_data_nascimento extends DialogFragment {
 
@@ -34,7 +33,7 @@ public class Dialog_registo_data_nascimento extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_registo_data_nascimento, container, false);
 
-        cancel = view.findViewById(R.id.tentar);
+        cancel = view.findViewById(R.id.voltar);
         ok = view.findViewById(R.id.enviar);
         datePicker = view.findViewById(R.id.date_picker);
 

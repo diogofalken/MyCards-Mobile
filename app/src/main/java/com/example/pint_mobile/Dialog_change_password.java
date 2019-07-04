@@ -31,7 +31,7 @@ public class Dialog_change_password extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_change_password, container, false);
 
-        cancel = view.findViewById(R.id.tentar);
+        cancel = view.findViewById(R.id.voltar);
         ok = view.findViewById(R.id.enviar);
         see_password1 = view.findViewById(R.id.see_pass1);
         see_password2 = view.findViewById(R.id.see_pass2);
