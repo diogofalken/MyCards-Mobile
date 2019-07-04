@@ -1,6 +1,5 @@
 package com.example.pint_mobile;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -13,11 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class Dialog_fidelizar_empresa extends DialogFragment {
 
@@ -33,9 +28,10 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
 
         cancel = view.findViewById(R.id.tentar);
         ok = view.findViewById(R.id.enviar);
-        TextView tvId = view.findViewById(R.id.id);
         TextView tvNome = view.findViewById(R.id.nome);
         TextView tvPontos = view.findViewById(R.id.pontos);
+        TextView tvCupoes = view.findViewById(R.id.cupoes);
+        TextView tvCarimbos = view.findViewById(R.id.carimbos);
 
         //fechar pop up ao carregar em cancelar
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +42,9 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         });
 
         tvNome.setText(getArguments().getString("nome"));
-        tvPontos.setText("12 pontos");
+        tvPontos.setText("12");
+        tvCupoes.setText("0");
+        tvCarimbos.setText("1");
 
         return view;
     }

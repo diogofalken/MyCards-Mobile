@@ -55,7 +55,7 @@ public class Fragment_profile_menu_preferencias extends Fragment {
 
         sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String auxPreferencias = sharedPreferences.getString("Preferencias", "");
-        ConstraintLayout container1 = (ConstraintLayout)view.findViewById(R.id.constraintLayout4);
+        ConstraintLayout container1 = (ConstraintLayout)view.findViewById(R.id.clDescontos);
         int auxIndex = 0;
 
         for (int i = 0; i < container1.getChildCount(); i++){
@@ -85,7 +85,7 @@ public class Fragment_profile_menu_preferencias extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                ConstraintLayout container = (ConstraintLayout)view.findViewById(R.id.constraintLayout4);
+                ConstraintLayout container = (ConstraintLayout)view.findViewById(R.id.clDescontos);
 
                 for (int i = 0; i < container.getChildCount(); i++){
                     View vi = container.getChildAt(i);
