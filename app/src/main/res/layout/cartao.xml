@@ -20,7 +20,6 @@
             android:id="@+id/nome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
@@ -38,7 +37,6 @@
             android:id="@+id/area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
@@ -56,10 +54,13 @@
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/id_cartao"
-            tools:layout_editor_absoluteX="64dp"
-            tools:layout_editor_absoluteY="73dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/area"
+            app:srcCompat="@drawable/id_cartao" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -68,20 +69,23 @@
             android:layout_marginStart="64dp"
             android:layout_marginLeft="64dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/descontos" />
 
         <TextView
-            android:id="@+id/nrclientes"
+            android:id="@+id/idcliente"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center_vertical"
             android:text="id cliente"
             android:textColor="@color/corBranca"
@@ -91,14 +95,14 @@
             app:layout_constraintTop_toBottomOf="@+id/area" />
 
         <TextView
-            android:id="@+id/nrdescontos2"
+            android:id="@+id/nrdescontos"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center_vertical"
             android:text="nr descontos"
             android:textColor="@color/corBranca"
@@ -106,25 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/nrclientes" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/border_onclick_cartao_fidelizador"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nrdescontos2"
-            app:srcCompat="@drawable/onclick" />
+            app:layout_constraintTop_toBottomOf="@+id/idcliente" />
 
         <!--so our layout is set-->
 

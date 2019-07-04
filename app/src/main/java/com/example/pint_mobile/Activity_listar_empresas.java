@@ -51,7 +51,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.lista_cartoes);
 
         String url = "https://www.mycards.dsprojects.pt/api/empresa";
         StringRequest getEmpresas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

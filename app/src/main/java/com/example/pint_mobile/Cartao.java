@@ -1,26 +1,32 @@
 package com.example.pint_mobile;
 
 public class Cartao {
-    private String id;
-    private String nome;
-    private String area;
-    private String nr_clientes;
-    private String nr_descontos;
+    private String id_empresa;
+    private String id_cartao;
+    private String id_cliente;
 
-    public Cartao(String id, String nome, String area, String nr_clientes, String nr_descontos) {
-        this.id = id;
-        this.nome = nome;
-        this.area = area;
-        this.nr_clientes = nr_clientes;
-        this.nr_descontos = nr_descontos;
+    public String getId_empresa() {
+        return id_empresa;
     }
 
-    public String getId() {
-        return id;
+    public void setId_empresa(String id_empresa) {
+        this.id_empresa = id_empresa;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getId_cartao() {
+        return id_cartao;
+    }
+
+    public void setId_cartao(String id_cartao) {
+        this.id_cartao = id_cartao;
+    }
+
+    public String getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getNome() {
@@ -39,14 +45,6 @@ public class Cartao {
         this.area = area;
     }
 
-    public String getNr_clientes() {
-        return nr_clientes;
-    }
-
-    public void setNr_clientes(String nr_clientes) {
-        this.nr_clientes = nr_clientes;
-    }
-
     public String getNr_descontos() {
         return nr_descontos;
     }
@@ -54,4 +52,18 @@ public class Cartao {
     public void setNr_descontos(String nr_descontos) {
         this.nr_descontos = nr_descontos;
     }
+
+    public Cartao(String id_empresa, String id_cartao, String id_cliente, String nome, String area, String nr_descontos) {
+        this.id_empresa = id_empresa;
+        this.id_cartao = id_cartao;
+        this.id_cliente = id_cliente;
+        this.nome = nome;
+        this.area = area;
+        this.nr_descontos = nr_descontos;
+    }
+
+    private String nome;
+    private String area;
+    private String nr_descontos;
+
 }
