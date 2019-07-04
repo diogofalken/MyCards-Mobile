@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -81,6 +82,19 @@ public class Activity_listar_empresas extends AppCompatActivity {
 
         adapter = new MyAdapter(this, listaEmpresas);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Dialog_fidelizar_empresa dialog = new Dialog_fidelizar_empresa();
+                Bundle args = new Bundle();
+                args.putString("id", listaEmpresas.get(position).getId());
+                args.putString("nome", listaEmpresas.get(position).getNome());
+                args.putString("area", listaEmpresas.get(position).getArea());
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "Dialog_fidelizar_empresa");
+            }
+        });
     }
 
     class MyAdapter extends ArrayAdapter<Empresa> {
