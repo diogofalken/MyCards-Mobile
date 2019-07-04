@@ -62,7 +62,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject empresa = jsonArray.getJSONObject(i);
 
-                        listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse")));
+                        listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -91,6 +91,8 @@ public class Activity_listar_empresas extends AppCompatActivity {
                 args.putString("id", listaEmpresas.get(position).getId());
                 args.putString("nome", listaEmpresas.get(position).getNome());
                 args.putString("area", listaEmpresas.get(position).getArea());
+                args.putString("distrito", listaEmpresas.get(position).getDistrito());
+                args.putString("email", listaEmpresas.get(position).getEmail());
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "Dialog_fidelizar_empresa");
             }

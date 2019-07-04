@@ -22,7 +22,7 @@ public class Dialog_recuperar_senha extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_recuperar_senha, container, false);
 
-        cancel = view.findViewById(R.id.tentar);
+        cancel = view.findViewById(R.id.voltar);
         recuperar = view.findViewById(R.id.enviar);
 
         //fechar pop up ao carregar em cancelar
