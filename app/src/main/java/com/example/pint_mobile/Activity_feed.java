@@ -90,8 +90,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         String id = getIntent().getStringExtra("id");
 
         //calcular rating
-        //new Getrating().execute();
-        //calcular_rating_cliente();
+        calcular_rating_cliente();
         }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
