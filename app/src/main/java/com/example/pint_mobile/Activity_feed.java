@@ -227,7 +227,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                     public void onResponse(String response) {
                         try {
                             JSONArray ratings = new JSONArray(response);
-                            if(ratings != null) {
+                            if(ratings.length() != 0){
                                 for (int i = 0; i < ratings.length(); i++) {
                                     JSONObject r = ratings.getJSONObject(i);
                                     String valor = r.getString("Rating");
