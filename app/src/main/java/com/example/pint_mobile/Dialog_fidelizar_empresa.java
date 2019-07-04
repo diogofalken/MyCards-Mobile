@@ -38,11 +38,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Dialog_fidelizar_empresa extends DialogFragment {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    Button cancel, ok;
+    Button cancel, fidelizar;
     String valor;
     int nCarimbos = 0, nCupoes = 0, nPontos = 0, x;
     TextView tvCarimbos, tvPontos, tvCupoes;
@@ -54,21 +57,31 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         final View view = inflater.inflate(R.layout.dialog_fidelizar_empresa, container, false);
 
         cancel = view.findViewById(R.id.voltar);
-        ok = view.findViewById(R.id.enviar);
+        fidelizar = view.findViewById(R.id.enviar);
+
         TextView tvNome = view.findViewById(R.id.nome);
-        tvPontos = view.findViewById(R.id.pontos);
-        tvCupoes = view.findViewById(R.id.cupoes);
-        tvCarimbos = view.findViewById(R.id.carimbos);
         TextView tvEmail = view.findViewById(R.id.tvEmail);
         TextView tvArea = view.findViewById(R.id.tvArea);
         TextView tvDistrito = view.findViewById(R.id.tvDistrito);
 
+        tvPontos = view.findViewById(R.id.pontos);
+        tvCupoes = view.findViewById(R.id.cupoes);
+        tvCarimbos = view.findViewById(R.id.carimbos);
         rating = view.findViewById(R.id.rating);
+
+        sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
+
         //fechar pop up ao carregar em cancelar
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDialog().dismiss();
+            }
+        });
+        fidelizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fidelizarEmpresa(sharedPreferences.getString("Id", ""), getArguments().getString("id"));
             }
         });
 
@@ -228,6 +241,64 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
                 rating.setImageResource(R.drawable.rating_user5);
                 break;
         }
+    }
+
+    private void fidelizarEmpresa(String idCliente, final String idEmpresa) {
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + idCliente + "/cartao";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getString("status").equals("true")) {
+                                Toast.makeText(getContext(), "Obrigado por se fidelizar!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getContext(), Activity_feed.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getContext(), "Não foi possivel fidelizar neste momento!", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ConnectivityManager conMgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                    Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    //This indicates that the request has either time out or there is no connection
+                    Log.i("VolleyError::", error.toString());
+                } else if (error instanceof AuthFailureError) {
+                    //Error indicating that there was an Authentication Failure while performing the request
+                    Log.i("AuthFailureError::", error.toString());
+                } else if (error instanceof ServerError) {
+                    //Indicates that the server responded with a error response
+                    Log.i("ServerError::", error.toString());
+                    Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    //Indicates that there was network error while performing the request
+                    Log.i("NetworkError::", error.toString());
+                    Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    //Indicates that the server response could not be parsed
+                    Log.i("ParseError::", error.toString());
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idempresa", idEmpresa);
+                return params;
+            }
+        };
+        // requestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(postRequest);
     }
 }
 
