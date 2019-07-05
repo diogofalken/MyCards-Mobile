@@ -1,6 +1,6 @@
 package com.example.pint_mobile;
 
-public class Cartao {
+public class Cartao_empresa_fidelizada {
     private String id_empresa;
     private String id_cartao;
     private String nome;
@@ -10,7 +10,7 @@ public class Cartao {
     private String cor;
     private String email;
 
-    public Cartao(String id_empresa, String id_cartao, String distrito, String nome, String area, String nr_descontos, String cor, String email) {
+    public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String distrito, String nome, String area, String nr_descontos, String cor, String email) {
         this.id_empresa = id_empresa;
         this.id_cartao = id_cartao;
         this.distrito = distrito;
