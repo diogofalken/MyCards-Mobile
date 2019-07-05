@@ -89,8 +89,15 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
         String id = getIntent().getStringExtra("id");
 
-        //calcular rating
+
         calcular_rating_cliente();
+        carregar_cartoes_empresas_fidelizadas();
+
+
+
+
+
+
         }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -278,5 +285,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         // requestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(postRequest);
+    }
+
+    private void carregar_cartoes_empresas_fidelizadas(){
+
     }
 }
