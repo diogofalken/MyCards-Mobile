@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -22,6 +25,7 @@ public class Fragment_feed_perfil extends Fragment {
     private CircleImageView image;
     private ImageView rating;
     SharedPreferences sharedPreferences;
+    ArrayList<Cartao_empresa_fidelizada> listaCartoes = Activity_feed.cartoesFidelizados;
 
     @Nullable
     @Override
@@ -44,7 +48,7 @@ public class Fragment_feed_perfil extends Fragment {
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
         setRating(sharedPreferences.getString("Rating", ""));
         nr_cartoes.setText(sharedPreferences.getString("NrCartoes", ""));
-
+        nr_descontos.setText(Integer.toString(contarDescontos()));
 
         return view;
     }
@@ -77,4 +81,13 @@ public class Fragment_feed_perfil extends Fragment {
         }
     }
 
+    private int contarDescontos() {
+        int nDescontos = 0;
+
+        for(Cartao_empresa_fidelizada cartao : listaCartoes) {
+            nDescontos += cartao.getListaCampanhas().size();
+        }
+
+        return nDescontos;
+    }
 }

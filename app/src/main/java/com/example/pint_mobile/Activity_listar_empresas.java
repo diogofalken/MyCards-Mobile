@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class Activity_listar_empresas extends AppCompatActivity {
     ListView listView;
     ArrayList<Empresa>  listaEmpresas = new ArrayList<>();
+    ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
     MyAdapter adapter;
 
     @Override
@@ -61,8 +62,9 @@ public class Activity_listar_empresas extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject empresa = jsonArray.getJSONObject(i);
-
-                        listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
+                        if(empresaFidelizada(empresa.getString("ID_Empresa")) == false) {
+                            listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -122,5 +124,14 @@ public class Activity_listar_empresas extends AppCompatActivity {
 
             return row;
         }
+    }
+
+    private boolean empresaFidelizada(String idEmpresa) {
+        for(Cartao_empresa_fidelizada cartao : lista ) {
+            if(cartao.getId_empresa().equals(idEmpresa)) {
+                return  true;
+            }
+        }
+        return false;
     }
 }
