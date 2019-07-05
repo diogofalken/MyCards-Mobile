@@ -63,7 +63,7 @@
         app:barrierDirection="left" />
 
     <EditText
-        android:id="@+id/nome"
+        android:id="@+id/id_nome"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
@@ -99,10 +99,10 @@
         android:paddingEnd="40dp"
         android:paddingRight="10dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/nome"
+        app:layout_constraintEnd_toEndOf="@+id/id_nome"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/nome"
-        app:layout_constraintTop_toBottomOf="@+id/nome" />
+        app:layout_constraintStart_toStartOf="@+id/id_nome"
+        app:layout_constraintTop_toBottomOf="@+id/id_nome" />
 
     <Button
         android:id="@+id/entrar"

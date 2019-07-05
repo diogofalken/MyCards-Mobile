@@ -42,6 +42,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
     String nome;
     String cor;
     String email;
+    String id_empresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
 
         Bundle b = new Bundle();
         b = getIntent().getExtras();
-        String id_empresa = b.getString("id_empresa");
+        id_empresa = b.getString("id_empresa");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View v = navigationView.getHeaderView(0);
@@ -99,31 +100,37 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 navigationView.getMenu().findItem(R.id.nav_descontos).setChecked(true);
                 navigationView.getMenu().findItem(R.id.nav_rating).setChecked(false);
                 navigationView.getMenu().findItem(R.id.nav_inf).setChecked(false);
-                Fragment_feed_cartoes fragment = new Fragment_feed_cartoes();
+                Fragment fragment = new Fragment_empresa_menu_descontos();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         fragment).commit();
-                Bundle bundle = new Bundle();
-                bundle.putString("nome", nome);
-                bundle.putString("email", email);
-                bundle.putString("area", AreaInteresse);
-                bundle.putString("distrito", localizacao);
-                fragment.setArguments(bundle);
                 break;
 
             case R.id.nav_rating:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fragment_empresa_menu_rating()).commit();
                 navigationView.getMenu().findItem(R.id.nav_descontos).setChecked(false);
                 navigationView.getMenu().findItem(R.id.nav_rating).setChecked(true);
                 navigationView.getMenu().findItem(R.id.nav_inf).setChecked(false);
+                Bundle bundle_rating = new Bundle();
+                bundle_rating.putString("nome", nome);
+                bundle_rating.putString("id", id_empresa);
+                fragment = new Fragment_empresa_menu_rating();
+                fragment.setArguments(bundle_rating);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        fragment).commit();
                 break;
 
             case R.id.nav_inf:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fragment_empresa_menu_informacoes()).commit();
                 navigationView.getMenu().findItem(R.id.nav_descontos).setChecked(false);
                 navigationView.getMenu().findItem(R.id.nav_rating).setChecked(false);
                 navigationView.getMenu().findItem(R.id.nav_inf).setChecked(true);
+                Bundle bundle_inf = new Bundle();
+                bundle_inf.putString("nome", nome);
+                bundle_inf.putString("email", email);
+                bundle_inf.putString("area", AreaInteresse);
+                bundle_inf.putString("distrito", localizacao);
+                fragment = new Fragment_empresa_menu_informacoes();
+                fragment.setArguments(bundle_inf);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        fragment).commit();
                 break;
 
             case R.id.nav_cancel:

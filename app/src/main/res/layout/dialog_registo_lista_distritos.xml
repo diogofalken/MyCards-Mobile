@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/nome"
+        android:id="@+id/id_nome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -31,7 +31,7 @@
         android:layout_height="2dp"
         android:layout_above="@+id/bottom_nav"
         android:background="#b3b3b3"
-        app:layout_constraintTop_toBottomOf="@+id/nome"
+        app:layout_constraintTop_toBottomOf="@+id/id_nome"
         tools:layout_editor_absoluteX="34dp"></View>
 
     <ScrollView

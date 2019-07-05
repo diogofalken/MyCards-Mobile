@@ -17,18 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,12 +87,12 @@ public class Fragment_feed_cartoes extends Fragment {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.cartao_empresa_fidelizada, parent, false);
 
-            TextView nomeEmpresa = row.findViewById(R.id.nome);
-            TextView areaEmpresa = row.findViewById(R.id.area);
+            TextView nomeEmpresa = row.findViewById(R.id.id_nome);
+            TextView areaEmpresa = row.findViewById(R.id.id_area);
             TextView nrDescontos = row.findViewById(R.id.nrdescontos2);
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);
-            TextView email = row.findViewById(R.id.email);
+            TextView email = row.findViewById(R.id.id_email);
 
             String cor = getItem(position).getCor();
 

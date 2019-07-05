@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,8 +32,8 @@ public class Fragment_feed_perfil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed_perfil, container, false);
 
         nome = view.findViewById(R.id.nome_utilizador);
-        distrito = view.findViewById(R.id.email);
-        email = view.findViewById(R.id.nome);
+        distrito = view.findViewById(R.id.id_email);
+        email = view.findViewById(R.id.id_nome);
         image = view.findViewById(R.id.user_pic);
         nr_cartoes = view.findViewById(R.id.nr_cartoes);
         nr_descontos = view.findViewById(R.id.nr_descontos);

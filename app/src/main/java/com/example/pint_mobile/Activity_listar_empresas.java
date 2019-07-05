@@ -115,8 +115,8 @@ public class Activity_listar_empresas extends AppCompatActivity {
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.row_empresa, parent, false);
-            TextView myTitle = row.findViewById(R.id.nome);
-            TextView myDescription = row.findViewById(R.id.area);
+            TextView myTitle = row.findViewById(R.id.id_nome);
+            TextView myDescription = row.findViewById(R.id.id_area);
 
             // now set our resources on views
             myTitle.setText(getItem(position).getNome());

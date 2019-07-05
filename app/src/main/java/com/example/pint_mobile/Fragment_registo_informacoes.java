@@ -44,9 +44,9 @@ public class Fragment_registo_informacoes extends Fragment implements Dialog_lis
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_registo_informacoes, container, false);
-        button_distrito = view.findViewById(R.id.email);
+        button_distrito = view.findViewById(R.id.id_email);
         button_data_nasc =  view.findViewById(R.id.data_nasc);
-        email = view.findViewById(R.id.nome);
+        email = view.findViewById(R.id.id_nome);
         senha = view.findViewById(R.id.senha);
         senha_conf = view.findViewById(R.id.senha_again);
         primeiro_nome = view.findViewById(R.id.primeiro_nome);
