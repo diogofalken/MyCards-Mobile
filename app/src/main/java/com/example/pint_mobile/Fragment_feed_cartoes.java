@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -70,6 +71,15 @@ public class Fragment_feed_cartoes extends Fragment {
 
         adapter = new MyAdapter(getContext(), listaCartoes);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getContext(), Activity_cartao_fidelizado.class);
+                i.putExtra("id_empresa", listaCartoes.get(position).getId_empresa());
+                startActivity(i);
+            }
+        });
 
         return view;
     }

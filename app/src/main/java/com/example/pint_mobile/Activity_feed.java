@@ -67,7 +67,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         bottomNav = findViewById(R.id.bottom_nav);
         icon_left = findViewById(R.id.icon_left);
-        icon_right = findViewById(R.id.menu);
+        icon_right = findViewById(R.id.icon_right);
         barra_pesquisa = findViewById(R.id.barra_pesquisa);
         navigationView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
