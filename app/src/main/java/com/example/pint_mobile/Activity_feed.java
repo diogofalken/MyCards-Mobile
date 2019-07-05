@@ -65,6 +65,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        cartoesFidelizados.clear();
 
         sharedPreferences = getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -380,16 +381,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                         default:
                             cor = "#5A613A";
                     }
-                    cartoesFidelizados.add(new Cartao_empresa_fidelizada(
-                            id,
-                            idCartao,
-                            localizacao,
-                            nome,
-                            AreaInteresse,
-                            "123",
-                            cor,
-                            email
-                    ));
+
+                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor,email);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Erro nos dados da empresa!", Toast.LENGTH_SHORT).show();
@@ -405,4 +399,76 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         RequestQueue requestQueue_inf = Volley.newRequestQueue(getApplicationContext());
         requestQueue_inf.add(getDadosEmpresa);
     }
+
+    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email) {
+            String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao/" + idCartao + "/instanciacampanha";
+            final StringRequest getCampanhas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
+                                id,
+                                idCartao,
+                                localizacao,
+                                nome,
+                                AreaInteresse,
+                                Integer.toString(jsonArray.length()),
+                                cor,
+                                email
+                        );
+                        cartoesFidelizados.add(auxCartao);
+                        getDescontos(auxCartao);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(getCampanhas);
+        }
+
+        void getDescontos(Cartao_empresa_fidelizada cartao) {
+            String url = "https://www.mycards.dsprojects.pt/api/empresa/" + cartao.getId_empresa() + "/campanha";
+            StringRequest getDescontos = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        for(int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject data = jsonArray.getJSONObject(i);
+                            ArrayList<Campanha> lista = new ArrayList<>();
+
+                            lista.add(new Campanha(
+                                    data.getString("ID_Campanha"),
+                                    data.getString("Designacao"),
+                                    data.getString("Descricao"),
+                                    data.getString("DataInicio"),
+                                    data.getString("DataFim"),
+                                    data.getString("Valor"),
+                                    data.getString("TipoCampanha")
+                            ));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(getDescontos);
+        }
 }

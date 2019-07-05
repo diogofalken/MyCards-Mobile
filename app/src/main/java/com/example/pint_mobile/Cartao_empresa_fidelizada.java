@@ -1,5 +1,7 @@
 package com.example.pint_mobile;
 
+import java.util.ArrayList;
+
 public class Cartao_empresa_fidelizada {
     private String id_empresa;
     private String id_cartao;
@@ -8,7 +10,7 @@ public class Cartao_empresa_fidelizada {
     private String nr_descontos;
     private String distrito;
     private String cor;
-    private String email;
+    private ArrayList<Campanha> listaCampanhas;
 
     public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String distrito, String nome, String area, String nr_descontos, String cor, String email) {
         this.id_empresa = id_empresa;
@@ -20,6 +22,8 @@ public class Cartao_empresa_fidelizada {
         this.cor = cor;
         this.email = email;
     }
+
+    private String email;
 
     public String getId_empresa() {
         return id_empresa;
@@ -87,5 +91,13 @@ public class Cartao_empresa_fidelizada {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<Campanha> getListaCampanhas() {
+        return listaCampanhas;
+    }
+
+    public void setListaCampanhas(ArrayList<Campanha> listaCampanhas) {
+        this.listaCampanhas = listaCampanhas;
     }
 }
