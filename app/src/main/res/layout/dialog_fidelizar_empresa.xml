@@ -93,7 +93,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
                     android:text="Email:"
                     android:textColor="@color/corPreta"
                     app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +104,6 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:text="TextView"
@@ -113,7 +111,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView26"
-                    app:layout_constraintTop_toBottomOf="@+id/tvArea" />
+                    app:layout_constraintTop_toTopOf="@+id/textView26" />
 
                 <TextView
                     android:id="@+id/tvArea"
@@ -121,7 +119,6 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:text="TextView"
@@ -129,22 +126,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView25"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+                    app:layout_constraintTop_toTopOf="@+id/textView25" />
 
                 <TextView
                     android:id="@+id/tvEmail"
                     android:layout_width="0dp"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:text="TextView"
                     android:textColor="@color/corPreta"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView21"
-                    app:layout_constraintTop_toBottomOf="@+id/textView122" />
+                    app:layout_constraintTop_toTopOf="@+id/textView21" />
 
                 <TextView
                     android:id="@+id/textView25"
@@ -153,11 +149,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
                     android:text="Área:"
                     android:textColor="@color/corPreta"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
                 <TextView
                     android:id="@+id/textView26"
@@ -166,13 +161,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp" 
                     android:text="Distrito:"
                     android:textColor="@color/corPreta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvArea" />
 
             </android.support.constraint.ConstraintLayout>
 

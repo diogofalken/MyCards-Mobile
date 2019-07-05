@@ -39,7 +39,7 @@ public class Fragment_feed_cartoes extends Fragment {
     private ImageView add_cartao;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private ArrayList<Cartao>  listaCartoes = new ArrayList<>();
+    private ArrayList<Cartao_empresa_fidelizada>  listaCartoes = new ArrayList<>();
     private Fragment_feed_cartoes.MyAdapter adapter;
     private ConstraintLayout cl_sem_cartoes;
     private ArrayList<HashMap<String, String>> cardsList;
@@ -153,7 +153,7 @@ public class Fragment_feed_cartoes extends Fragment {
                         default:
                             cor = "#5A613A";
                     }
-                        listaCartoes.add(new Cartao(
+                        listaCartoes.add(new Cartao_empresa_fidelizada(
                                 id,
                                 idCartao,
                                 localizacao,
@@ -180,11 +180,11 @@ public class Fragment_feed_cartoes extends Fragment {
         requestQueue_inf.add(getDadosEmpresa);
     }
 
-    class MyAdapter extends ArrayAdapter<Cartao> {
+    class MyAdapter extends ArrayAdapter<Cartao_empresa_fidelizada> {
 
         Context context;
 
-        MyAdapter (Context c,  ArrayList<Cartao> objects) {
+        MyAdapter (Context c,  ArrayList<Cartao_empresa_fidelizada> objects) {
             super(c, R.layout.cartao_empresa_fidelizada, objects);
             this.context = c;
         }

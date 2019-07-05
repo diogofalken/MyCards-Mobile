@@ -145,10 +145,10 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         int width_screen = size.x;
         int height_screen = size.y;
 
-        double w = width_screen * 0.9;
+        double w = width_screen * 0.95;
         int width = (int) w;
 
-        double h = height_screen * 0.75;
+        double h = height_screen * 0.9;
         int height = (int) h;
 
         getDialog().getWindow().setLayout(width, height);
