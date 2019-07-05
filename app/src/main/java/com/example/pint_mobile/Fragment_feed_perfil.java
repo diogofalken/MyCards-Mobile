@@ -33,6 +33,7 @@ public class Fragment_feed_perfil extends Fragment {
         distrito = view.findViewById(R.id.distrito);
         email = view.findViewById(R.id.email);
         image = view.findViewById(R.id.user_pic);
+        nr_cartoes = view.findViewById(R.id.nr_cartoes);
         nr_descontos = view.findViewById(R.id.nr_descontos);
         nr_descontos_usados = view.findViewById(R.id.nr_descontos_usados);
         rating = view.findViewById(R.id.rating);
@@ -43,6 +44,7 @@ public class Fragment_feed_perfil extends Fragment {
         email.setText(sharedPreferences.getString("Email", ""));
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
         setRating(sharedPreferences.getString("Rating", ""));
+        nr_cartoes.setText(sharedPreferences.getString("NrCartoes", ""));
 
 
         return view;
