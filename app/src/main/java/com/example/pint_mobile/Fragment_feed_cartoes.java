@@ -39,7 +39,7 @@ public class Fragment_feed_cartoes extends Fragment {
     private ImageView add_cartao;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private ArrayList<Cartao_empresa_fidelizada>  listaCartoes = new ArrayList<>();
+    private ArrayList<Cartao_empresa_fidelizada>  listaCartoes = Activity_feed.cartoesFidelizados;
     private Fragment_feed_cartoes.MyAdapter adapter;
     private ConstraintLayout cl_sem_cartoes;
     private ArrayList<HashMap<String, String>> cardsList;
@@ -68,116 +68,10 @@ public class Fragment_feed_cartoes extends Fragment {
         cardsList = new ArrayList<>();
         lv = view.findViewById(R.id.lista_cartoes);
 
-        carregar_cartoes();
-
-
-        return view;
-    }
-
-    private void carregar_cartoes(){
-        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao";
-        StringRequest getEmpresas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    if(jsonArray.length() == 0){
-                        cl_sem_cartoes.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject cartao = jsonArray.getJSONObject(i);
-
-                            HashMap<String, String> arrayInf;
-                            carregar_informacao_empresa(cartao.getString("ID_Empresa"), cartao.getString("ID_Cartao"), i);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(getEmpresas);
-
         adapter = new MyAdapter(getContext(), listaCartoes);
         lv.setAdapter(adapter);
-    }
 
-    void carregar_informacao_empresa(final String id, final String idCartao, final int index){
-        String url_inf = "https://www.mycards.dsprojects.pt/api/empresa/" + id;
-        StringRequest getDadosEmpresa = new StringRequest(Request.Method.GET, url_inf, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray_inf = new JSONArray(response);
-                    JSONObject dados = jsonArray_inf.getJSONObject(0);
-                    String localizacao = dados.getString("Localizacao");
-                    String AreaInteresse = dados.getString("AreaInteresse");
-                    String nome = dados.getString("Nome");
-                    String cor = "";
-                    String email = dados.getString("Email");
-                    switch (AreaInteresse.toString()) {
-                        case "Agricultura":
-                            cor = "#006600";
-                            break;
-                        case "Ciência e Tecnologia":
-                            cor = "#042C54";
-                            break;
-                        case "Desporto":
-                            cor = "#4d004d";
-                            break;
-                        case "Educação":
-                            cor = "#662200";
-                            break;
-                        case "Saúde":
-                            cor = "#5C7993";
-                            break;
-                        case "Restauração":
-                            cor = "#BD8E02";
-                            break;
-                        case "Transportes e Mercadorias":
-                            cor = "#3F51B5";
-                            break;
-                        case "Turismo":
-                            cor = "#E91E63";
-                            break;
-                        default:
-                            cor = "#5A613A";
-                    }
-                        listaCartoes.add(new Cartao_empresa_fidelizada(
-                                id,
-                                idCartao,
-                                localizacao,
-                                nome,
-                                AreaInteresse,
-                                "123",
-                                cor,
-                                email
-                        ));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), "Erro nos dados da empresa!", Toast.LENGTH_SHORT).show();
-                }
-                adapter.notifyDataSetChanged();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue_inf = Volley.newRequestQueue(getContext());
-        requestQueue_inf.add(getDadosEmpresa);
+        return view;
     }
 
     class MyAdapter extends ArrayAdapter<Cartao_empresa_fidelizada> {
