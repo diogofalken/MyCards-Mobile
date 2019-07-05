@@ -244,11 +244,12 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
     }
 
     private void fidelizarEmpresa(String idCliente, final String idEmpresa) {
-        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + idCliente + "/cartao_empresa_fidelizada";
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + idCliente + "/cartao";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("true")) {
