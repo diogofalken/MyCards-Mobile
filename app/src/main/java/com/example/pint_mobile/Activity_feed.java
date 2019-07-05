@@ -390,7 +390,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                             cor,
                             email
                     ));
-                    Toast.makeText(getApplicationContext(), cartoesFidelizados.get(0).getNome(), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Erro nos dados da empresa!", Toast.LENGTH_SHORT).show();
