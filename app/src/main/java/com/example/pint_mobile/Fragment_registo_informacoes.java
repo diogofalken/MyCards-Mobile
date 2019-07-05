@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -18,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Fragment_registo_informacoes extends Fragment implements Dialog_lista_distritos.OnInputSelectedDistrict, Dialog_registo_data_nascimento.OnInputSelectedDate {
 
@@ -46,9 +44,9 @@ public class Fragment_registo_informacoes extends Fragment implements Dialog_lis
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_registo_informacoes, container, false);
-        button_distrito = view.findViewById(R.id.distrito);
+        button_distrito = view.findViewById(R.id.email);
         button_data_nasc =  view.findViewById(R.id.data_nasc);
-        email = view.findViewById(R.id.email);
+        email = view.findViewById(R.id.nome);
         senha = view.findViewById(R.id.senha);
         senha_conf = view.findViewById(R.id.senha_again);
         primeiro_nome = view.findViewById(R.id.primeiro_nome);

@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,7 +65,7 @@ public class Activity_concluir_registo extends AppCompatActivity {
         cor = getResources().getColor(R.color.corBaseAzul);
         aviso = findViewById(R.id.aviso);
         nome = findViewById(R.id.nome);
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.nome);
         checkBox = findViewById(R.id.politicas);
         concluir = findViewById(R.id.concluir);
         progressBar = findViewById(R.id.progressBar);

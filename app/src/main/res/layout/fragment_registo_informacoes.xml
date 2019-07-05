@@ -23,7 +23,7 @@
 
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/nome"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:background="#e6e6e6"
@@ -54,10 +54,10 @@
                 android:paddingEnd="40dp"
                 android:paddingRight="10dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintEnd_toEndOf="@+id/nome"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintStart_toStartOf="@+id/nome"
+                app:layout_constraintTop_toBottomOf="@+id/nome" />
 
             <EditText
                 android:id="@+id/senha_again"
@@ -176,7 +176,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ultimo_nome" />
 
             <Button
-                android:id="@+id/distrito"
+                android:id="@+id/email"
                 android:layout_width="0dp"
                 android:hint="Distrito"
                 android:layout_height="40dp"

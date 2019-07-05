@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Ver" >
+        <menu>
+            <item android:id="@+id/nav_descontos"
+                android:icon="@drawable/ic_descontos"
+                android:title="Descontos"/>
+            <item android:id="@+id/nav_rating"
+                android:icon="@drawable/ic_star"
+                android:title="Rating"/>
+            <item android:id="@+id/nav_inf"
+                android:icon="@drawable/ic_info_black"
+                android:title="Informações"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/nav_cancel"
+        android:title="Cancelar Fidelização"></item>
+
+
+</menu>

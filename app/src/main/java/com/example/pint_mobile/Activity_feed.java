@@ -1,17 +1,13 @@
 package com.example.pint_mobile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,8 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,8 +38,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Activity_feed extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
@@ -74,7 +66,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         bottomNav = findViewById(R.id.bottom_nav);
         icon_left = findViewById(R.id.icon_left);
-        icon_right = findViewById(R.id.icon_right);
+        icon_right = findViewById(R.id.menu);
         barra_pesquisa = findViewById(R.id.barra_pesquisa);
         navigationView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -91,7 +83,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         navigationView.setNavigationItemSelectedListener(this);
         String id = getIntent().getStringExtra("id");
-
 
         calcular_rating_cliente();
 

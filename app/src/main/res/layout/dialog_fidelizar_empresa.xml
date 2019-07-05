@@ -64,7 +64,7 @@
                 android:background="@drawable/border_constraint_layout_edit_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nome">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/textView122"
@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView122" />
 
                 <TextView
-                    android:id="@+id/tvDistrito"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
@@ -114,7 +114,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
 
                 <TextView
-                    android:id="@+id/tvArea"
+                    android:id="@+id/area"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
@@ -129,7 +129,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView25" />
 
                 <TextView
-                    android:id="@+id/tvEmail"
+                    android:id="@+id/nome"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -152,7 +152,7 @@
                     android:text="Área:"
                     android:textColor="@color/corPreta"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+                    app:layout_constraintTop_toBottomOf="@+id/nome" />
 
                 <TextView
                     android:id="@+id/textView26"
@@ -161,12 +161,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp" 
+                    android:layout_marginBottom="8dp"
                     android:text="Distrito:"
                     android:textColor="@color/corPreta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvArea" />
+                    app:layout_constraintTop_toBottomOf="@+id/area" />
 
             </android.support.constraint.ConstraintLayout>
 
