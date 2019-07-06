@@ -1,6 +1,8 @@
 package com.example.pint_mobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.NonNull;
@@ -31,23 +33,29 @@ import org.json.JSONObject;
 
 public class Activity_cartao_fidelizado extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
 
-    ConstraintLayout cl_nome_empresa;
-    TextView nome_empresa;
-    NavigationView navigationView;
-    DrawerLayout drawerLayout;
-    ImageView menu;
-    JSONObject dados;
-    String localizacao;
-    String AreaInteresse;
-    String nome;
-    String cor;
-    String email;
-    String id_empresa;
+    private ConstraintLayout cl_nome_empresa;
+    private TextView nome_empresa;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    private ImageView menu;
+    private JSONObject dados;
+    private String localizacao;
+    private String AreaInteresse;
+    private String nome;
+    private String cor;
+    private String email;
+    private String id_empresa;
+    private String rating;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_fidelizado);
+
+        sharedPreferences = getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         //remover action bar
         getSupportActionBar().hide();
@@ -89,7 +97,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
 
         carregar_dados_empresa(id_empresa);
 
-        //carregar todos os descontos
+        carregar_rating(id_empresa, sharedPreferences.getString("Id", ""));
 
     }
 
@@ -111,7 +119,9 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 navigationView.getMenu().findItem(R.id.nav_inf).setChecked(false);
                 Bundle bundle_rating = new Bundle();
                 bundle_rating.putString("nome", nome);
-                bundle_rating.putString("id", id_empresa);
+                bundle_rating.putString("id_empresa", id_empresa);
+                bundle_rating.putString("id_cliente", sharedPreferences.getString("Id", ""));
+                bundle_rating.putString("rating", rating);
                 fragment = new Fragment_empresa_menu_rating();
                 fragment.setArguments(bundle_rating);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -201,5 +211,35 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
 
         RequestQueue requestQueue_inf = Volley.newRequestQueue(getApplicationContext());
         requestQueue_inf.add(getDadosEmpresa);
+    }
+
+    private void carregar_rating(String id_empresa, String id_cliente){
+        String url = "https://www.mycards.dsprojects.pt/api/empresa/" + id_empresa + "/rating/" + id_cliente;
+        StringRequest getRatingEmpresa = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("status").equals("true")) {
+                        JSONArray jsonArray = jsonObject.getJSONArray("message");
+                        rating = jsonArray.getJSONObject(0).getString("Rating");
+                    } else {
+                        rating = "0";
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Erro no rating da empresa!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue_inf = Volley.newRequestQueue(getApplicationContext());
+        requestQueue_inf.add(getRatingEmpresa);
+
     }
 }
