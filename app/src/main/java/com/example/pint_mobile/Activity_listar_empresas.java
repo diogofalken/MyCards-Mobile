@@ -62,7 +62,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject empresa = jsonArray.getJSONObject(i);
-                        if(empresaFidelizada(empresa.getString("ID_Empresa")) == false) {
+                        if(empresaFidelizada(empresa) == false) {
                             listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
                         }
                     }
@@ -126,12 +126,13 @@ public class Activity_listar_empresas extends AppCompatActivity {
         }
     }
 
-    private boolean empresaFidelizada(String idEmpresa) {
+    private boolean empresaFidelizada(JSONObject data) throws JSONException {
         for(Cartao_empresa_fidelizada cartao : lista ) {
-            if(cartao.getId_empresa().equals(idEmpresa)) {
-                return  true;
-            }
+            if (cartao.getId_empresa().equals(data.getString("ID_Empresa")))
+                        return true;
         }
+        if (data.getString("TipoEmpresa").equals("0") || data.getString("Ativo").equals("0"))
+            return true;
         return false;
     }
 }

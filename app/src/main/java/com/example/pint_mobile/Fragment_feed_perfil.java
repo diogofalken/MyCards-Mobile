@@ -48,6 +48,7 @@ public class Fragment_feed_perfil extends Fragment {
         setRating(sharedPreferences.getString("Rating", ""));
         nr_cartoes.setText(sharedPreferences.getString("NrCartoes", ""));
         nr_descontos.setText(Integer.toString(contarDescontos()));
+        nr_descontos_usados.setText(Integer.toString(contarDescontosUsados()));
 
         return view;
     }
@@ -88,5 +89,15 @@ public class Fragment_feed_perfil extends Fragment {
         }
 
         return nDescontos;
+    }
+
+    private int contarDescontosUsados() {
+        int nDescontosUsados = 0;
+
+        for(Cartao_empresa_fidelizada cartao : listaCartoes) {
+            nDescontosUsados += Integer.parseInt(cartao.getUtilizacoes());
+        }
+
+        return nDescontosUsados;
     }
 }

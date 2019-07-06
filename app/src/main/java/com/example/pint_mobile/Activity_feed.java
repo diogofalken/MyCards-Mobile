@@ -398,6 +398,11 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 public void onResponse(String response) {
                     try {
                         JSONArray jsonArray = new JSONArray(response);
+                        int nUtilizacoes = 0;
+                        for(int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject data = jsonArray.getJSONObject(i);
+                            nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
+                        }
                         Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
                                 id,
                                 idCartao,
@@ -406,7 +411,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                                 AreaInteresse,
                                 Integer.toString(jsonArray.length()),
                                 cor,
-                                email
+                                email,
+                                Integer.toString(nUtilizacoes)
                         );
                         cartoesFidelizados.add(auxCartao);
                         getDescontos(auxCartao);

@@ -6,13 +6,15 @@ public class Cartao_empresa_fidelizada {
     private String id_empresa;
     private String id_cartao;
     private String nome;
+    private String email;
     private String area;
     private String nr_descontos;
     private String distrito;
     private String cor;
     private ArrayList<Campanha> listaCampanhas;
+    private String utilizacoes;
 
-    public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String distrito, String nome, String area, String nr_descontos, String cor, String email) {
+    public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String distrito, String nome, String area, String nr_descontos, String cor, String email, String utilizacoes) {
         this.id_empresa = id_empresa;
         this.id_cartao = id_cartao;
         this.distrito = distrito;
@@ -21,9 +23,9 @@ public class Cartao_empresa_fidelizada {
         this.nr_descontos = nr_descontos;
         this.cor = cor;
         this.email = email;
+        this.utilizacoes = utilizacoes;
     }
 
-    private String email;
 
     public String getId_empresa() {
         return id_empresa;
@@ -99,5 +101,13 @@ public class Cartao_empresa_fidelizada {
 
     public void setListaCampanhas(ArrayList<Campanha> listaCampanhas) {
         this.listaCampanhas = listaCampanhas;
+    }
+
+    public String getUtilizacoes() {
+        return utilizacoes;
+    }
+
+    public void setUtilizacoes(String utilizacoes) {
+        this.utilizacoes = utilizacoes;
     }
 }
