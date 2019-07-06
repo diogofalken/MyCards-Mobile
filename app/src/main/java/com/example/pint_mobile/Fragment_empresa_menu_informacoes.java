@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Fragment_empresa_menu_informacoes extends Fragment {
 
@@ -24,7 +23,7 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
 
         nome = view.findViewById(R.id.id_nome);
         area = view.findViewById(R.id.id_area);
-        email = view.findViewById(R.id.id_email);
+        email = view.findViewById(R.id.email);
         distrito = view.findViewById(R.id.id_distrito);
 
 

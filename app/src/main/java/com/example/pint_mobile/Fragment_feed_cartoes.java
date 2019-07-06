@@ -91,11 +91,11 @@ public class Fragment_feed_cartoes extends Fragment {
             View row = layoutInflater.inflate(R.layout.cartao_empresa_fidelizada, parent, false);
 
             TextView nomeEmpresa = row.findViewById(R.id.nome_empresa);
-            TextView areaEmpresa = row.findViewById(R.id.descricao);
-            TextView nrDescontos = row.findViewById(R.id.nrdescontos2);
+            TextView areaEmpresa = row.findViewById(R.id.area_empresa);
+            TextView nrDescontos = row.findViewById(R.id.nrdescontos);
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);
-            TextView email = row.findViewById(R.id.id_email);
+            TextView email = row.findViewById(R.id.email);
 
             String cor = getItem(position).getCor();
 

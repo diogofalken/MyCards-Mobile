@@ -176,7 +176,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ultimo_nome" />
 
             <Button
-                android:id="@+id/id_email"
+                android:id="@+id/email"
                 android:layout_width="0dp"
                 android:hint="Distrito"
                 android:layout_height="40dp"

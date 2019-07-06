@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView122" />
 
                 <TextView
-                    android:id="@+id/id_email"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
@@ -114,7 +114,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
 
                 <TextView
-                    android:id="@+id/descricao"
+                    android:id="@+id/area_empresa"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
@@ -166,7 +166,7 @@
                     android:textColor="@color/corPreta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descricao" />
+                    app:layout_constraintTop_toBottomOf="@+id/area_empresa" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -284,7 +284,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/carimbos" />
 
                 <TextView
-                    android:id="@+id/pontos"
+                    android:id="@+id/nrpontos"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
