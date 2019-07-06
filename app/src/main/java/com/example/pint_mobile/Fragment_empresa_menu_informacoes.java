@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +15,7 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
 
     private TextView nome, area, email, distrito;
     private String s_nome, s_area, s_email, s_distrito;
-
+    ImageView rating;
 
     @Nullable
     @Override
@@ -32,6 +33,10 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
         s_area = getArguments().getString("area");
         s_distrito = getArguments().getString("distrito");
 
+
+        rating = view.findViewById(R.id.rating);
+        setRating(getArguments().getString("rating"));
+
         nome.setText(s_nome);
         email.setText(s_email);
         area.setText(s_area);
@@ -39,4 +44,34 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
 
         return view;
     }
+
+    private void setRating(String rat){
+        switch (rat) {
+            case "0":
+                rating.setImageResource(R.drawable.rating_user0);
+                break;
+
+            case "1":
+                rating.setImageResource(R.drawable.rating_user1);
+                break;
+
+            case "2":
+                rating.setImageResource(R.drawable.rating_user2);
+                break;
+
+            case "3":
+                rating.setImageResource(R.drawable.rating_user3);
+                break;
+
+            case "4":
+                rating.setImageResource(R.drawable.rating_user4);
+                break;
+
+            case "5":
+                rating.setImageResource(R.drawable.rating_user5);
+                break;
+        }
+    }
+
 }
+

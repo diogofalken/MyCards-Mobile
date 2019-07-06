@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Fragment_empresa_menu_rating extends Fragment {
-
     private TextView aviso, nr_rating;
     private String s_nome, s_id_empresa, s_id_cliente, s_rating;
     private ImageView star1, star2, star3, star4, star5;

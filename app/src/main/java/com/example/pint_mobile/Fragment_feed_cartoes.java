@@ -32,7 +32,6 @@ public class Fragment_feed_cartoes extends Fragment {
     private Fragment_feed_cartoes.MyAdapter adapter;
     private ConstraintLayout cl_sem_cartoes;
     private ArrayList<HashMap<String, String>> cardsList;
-    private HashMap<String, String> map = new HashMap<String, String>();
 
     @Nullable
     @Override
@@ -66,9 +65,9 @@ public class Fragment_feed_cartoes extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(), Activity_cartao_fidelizado.class);
-                i.putExtra("id_cliente", sharedPreferences.getString("Id", ""));
-                i.putExtra("id_cartao", listaCartoes.get(position).getId_cartao());
-                i.putExtra("id_empresa", listaCartoes.get(position).getId_empresa());
+                i.putExtra("cartaoFidelizado", listaCartoes.get(position));
+                i.putExtra("idCliente", sharedPreferences.getString("Id", ""));
+                i.putParcelableArrayListExtra("campanhas", listaCartoes.get(position).getListaCampanhas());
                 startActivity(i);
             }
         });

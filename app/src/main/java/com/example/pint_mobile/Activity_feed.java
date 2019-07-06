@@ -286,7 +286,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                     JSONArray jsonArray = new JSONArray(response);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject cartao = jsonArray.getJSONObject(i);
-                            carregar_informacao_empresa(cartao.getString("ID_Empresa"), cartao.getString("ID_Cartao"));
+                            carregar_informacao_empresa(cartao.getString("ID_Empresa"), cartao.getString("ID_Cartao"), cartao.getString("Pontos"));
                         }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -304,7 +304,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue.add(getCartoes);
     }
 
-    void carregar_informacao_empresa(final String id, final String idCartao){
+    void carregar_informacao_empresa(final String id, final String idCartao, final String pontos){
         String url_inf = "https://www.mycards.dsprojects.pt/api/empresa/" + id;
         StringRequest getDadosEmpresa = new StringRequest(Request.Method.GET, url_inf, new Response.Listener<String>() {
             @Override
@@ -346,7 +346,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                             cor = "#5A613A";
                     }
 
-                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor,email);
+                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor, email, pontos);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -364,7 +364,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue_inf.add(getDadosEmpresa);
     }
 
-    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email) {
+    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email, final String pontos) {
             String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao/" + idCartao + "/instanciacampanha";
             final StringRequest getCampanhas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -379,15 +379,17 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                         Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
                                 id,
                                 idCartao,
-                                localizacao,
                                 nome,
+                                email,
                                 AreaInteresse,
                                 Integer.toString(jsonArray.length()),
+                                localizacao,
                                 cor,
-                                email,
-                                Integer.toString(nUtilizacoes)
+                                Integer.toString(nUtilizacoes),
+                                pontos
                         );
                         cartoesFidelizados.add(auxCartao);
+                        calcularRatingEmpresa(id, auxCartao);
                         editor.commit();
                         getDescontos(auxCartao);
                     } catch (JSONException e) {
@@ -443,7 +445,60 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
             requestQueue.add(getDescontos);
         }
 
-        private void infoFeedPerfil() {
-
-        }
+    private void calcularRatingEmpresa(String id, final Cartao_empresa_fidelizada cartao) {
+        String url = "https://www.mycards.dsprojects.pt/api/empresa/" +  id + "/rating";
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        String valor= "0";
+                        float x = 0;
+                        try {
+                            JSONArray ratings = new JSONArray(response);
+                            if(ratings.length() != 0){
+                                for (int i = 0; i < ratings.length(); i++) {
+                                    JSONObject r = ratings.getJSONObject(i);
+                                    valor = r.getString("Rating");
+                                    x += Float.parseFloat(valor);
+                                }
+                                valor = Integer.toString(Math.round(x / ratings.length()));
+                            }
+                            cartao.setRating(valor);
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                    Toast.makeText(getApplicationContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    //This indicates that the request has either time out or there is no connection
+                    Log.i("VolleyError::", error.toString());
+                } else if (error instanceof AuthFailureError) {
+                    //Error indicating that there was an Authentication Failure while performing the request
+                    Log.i("AuthFailureError::", error.toString());
+                } else if (error instanceof ServerError) {
+                    //Indicates that the server responded with a error response
+                    Log.i("ServerError::", error.toString());
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    //Indicates that there was network error while performing the request
+                    Log.i("NetworkError::", error.toString());
+                    Toast.makeText(getApplicationContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    //Indicates that the server response could not be parsed
+                    Log.i("ParseError::", error.toString());
+                }
+            }
+        }) {
+        };
+        // requestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(postRequest);
+    }
 }
