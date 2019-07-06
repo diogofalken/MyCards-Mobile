@@ -1,5 +1,6 @@
 package com.example.pint_mobile;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,9 +11,12 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,18 +48,14 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
     private String nome;
     private String cor;
     private String email;
-    private String id_empresa;
+    private String id_empresa, id_cartao, id_cliente;
     private String rating;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_fidelizado);
 
-        sharedPreferences = getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         //remover action bar
         getSupportActionBar().hide();
@@ -75,6 +75,8 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         Bundle b = new Bundle();
         b = getIntent().getExtras();
         id_empresa = b.getString("id_empresa");
+        id_cartao = b.getString("id_cartao");
+        id_cliente = b.getString("id_cliente");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View v = navigationView.getHeaderView(0);
@@ -97,7 +99,13 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
 
         carregar_dados_empresa(id_empresa);
 
-        carregar_rating(id_empresa, sharedPreferences.getString("Id", ""));
+        carregar_rating(id_empresa, id_cliente);
+
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_cancel);
+        SpannableString s = new SpannableString(menuItem.getTitle());
+        int cor = getResources().getColor(R.color.corCancelarFidelizacao);
+        s.setSpan(new ForegroundColorSpan(cor), 0, s.length(), 0);
+        menuItem.setTitle(s);
 
     }
 
@@ -120,7 +128,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 Bundle bundle_rating = new Bundle();
                 bundle_rating.putString("nome", nome);
                 bundle_rating.putString("id_empresa", id_empresa);
-                bundle_rating.putString("id_cliente", sharedPreferences.getString("Id", ""));
+                bundle_rating.putString("id_cliente", id_cliente);
                 bundle_rating.putString("rating", rating);
                 fragment = new Fragment_empresa_menu_rating();
                 fragment.setArguments(bundle_rating);
@@ -144,8 +152,13 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 break;
 
             case R.id.nav_cancel:
-                //Dialog_logout dialog = new Dialog_logout();
-                //dialog.show(getSupportFragmentManager(), "Dialog_logout");
+                Dialog_cancelar_fidelizacao dialog = new Dialog_cancelar_fidelizacao();
+                Bundle args = new Bundle();
+                args.putString("id_cliente", id_cliente);
+                args.putString("id_cartao", id_cartao);
+                args.putString("id_empresa", id_empresa);
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "Dialog_cancelar_fidelizacao");
                 break;
         }
         drawerLayout.closeDrawer(Gravity.RIGHT);
@@ -205,7 +218,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "getDadosEmpresa sem sucesso", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -234,7 +247,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "getRatingEmpresa sem sucesso", Toast.LENGTH_SHORT).show();
             }
         });
 

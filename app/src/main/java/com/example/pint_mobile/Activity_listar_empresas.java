@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +32,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Activity_listar_empresas extends AppCompatActivity {
-    ListView listView;
-    ArrayList<Empresa>  listaEmpresas = new ArrayList<>();
-    ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
-    MyAdapter adapter;
+
+    private ListView listView;
+    private ArrayList<Empresa>  listaEmpresas = new ArrayList<>();
+    private ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
+    private MyAdapter adapter;
+    private ConstraintLayout sem_empresas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.lista_cartoes);
+        sem_empresas = findViewById(R.id.sem_empresas);
 
         String url = "https://www.mycards.dsprojects.pt/api/empresa";
         StringRequest getEmpresas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -63,6 +67,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject empresa = jsonArray.getJSONObject(i);
                         if(empresaFidelizada(empresa) == false) {
+                                sem_empresas.setVisibility(View.GONE);
                             listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
                         }
                     }
@@ -99,6 +104,9 @@ public class Activity_listar_empresas extends AppCompatActivity {
                 dialog.show(getSupportFragmentManager(), "Dialog_fidelizar_empresa");
             }
         });
+
+
+
     }
 
     class MyAdapter extends ArrayAdapter<Empresa> {

@@ -40,7 +40,7 @@ public class Fragment_feed_cartoes extends Fragment {
         view = inflater.inflate(R.layout.fragment_feed_cartoes, container, false);
 
         add_cartao = view.findViewById(R.id.add_cartao);
-        cl_sem_cartoes = view.findViewById(R.id.sem_cartoes);
+        cl_sem_cartoes = view.findViewById(R.id.sem_empresas);
 
         if(listaCartoes.size() != 0) {
             cl_sem_cartoes.setVisibility(View.GONE);
@@ -66,6 +66,8 @@ public class Fragment_feed_cartoes extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(), Activity_cartao_fidelizado.class);
+                i.putExtra("id_cliente", sharedPreferences.getString("Id", ""));
+                i.putExtra("id_cartao", listaCartoes.get(position).getId_cartao());
                 i.putExtra("id_empresa", listaCartoes.get(position).getId_empresa());
                 startActivity(i);
             }
