@@ -1,6 +1,9 @@
 package com.example.pint_mobile;
 
-public class Campanha {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Campanha implements Parcelable {
     private String idCampanha;
     private String designacao;
     private String descricao;
@@ -18,6 +21,28 @@ public class Campanha {
         this.valor = valor;
         this.tipoCampanha = tipoCampanha;
     }
+
+    protected Campanha(Parcel in) {
+        idCampanha = in.readString();
+        designacao = in.readString();
+        descricao = in.readString();
+        dataInicio = in.readString();
+        dataFim = in.readString();
+        valor = in.readString();
+        tipoCampanha = in.readString();
+    }
+
+    public static final Creator<Campanha> CREATOR = new Creator<Campanha>() {
+        @Override
+        public Campanha createFromParcel(Parcel in) {
+            return new Campanha(in);
+        }
+
+        @Override
+        public Campanha[] newArray(int size) {
+            return new Campanha[size];
+        }
+    };
 
     public String getIdCampanha() {
         return idCampanha;
@@ -73,5 +98,21 @@ public class Campanha {
 
     public void setTipoCampanha(String tipoCampanha) {
         this.tipoCampanha = tipoCampanha;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idCampanha);
+        dest.writeString(designacao);
+        dest.writeString(descricao);
+        dest.writeString(dataInicio);
+        dest.writeString(dataFim);
+        dest.writeString(valor);
+        dest.writeString(tipoCampanha);
     }
 }

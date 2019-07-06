@@ -91,25 +91,25 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
-    new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.nav_wallet:
-                    open_fragment_cartoes();
-                    break;
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_wallet:
+                            open_fragment_cartoes();
+                            break;
 
-                case R.id.nav_home:
-                    open_fragment_descontos();
-                    break;
+                        case R.id.nav_home:
+                            open_fragment_descontos();
+                            break;
 
-                case R.id.nav_profile:
-                    open_fragment_perfil();
-                    break;
-            }
-            return true;
-        }
-        };
+                        case R.id.nav_profile:
+                            open_fragment_perfil();
+                            break;
+                    }
+                    return true;
+                }
+            };
 
     private void open_fragment_descontos(){
         Fragment fragment = new Fragment_feed_descontos();
@@ -284,10 +284,10 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject cartao = jsonArray.getJSONObject(i);
-                            carregar_informacao_empresa(cartao.getString("ID_Empresa"), cartao.getString("ID_Cartao"));
-                        }
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject cartao = jsonArray.getJSONObject(i);
+                        carregar_informacao_empresa(cartao.getString("ID_Empresa"), cartao.getString("ID_Cartao"), cartao.getString("Pontos"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
@@ -304,7 +304,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue.add(getCartoes);
     }
 
-    void carregar_informacao_empresa(final String id, final String idCartao){
+    void carregar_informacao_empresa(final String id, final String idCartao, final String pontos){
         String url_inf = "https://www.mycards.dsprojects.pt/api/empresa/" + id;
         StringRequest getDadosEmpresa = new StringRequest(Request.Method.GET, url_inf, new Response.Listener<String>() {
             @Override
@@ -346,7 +346,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                             cor = "#5A613A";
                     }
 
-                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor,email);
+                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor, email, pontos);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -364,86 +364,141 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue_inf.add(getDadosEmpresa);
     }
 
-    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email) {
-            String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao/" + idCartao + "/instanciacampanha";
-            final StringRequest getCampanhas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        int nUtilizacoes = 0;
-                        for(int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject data = jsonArray.getJSONObject(i);
-                            nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
-                        }
-                        Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
-                                id,
-                                idCartao,
-                                localizacao,
-                                nome,
-                                AreaInteresse,
-                                Integer.toString(jsonArray.length()),
-                                cor,
-                                email,
-                                Integer.toString(nUtilizacoes)
-                        );
-                        cartoesFidelizados.add(auxCartao);
-                        editor.commit();
-                        getDescontos(auxCartao);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
+    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email, final String pontos) {
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao/" + idCartao + "/instanciacampanha";
+        final StringRequest getCampanhas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    int nUtilizacoes = 0;
+                    for(int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject data = jsonArray.getJSONObject(i);
+                        nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
                     }
+                    Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
+                            id,
+                            idCartao,
+                            nome,
+                            email,
+                            AreaInteresse,
+                            Integer.toString(jsonArray.length()),
+                            localizacao,
+                            cor,
+                            Integer.toString(nUtilizacoes),
+                            pontos
+                    );
+                    cartoesFidelizados.add(auxCartao);
+                    calcularRatingEmpresa(id, auxCartao);
+                    editor.commit();
+                    getDescontos(auxCartao);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
-                }
-            });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(getCampanhas);
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(getCampanhas);
+    }
 
-        void getDescontos(final Cartao_empresa_fidelizada cartao) {
-            String url = "https://www.mycards.dsprojects.pt/api/empresa/" + cartao.getId_empresa() + "/campanha";
-            StringRequest getDescontos = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        ArrayList<Campanha> lista = new ArrayList<Campanha>();
-                        for(int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject data = jsonArray.getJSONObject(i);
-                            lista.add(new Campanha(
-                                    data.getString("ID_Campanha"),
-                                    data.getString("Designacao"),
-                                    data.getString("Descricao"),
-                                    data.getString("DataInicio"),
-                                    data.getString("DataFim"),
-                                    data.getString("Valor"),
-                                    data.getString("TipoCampanha")
-                            ));
-                        }
-                        cartao.setListaCampanhas(lista);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
+    void getDescontos(final Cartao_empresa_fidelizada cartao) {
+        String url = "https://www.mycards.dsprojects.pt/api/empresa/" + cartao.getId_empresa() + "/campanha";
+        StringRequest getDescontos = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    ArrayList<Campanha> lista = new ArrayList<Campanha>();
+                    for(int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject data = jsonArray.getJSONObject(i);
+                        lista.add(new Campanha(
+                                data.getString("ID_Campanha"),
+                                data.getString("Designacao"),
+                                data.getString("Descricao"),
+                                data.getString("DataInicio"),
+                                data.getString("DataFim"),
+                                data.getString("Valor"),
+                                data.getString("TipoCampanha")
+                        ));
                     }
+                    cartao.setListaCampanhas(lista);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(getDescontos);
+    }
+
+    private void calcularRatingEmpresa(String id, final Cartao_empresa_fidelizada cartao) {
+        String url = "https://www.mycards.dsprojects.pt/api/empresa/" +  id + "/rating";
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        String valor= "0";
+                        float x = 0;
+                        try {
+                            JSONArray ratings = new JSONArray(response);
+                            if(ratings.length() != 0){
+                                for (int i = 0; i < ratings.length(); i++) {
+                                    JSONObject r = ratings.getJSONObject(i);
+                                    valor = r.getString("Rating");
+                                    x += Float.parseFloat(valor);
+                                }
+                                valor = Integer.toString(Math.round(x / ratings.length()));
+                            }
+                            cartao.setRating(valor);
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                    Toast.makeText(getApplicationContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    //This indicates that the request has either time out or there is no connection
+                    Log.i("VolleyError::", error.toString());
+                } else if (error instanceof AuthFailureError) {
+                    //Error indicating that there was an Authentication Failure while performing the request
+                    Log.i("AuthFailureError::", error.toString());
+                } else if (error instanceof ServerError) {
+                    //Indicates that the server responded with a error response
+                    Log.i("ServerError::", error.toString());
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    //Indicates that there was network error while performing the request
+                    Log.i("NetworkError::", error.toString());
+                    Toast.makeText(getApplicationContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    //Indicates that the server response could not be parsed
+                    Log.i("ParseError::", error.toString());
                 }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(getDescontos);
-        }
-
-        private void infoFeedPerfil() {
-
-        }
+            }
+        }) {
+        };
+        // requestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(postRequest);
+    }
 }

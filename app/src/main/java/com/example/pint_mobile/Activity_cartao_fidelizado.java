@@ -1,20 +1,13 @@
 package com.example.pint_mobile;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.media.Image;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
@@ -35,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Activity_cartao_fidelizado extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
 
     private ConstraintLayout cl_nome_empresa;
@@ -43,13 +38,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
     private DrawerLayout drawerLayout;
     private ImageView menu;
     private JSONObject dados;
-    private String localizacao;
-    private String AreaInteresse;
-    private String nome;
-    private String cor;
-    private String email;
-    private String id_empresa, id_cartao, id_cliente;
-    private String rating;
+    private String localizacao, AreaInteresse, nome, cor, email, id_empresa, id_cartao, id_cliente, rating, ratingEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +53,11 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         drawerLayout = findViewById(R.id.drawer_layout);
         menu = findViewById(R.id.menu);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View v = navigationView.getHeaderView(0);
+        cl_nome_empresa = v.findViewById(R.id.clEmpresa);
+        nome_empresa = v.findViewById(R.id.nome_empresa);
+
         final ImageView button = findViewById(R.id.voltar);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,16 +66,20 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
             }
         });
 
-        Bundle b = new Bundle();
-        b = getIntent().getExtras();
-        id_empresa = b.getString("id_empresa");
-        id_cartao = b.getString("id_cartao");
-        id_cliente = b.getString("id_cliente");
+        Cartao_empresa_fidelizada cartao = getIntent().getParcelableExtra("cartaoFidelizado");
+        nome_empresa.setText(cartao.getNome());
+        localizacao = cartao.getDistrito();
+        AreaInteresse = cartao.getArea();
+        nome = cartao.getNome();
+        cor = cartao.getCor();
+        email = cartao.getEmail();
+        id_empresa = cartao.getId_empresa();
+        id_cartao = cartao.getId_cartao();
+        id_cliente = getIntent().getExtras().getString("idCliente");
+        ratingEmpresa = cartao.getRating();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View v = navigationView.getHeaderView(0);
-        cl_nome_empresa = v.findViewById(R.id.clEmpresa);
-        nome_empresa = v.findViewById(R.id.nome_empresa);
+        // Todas as campanhas deste cartao
+        ArrayList<Campanha> campanhas = getIntent().getParcelableArrayListExtra("campanhas");
 
         //abrir menu perfil
         menu.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +94,6 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.getMenu().findItem(R.id.nav_descontos).setChecked(true);
-
-        carregar_dados_empresa(id_empresa);
 
         carregar_rating(id_empresa, id_cliente);
 
@@ -145,6 +141,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 bundle_inf.putString("email", email);
                 bundle_inf.putString("area", AreaInteresse);
                 bundle_inf.putString("distrito", localizacao);
+                bundle_inf.putString("rating", ratingEmpresa);
                 fragment = new Fragment_empresa_menu_informacoes();
                 fragment.setArguments(bundle_inf);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -163,67 +160,6 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         }
         drawerLayout.closeDrawer(Gravity.RIGHT);
         return true;
-    }
-
-    private void carregar_dados_empresa(String id){
-        String url_inf = "https://www.mycards.dsprojects.pt/api/empresa/" + id;
-        StringRequest getDadosEmpresa = new StringRequest(Request.Method.GET, url_inf, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray_inf = new JSONArray(response);
-                    JSONObject dados = jsonArray_inf.getJSONObject(0);
-                    localizacao = dados.getString("Localizacao");
-                    AreaInteresse = dados.getString("AreaInteresse");
-                    nome = dados.getString("Nome");
-                    cor = "azul";
-                    email = dados.getString("Email");
-                    switch (AreaInteresse.toString()) {
-                        case "Agricultura":
-                            cor = "#006600";
-                            break;
-                        case "Ciência e Tecnologia":
-                            cor = "#042C54";
-                            break;
-                        case "Desporto":
-                            cor = "#4d004d";
-                            break;
-                        case "Educação":
-                            cor = "#662200";
-                            break;
-                        case "Saúde":
-                            cor = "#5C7993";
-                            break;
-                        case "Restauração":
-                            cor = "#BD8E02";
-                            break;
-                        case "Transportes e Mercadorias":
-                            cor = "#3F51B5";
-                            break;
-                        case "Turismo":
-                            cor = "#E91E63";
-                            break;
-                        default:
-                            cor = "#5A613A";
-
-                    }
-
-                    nome_empresa.setText(nome);
-                    cl_nome_empresa.setBackgroundColor(Color.parseColor(cor));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Erro nos dados da empresa!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "getDadosEmpresa sem sucesso", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue_inf = Volley.newRequestQueue(getApplicationContext());
-        requestQueue_inf.add(getDadosEmpresa);
     }
 
     private void carregar_rating(String id_empresa, String id_cliente){
