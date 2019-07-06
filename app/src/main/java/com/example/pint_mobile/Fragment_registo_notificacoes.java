@@ -67,7 +67,6 @@ public class Fragment_registo_notificacoes extends Fragment {
         int radioId = rg.getCheckedRadioButtonId();
         rb = view.findViewById(radioId);
         not = rb.getContentDescription().toString();
-        Toast.makeText(getActivity(), not, Toast.LENGTH_SHORT).show();
         editor.putString("notificacoes", not);
         editor.commit();
     }

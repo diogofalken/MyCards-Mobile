@@ -242,4 +242,10 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         requestQueue_inf.add(getRatingEmpresa);
 
     }
+
+    public void refreshMyData(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
 }

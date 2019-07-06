@@ -140,13 +140,11 @@ public class Fragment_empresa_menu_rating extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 try {
-                                    Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                                     JSONObject jsonObject = new JSONObject(response);
                                     if (jsonObject.getString("status").equals("true")) {
-                                        //progressBar.setVisibility(View.GONE);
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getContext(), "Avaliação enviada com sucesso!", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(getContext(), Activity_cartao_fidelizado.class);
-                                        startActivity(i);
+                                        ((Activity_cartao_fidelizado)getActivity()).refreshMyData();
                                     } else {
                                         //progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getContext(), "Erro!", Toast.LENGTH_SHORT).show();
