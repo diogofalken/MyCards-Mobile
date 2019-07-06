@@ -2,6 +2,7 @@ package com.example.pint_mobile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,11 @@ public class Fragment_feed_perfil extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed_perfil, container, false);
 
+        Bitmap bitmap = new ImageSaver(this.getContext()).
+                setFileName("myImage.png").
+                setDirectoryName("images").
+                load();
+
         nome = view.findViewById(R.id.nome_utilizador);
         distrito = view.findViewById(R.id.id_email);
         email = view.findViewById(R.id.id_nome);
@@ -39,6 +45,8 @@ public class Fragment_feed_perfil extends Fragment {
         nr_descontos = view.findViewById(R.id.nr_descontos);
         nr_descontos_usados = view.findViewById(R.id.nr_descontos_usados);
         rating = view.findViewById(R.id.rating);
+
+        image.setImageBitmap(bitmap);
 
         sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
 
