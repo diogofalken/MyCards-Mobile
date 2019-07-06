@@ -66,7 +66,7 @@ public class Activity_login extends AppCompatActivity {
 
         recuperar_senha = findViewById(R.id.recuperar);
         login = findViewById(R.id.entrar);
-        editText_email = findViewById(R.id.id_nome);
+        editText_email = findViewById(R.id.nome_empresa);
         editText_senha = findViewById(R.id.senha);
         progressBar = findViewById(R.id.progressBar);
 

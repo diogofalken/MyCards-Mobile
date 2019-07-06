@@ -39,7 +39,7 @@ public class Fragment_feed_perfil extends Fragment {
 
         nome = view.findViewById(R.id.nome_utilizador);
         distrito = view.findViewById(R.id.id_email);
-        email = view.findViewById(R.id.id_nome);
+        email = view.findViewById(R.id.nome_empresa);
         image = view.findViewById(R.id.user_pic);
         nr_cartoes = view.findViewById(R.id.nr_cartoes);
         nr_descontos = view.findViewById(R.id.nr_descontos);

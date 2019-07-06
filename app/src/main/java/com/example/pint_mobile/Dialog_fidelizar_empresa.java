@@ -60,8 +60,8 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         fidelizar = view.findViewById(R.id.enviar);
 
         TextView tvNome = view.findViewById(R.id.fe_nome);
-        TextView tvEmail = view.findViewById(R.id.id_nome);
-        TextView tvArea = view.findViewById(R.id.id_area);
+        TextView tvEmail = view.findViewById(R.id.nome_empresa);
+        TextView tvArea = view.findViewById(R.id.descricao);
         TextView tvDistrito = view.findViewById(R.id.id_email);
 
         tvPontos = view.findViewById(R.id.pontos);

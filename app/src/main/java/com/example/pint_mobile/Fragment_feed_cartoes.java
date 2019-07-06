@@ -91,8 +91,8 @@ public class Fragment_feed_cartoes extends Fragment {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.cartao_empresa_fidelizada, parent, false);
 
-            TextView nomeEmpresa = row.findViewById(R.id.id_nome);
-            TextView areaEmpresa = row.findViewById(R.id.id_area);
+            TextView nomeEmpresa = row.findViewById(R.id.nome_empresa);
+            TextView areaEmpresa = row.findViewById(R.id.descricao);
             TextView nrDescontos = row.findViewById(R.id.nrdescontos2);
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);

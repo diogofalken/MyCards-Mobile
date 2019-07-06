@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Fragment_empresa_menu_informacoes extends Fragment {
 
@@ -21,8 +20,8 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_empresa_menu_informacoes, container, false);
 
-        nome = view.findViewById(R.id.id_nome);
-        area = view.findViewById(R.id.id_area);
+        nome = view.findViewById(R.id.nome_empresa);
+        area = view.findViewById(R.id.descricao);
         email = view.findViewById(R.id.id_email);
         distrito = view.findViewById(R.id.id_distrito);
 

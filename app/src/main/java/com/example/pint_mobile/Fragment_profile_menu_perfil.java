@@ -2,29 +2,19 @@ package com.example.pint_mobile;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,21 +41,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.app.Activity.RESULT_OK;
-import static com.example.pint_mobile.Activity_login.MyPREFERENCES;
 
 public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lista_distritos.OnInputSelectedDistrict, Dialog_registo_data_nascimento.OnInputSelectedDate {
 
@@ -111,7 +89,7 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         alterar_senha = view.findViewById(R.id.alterar_senha);
         distrito = view.findViewById(R.id.id_email);
         data_nasc = view.findViewById(R.id.data_nasc);
-        email = view.findViewById(R.id.id_nome);
+        email = view.findViewById(R.id.nome_empresa);
         senha = view.findViewById(R.id.senha);
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);
