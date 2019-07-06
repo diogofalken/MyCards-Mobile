@@ -115,11 +115,8 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         senha = view.findViewById(R.id.senha);
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);
-        nome = view.findViewById(R.id.id_nome);
-        nr_tele = view.findViewById(R.id.telemovel);
-        see_password = view.findViewById(R.id.see_pass);
         foto_user = view.findViewById(R.id.user_pic);
-foto_user.setImageBitmap(bitmap
+        foto_user.setImageBitmap(bitmap
 );
         email.setText(sharedPreferences.getString("Email", ""));
         primeiroNome.setText(sharedPreferences.getString("PrimeiroNome", ""));
