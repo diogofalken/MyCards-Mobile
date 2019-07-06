@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -96,15 +98,17 @@ public class Fragment_feed_cartoes extends Fragment {
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);
             TextView email = row.findViewById(R.id.email);
+            TextView nrPontos = row.findViewById(R.id.nrpontos);
 
             String cor = getItem(position).getCor();
 
             nomeEmpresa.setText(getItem(position).getNome());
             areaEmpresa.setText(getItem(position).getArea());
-            nrDescontos.setText(getItem(position).getNr_descontos() + " descontos");
+            nrDescontos.setText(getItem(position).getNr_descontos());
             distrito.setText(getItem(position).getDistrito());
             cl.setBackgroundColor(Color.parseColor(cor));
             email.setText(getItem(position).getEmail());
+            nrPontos.setText(getItem(position).getPontos());
 
             return row;
         }
