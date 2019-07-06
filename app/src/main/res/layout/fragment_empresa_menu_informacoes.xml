@@ -111,7 +111,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView25" />
 
         <TextView
-            android:id="@+id/nome_empresa"
+            android:id="@+id/id_nome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
