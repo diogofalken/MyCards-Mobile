@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -22,9 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,16 +37,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +66,7 @@ public class Activity_login extends AppCompatActivity {
 
         recuperar_senha = findViewById(R.id.recuperar);
         login = findViewById(R.id.entrar);
-        editText_email = findViewById(R.id.email);
+        editText_email = findViewById(R.id.id_nome);
         editText_senha = findViewById(R.id.senha);
         progressBar = findViewById(R.id.progressBar);
 

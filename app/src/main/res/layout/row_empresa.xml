@@ -1,40 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     >
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nome"
-            android:layout_width="149dp"
+            android:id="@+id/id_nome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Main Title"
-            android:textColor="#000"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Nome empresa"
+            android:textColor="@color/corPreta"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/id_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sub Title"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="area"
             android:textColor="#a9a9a9"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_margin="5dp"
-            android:textSize="15sp"
-            android:id="@+id/area"
-            />
-        <!--so our layout is set-->
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_nome" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/ic_info"
+            app:layout_constraintBottom_toBottomOf="@+id/id_area"
+            app:layout_constraintEnd_toEndOf="@+id/id_nome"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="@+id/id_nome"
+            app:layout_constraintTop_toTopOf="@+id/id_nome" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

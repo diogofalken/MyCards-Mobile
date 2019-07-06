@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class Activity_listar_empresas extends AppCompatActivity {
     ListView listView;
     ArrayList<Empresa>  listaEmpresas = new ArrayList<>();
+    ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
     MyAdapter adapter;
 
     @Override
@@ -51,7 +52,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.lista_cartoes);
 
         String url = "https://www.mycards.dsprojects.pt/api/empresa";
         StringRequest getEmpresas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -61,8 +62,9 @@ public class Activity_listar_empresas extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject empresa = jsonArray.getJSONObject(i);
-
-                        listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse")));
+                        if(empresaFidelizada(empresa) == false) {
+                            listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -91,6 +93,8 @@ public class Activity_listar_empresas extends AppCompatActivity {
                 args.putString("id", listaEmpresas.get(position).getId());
                 args.putString("nome", listaEmpresas.get(position).getNome());
                 args.putString("area", listaEmpresas.get(position).getArea());
+                args.putString("distrito", listaEmpresas.get(position).getDistrito());
+                args.putString("email", listaEmpresas.get(position).getEmail());
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "Dialog_fidelizar_empresa");
             }
@@ -111,8 +115,8 @@ public class Activity_listar_empresas extends AppCompatActivity {
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.row_empresa, parent, false);
-            TextView myTitle = row.findViewById(R.id.nome);
-            TextView myDescription = row.findViewById(R.id.area);
+            TextView myTitle = row.findViewById(R.id.id_nome);
+            TextView myDescription = row.findViewById(R.id.id_area);
 
             // now set our resources on views
             myTitle.setText(getItem(position).getNome());
@@ -120,5 +124,15 @@ public class Activity_listar_empresas extends AppCompatActivity {
 
             return row;
         }
+    }
+
+    private boolean empresaFidelizada(JSONObject data) throws JSONException {
+        for(Cartao_empresa_fidelizada cartao : lista ) {
+            if (cartao.getId_empresa().equals(data.getString("ID_Empresa")))
+                        return true;
+        }
+        if (data.getString("TipoEmpresa").equals("0") || data.getString("Ativo").equals("0"))
+            return true;
+        return false;
     }
 }

@@ -30,7 +30,7 @@ public class Dialog_filtros_descontos extends DialogFragment {
         ll_empresas = view.findViewById(R.id.linearLayoutEmpresas);
         tv_tipos = view.findViewById(R.id.textViewTipos);
         tv_empresas = view.findViewById(R.id.textViewEmpresas);
-        close = view.findViewById(R.id.tentar);
+        close = view.findViewById(R.id.voltar);
 
 
         //fechar pop up

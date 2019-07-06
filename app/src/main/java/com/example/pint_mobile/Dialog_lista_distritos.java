@@ -35,7 +35,7 @@ public class Dialog_lista_distritos extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_registo_lista_distritos, container, false);
 
-        cancel = view.findViewById(R.id.tentar);
+        cancel = view.findViewById(R.id.voltar);
         ok = view.findViewById(R.id.enviar);
         rg = view.findViewById(R.id.radio_group);
 

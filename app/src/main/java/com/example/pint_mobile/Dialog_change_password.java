@@ -52,7 +52,7 @@ public class Dialog_change_password extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_change_password, container, false);
 
-        cancel = view.findViewById(R.id.tentar);
+        cancel = view.findViewById(R.id.voltar);
         ok = view.findViewById(R.id.enviar);
 
         sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);

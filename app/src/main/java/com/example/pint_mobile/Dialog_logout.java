@@ -23,7 +23,7 @@ public class Dialog_logout extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_logout, container, false);
 
-        nao = view.findViewById(R.id.tentar);
+        nao = view.findViewById(R.id.voltar);
         sim = view.findViewById(R.id.sim);
 
         //fechar pop up

@@ -109,12 +109,15 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         guardar = view.findViewById(R.id.save);
         alterar_foto = view.findViewById(R.id.alterar_foto);
         alterar_senha = view.findViewById(R.id.alterar_senha);
-        distrito = view.findViewById(R.id.distrito);
+        distrito = view.findViewById(R.id.id_email);
         data_nasc = view.findViewById(R.id.data_nasc);
-        email = view.findViewById(R.id.email);
+        email = view.findViewById(R.id.id_nome);
         senha = view.findViewById(R.id.senha);
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);
+        nome = view.findViewById(R.id.id_nome);
+        nr_tele = view.findViewById(R.id.telemovel);
+        see_password = view.findViewById(R.id.see_pass);
         foto_user = view.findViewById(R.id.user_pic);
 foto_user.setImageBitmap(bitmap
 );

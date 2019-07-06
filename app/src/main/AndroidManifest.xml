@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity_listar_empresas"></activity>
+        <activity android:name=".Activity_cartao_fidelizado"></activity>
+        <activity android:name=".Activity_listar_empresas" />
         <activity
             android:name=".Activity_concluir_registo"
             android:screenOrientation="portrait"

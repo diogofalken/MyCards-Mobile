@@ -173,7 +173,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/id_nome"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"
@@ -217,6 +217,21 @@
                     app:layout_constraintStart_toEndOf="@+id/textView20"
                     app:layout_constraintTop_toBottomOf="@+id/email"
                     android:focusable="false"/>
+                    app:layout_constraintTop_toBottomOf="@+id/id_nome" />
+
+                <ImageView
+                    android:id="@+id/see_pass"
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/senha"
+                    app:layout_constraintEnd_toEndOf="@+id/senha"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/senha"
+                    app:layout_constraintTop_toTopOf="@+id/senha"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/ic_not_see_password" />
 
                 <Button
                     android:id="@+id/alterar_senha"
@@ -390,7 +405,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
 
                 <Button
-                    android:id="@+id/distrito"
+                    android:id="@+id/id_email"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"

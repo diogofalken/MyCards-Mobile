@@ -21,7 +21,7 @@ public class Dialog_save_changes extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_save_changes, container, false);
 
-        nao = view.findViewById(R.id.tentar);
+        nao = view.findViewById(R.id.voltar);
         sim = view.findViewById(R.id.sim);
 
         //fechar pop up

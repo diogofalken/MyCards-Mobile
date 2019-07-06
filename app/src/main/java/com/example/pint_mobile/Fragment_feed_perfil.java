@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,6 +24,7 @@ public class Fragment_feed_perfil extends Fragment {
     private CircleImageView image;
     private ImageView rating;
     SharedPreferences sharedPreferences;
+    ArrayList<Cartao_empresa_fidelizada> listaCartoes = Activity_feed.cartoesFidelizados;
 
     @Nullable
     @Override
@@ -30,9 +32,10 @@ public class Fragment_feed_perfil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed_perfil, container, false);
 
         nome = view.findViewById(R.id.nome_utilizador);
-        distrito = view.findViewById(R.id.distrito);
-        email = view.findViewById(R.id.email);
+        distrito = view.findViewById(R.id.id_email);
+        email = view.findViewById(R.id.id_nome);
         image = view.findViewById(R.id.user_pic);
+        nr_cartoes = view.findViewById(R.id.nr_cartoes);
         nr_descontos = view.findViewById(R.id.nr_descontos);
         nr_descontos_usados = view.findViewById(R.id.nr_descontos_usados);
         rating = view.findViewById(R.id.rating);
@@ -43,8 +46,9 @@ public class Fragment_feed_perfil extends Fragment {
         email.setText(sharedPreferences.getString("Email", ""));
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
         setRating(sharedPreferences.getString("Rating", ""));
+        nr_cartoes.setText(Integer.toString(listaCartoes.size()));
 
-
+        contarDescontos();
         return view;
     }
 
@@ -76,4 +80,14 @@ public class Fragment_feed_perfil extends Fragment {
         }
     }
 
+    private void contarDescontos() {
+        int nDescontos = 0, nDescontosUsados = 0;
+
+        for(Cartao_empresa_fidelizada cartao : listaCartoes) {
+            nDescontos += cartao.getListaCampanhas().size();
+            nDescontosUsados += Integer.parseInt(cartao.getUtilizacoes());
+        }
+        nr_descontos.setText(Integer.toString(nDescontos));
+        nr_descontos_usados.setText(Integer.toString(nDescontosUsados));
+    }
 }
