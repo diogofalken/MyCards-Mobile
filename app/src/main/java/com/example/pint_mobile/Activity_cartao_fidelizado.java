@@ -1,6 +1,7 @@
 package com.example.pint_mobile;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -94,6 +95,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.getMenu().findItem(R.id.nav_descontos).setChecked(true);
+        cl_nome_empresa.setBackgroundColor(Color.parseColor(cor));
 
         carregar_rating(id_empresa, id_cliente);
 
