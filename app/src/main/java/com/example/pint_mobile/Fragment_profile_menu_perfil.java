@@ -102,8 +102,8 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
                 setDirectoryName("images").
                 load();
 
-
         sharedPreferences = getContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
 
         cancelar = view.findViewById(R.id.cancel);
         guardar = view.findViewById(R.id.save);
@@ -116,8 +116,13 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);
         foto_user = view.findViewById(R.id.user_pic);
-        foto_user.setImageBitmap(bitmap
-);
+        foto_user.setImageBitmap(bitmap);
+
+        if(bitmap == null) {
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            foto_user.setImageBitmap(largeIcon);
+        }
+
         email.setText(sharedPreferences.getString("Email", ""));
         primeiroNome.setText(sharedPreferences.getString("PrimeiroNome", ""));
         segundoNome.setText(sharedPreferences.getString("UltimoNome", ""));
