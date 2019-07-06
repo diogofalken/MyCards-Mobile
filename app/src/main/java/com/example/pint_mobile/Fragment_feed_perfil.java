@@ -46,7 +46,7 @@ public class Fragment_feed_perfil extends Fragment {
         email.setText(sharedPreferences.getString("Email", ""));
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
         setRating(sharedPreferences.getString("Rating", ""));
-        nr_cartoes.setText(sharedPreferences.getString("NrCartoes", ""));
+        nr_cartoes.setText(Integer.toString(listaCartoes.size()));
 
         contarDescontos();
         return view;

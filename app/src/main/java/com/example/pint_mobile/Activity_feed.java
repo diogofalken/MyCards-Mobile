@@ -87,8 +87,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         calcular_rating_cliente();
 
-        calcular_nr_cartoes();
-
         getCartoesFidelizados();
     }
 
@@ -277,31 +275,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         // requestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(postRequest);
-    }
-
-    private void calcular_nr_cartoes(){
-        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao";
-        StringRequest getEmpresas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    editor.putString("NrCartoes", String.valueOf(jsonArray.length()));
-                    editor.commit();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "GET sem sucesso", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(getEmpresas);
     }
 
     private void getCartoesFidelizados() {
