@@ -1,30 +1,51 @@
 package com.example.pint_mobile;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
-import android.text.InputType;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Dialog_change_password extends DialogFragment {
 
 
     Button cancel, ok;
-    RadioGroup rg;
-    ImageView see_password1, see_password2, see_password3;
+    SharedPreferences sharedPreferences;
+    private String info;
+    String senhaAtualValor, senhaNovaValor;
 
     @Nullable
     @Override
@@ -33,9 +54,8 @@ public class Dialog_change_password extends DialogFragment {
 
         cancel = view.findViewById(R.id.tentar);
         ok = view.findViewById(R.id.enviar);
-        see_password1 = view.findViewById(R.id.see_pass1);
-        see_password2 = view.findViewById(R.id.see_pass2);
-        see_password3 = view.findViewById(R.id.see_pass3);
+
+        sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
 
         //fechar pop up ao carregar em cancelar
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -45,35 +65,85 @@ public class Dialog_change_password extends DialogFragment {
             }
         });
 
-        //fechar pop up ao carregar em ok
+        //Atualizar Password
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //alterar password
+                final EditText senhaAtual = (EditText) view.findViewById(R.id.senha_atual);
+                senhaAtualValor = senhaAtual.getText().toString();
+
+                EditText senhaNova = (EditText) view.findViewById(R.id.senha_nova);
+                senhaNovaValor = senhaNova.getText().toString();
+
+                EditText senhaNovaAgain = (EditText) view.findViewById(R.id.senha_nova_again);
+                String senhaNovaAgainValor = senhaNovaAgain.getText().toString();
+
+                if(!senhaNovaValor.equals(senhaNovaAgainValor)) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Password não são iguais!", Toast.LENGTH_SHORT).show();
+                } else if(senhaAtual.equals("")) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Password Antiga Errada!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                String url = "https://www.mycards.dsprojects.pt/authentication/updatePassword_cliente";
+                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    if(jsonObject.getString("status").equals("true")) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "Password alterada com sucesso!", Toast.LENGTH_SHORT).show();
+                                        dismiss();
+                                    } else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "Password não alterada!", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    ConnectivityManager conMgr = (ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                                    NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                                    if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                                        Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                                    } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                        //This indicates that the request has either time out or there is no connection
+                                        Log.i("VolleyError::", error.toString());
+                                    } else if (error instanceof AuthFailureError) {
+                                        //Error indicating that there was an Authentication Failure while performing the request
+                                        Log.i("AuthFailureError::", error.toString());
+                                    } else if (error instanceof ServerError) {
+                                        //Indicates that the server responded with a error response
+                                        Log.i("ServerError::", error.toString());
+                                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                                    } else if (error instanceof NetworkError) {
+                                        //Indicates that there was network error while performing the request
+                                        Log.i("NetworkError::", error.toString());
+                                        Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                                    } else if (error instanceof ParseError) {
+                                        //Indicates that the server response could not be parsed
+                                        Log.i("ParseError::", error.toString());
+                                    }
+                                }
+                            }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("email", sharedPreferences.getString("Email", ""));
+                        params.put("prepassword",senhaAtualValor);
+                        params.put("password", senhaNovaValor);
+                        return params;
+                    }
+                };
+                    RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                    requestQueue.add(postRequest);
+            }
+
             }
         });
-
-        see_password1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                see_not_see_password1(view);
-            }
-        });
-
-        see_password2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                see_not_see_password2(view);
-            }
-        });
-
-        see_password3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                see_not_see_password3(view);
-            }
-        });
-
 
         return view;
     }
@@ -97,74 +167,5 @@ public class Dialog_change_password extends DialogFragment {
         getDialog().getWindow().setGravity(Gravity.CENTER);
     }
 
-    public void see_not_see_password1(View v){
-        TextView password = v.findViewById(R.id.senha_atual);
-        ImageView img_see = v.findViewById(R.id.see_pass1);
-        Context mContext = getContext();
-        Drawable drawable_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_see_password
-        );
-        Drawable drawable_not_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_not_see_password
-        );
-        if(password.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){ //password visivel
-            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            img_see.setImageDrawable(drawable_not_see);
-
-        }
-        else{ //password nao visivel
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            img_see.setImageDrawable(drawable_see);
-        }
-    }
-
-    public void see_not_see_password2(View v){
-        TextView password = v.findViewById(R.id.senha_nova);
-        ImageView img_see = v.findViewById(R.id.see_pass2);
-        Context mContext = getContext();
-        Drawable drawable_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_see_password
-        );
-        Drawable drawable_not_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_not_see_password
-        );
-        if(password.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){ //password visivel
-            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            img_see.setImageDrawable(drawable_not_see);
-
-        }
-        else{ //password nao visivel
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            img_see.setImageDrawable(drawable_see);
-        }
-    }
-
-    public void see_not_see_password3(View v){
-        TextView password = v.findViewById(R.id.senha_nova_again);
-        ImageView img_see = v.findViewById(R.id.see_pass3);
-        Context mContext = getContext();
-        Drawable drawable_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_see_password
-        );
-        Drawable drawable_not_see = ContextCompat.getDrawable(
-                mContext,
-                R.drawable.ic_not_see_password
-        );
-        if(password.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){ //password visivel
-            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            img_see.setImageDrawable(drawable_not_see);
-
-        }
-        else{ //password nao visivel
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            img_see.setImageDrawable(drawable_see);
-        }
-    }
- 
 }
 
