@@ -415,6 +415,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                                 Integer.toString(nUtilizacoes)
                         );
                         cartoesFidelizados.add(auxCartao);
+                        editor.commit();
                         getDescontos(auxCartao);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -467,5 +468,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(getDescontos);
+        }
+
+        private void infoFeedPerfil() {
+
         }
 }

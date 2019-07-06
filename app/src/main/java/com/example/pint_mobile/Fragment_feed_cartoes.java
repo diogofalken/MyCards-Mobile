@@ -42,7 +42,9 @@ public class Fragment_feed_cartoes extends Fragment {
         add_cartao = view.findViewById(R.id.add_cartao);
         cl_sem_cartoes = view.findViewById(R.id.sem_cartoes);
 
-        cl_sem_cartoes.setVisibility(View.GONE);
+        if(listaCartoes.size() != 0) {
+            cl_sem_cartoes.setVisibility(View.GONE);
+        }
 
         sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

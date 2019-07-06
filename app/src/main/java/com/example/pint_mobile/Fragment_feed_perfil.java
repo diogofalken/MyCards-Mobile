@@ -47,9 +47,8 @@ public class Fragment_feed_perfil extends Fragment {
         distrito.setText(sharedPreferences.getString("Localizacao", "") + ", Portugal");
         setRating(sharedPreferences.getString("Rating", ""));
         nr_cartoes.setText(sharedPreferences.getString("NrCartoes", ""));
-        nr_descontos.setText(Integer.toString(contarDescontos()));
-        nr_descontos_usados.setText(Integer.toString(contarDescontosUsados()));
 
+        contarDescontos();
         return view;
     }
 
@@ -81,23 +80,14 @@ public class Fragment_feed_perfil extends Fragment {
         }
     }
 
-    private int contarDescontos() {
-        int nDescontos = 0;
+    private void contarDescontos() {
+        int nDescontos = 0, nDescontosUsados = 0;
 
         for(Cartao_empresa_fidelizada cartao : listaCartoes) {
             nDescontos += cartao.getListaCampanhas().size();
-        }
-
-        return nDescontos;
-    }
-
-    private int contarDescontosUsados() {
-        int nDescontosUsados = 0;
-
-        for(Cartao_empresa_fidelizada cartao : listaCartoes) {
             nDescontosUsados += Integer.parseInt(cartao.getUtilizacoes());
         }
-
-        return nDescontosUsados;
+        nr_descontos.setText(Integer.toString(nDescontos));
+        nr_descontos_usados.setText(Integer.toString(nDescontosUsados));
     }
 }
