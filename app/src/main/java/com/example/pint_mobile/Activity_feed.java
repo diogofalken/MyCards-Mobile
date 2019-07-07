@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,10 +15,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,6 +41,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -80,14 +86,17 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         bottomNav.getMenu().findItem(R.id.nav_wallet).setChecked(false);
         bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
 
+        calcular_rating_cliente();
+
+        getCartoesFidelizados();
+
+
         open_fragment_descontos();
 
         navigationView.setNavigationItemSelectedListener(this);
         String id = getIntent().getStringExtra("id");
 
-        calcular_rating_cliente();
 
-        getCartoesFidelizados();
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -146,6 +155,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 }
             }
         });
+
+
     }
 
     private void open_fragment_cartoes(){
@@ -502,4 +513,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(postRequest);
     }
+
+
 }
