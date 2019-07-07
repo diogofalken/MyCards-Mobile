@@ -153,7 +153,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
 
         icon_left.setVisibility(View.GONE);
-        icon_right.setVisibility(View.GONE);
+        icon_right.setVisibility(View.VISIBLE);
+        icon_right.setImageResource(R.drawable.ic_reload);
         barra_pesquisa.setVisibility(View.GONE);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
