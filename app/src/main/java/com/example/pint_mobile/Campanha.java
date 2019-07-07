@@ -14,6 +14,7 @@ public class Campanha implements Parcelable {
     private String nomeEmpresa;
     private String areaInteresse;
     private String utilizacoes;
+    private String cor;
 
     public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha) {
         this.idCampanha = idCampanha;
@@ -141,5 +142,13 @@ public class Campanha implements Parcelable {
 
     public void setUtilizacoes(String utilizacoes) {
         this.utilizacoes = utilizacoes;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
     }
 }

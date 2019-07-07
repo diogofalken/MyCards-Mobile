@@ -42,6 +42,7 @@ public class Fragment_feed_descontos extends Fragment {
                 campanha.setNomeEmpresa(cartao.getNome());
                 campanha.setAreaInteresse(cartao.getArea());
                 campanha.setUtilizacoes(cartao.getUtilizacoes());
+                campanha.setCor(cartao.getCor());
                 listaDescontos.add(campanha);
             }
         }
@@ -85,36 +86,7 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDataFim = row.findViewById(R.id.dataFim);
                     cl_cupoes = row.findViewById(R.id.cl);
 
-                    //dar cor consoante a area empresa
-                    switch (campanha.getAreaInteresse()) {
-                        case "Agricultura":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#006600"));
-                            break;
-                        case "Ciência e Tecnologia":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#042C54"));
-                            break;
-                        case "Desporto":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#4d004d"));
-                            break;
-                        case "Educação":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#662200"));
-                            break;
-                        case "Saúde":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#5C7993"));
-                            break;
-                        case "Restauração":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#BD8E02"));
-                            break;
-                        case "Transportes e Mercadorias":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#3F51B5"));
-                            break;
-                        case "Turismo":
-                            cl_cupoes.setBackgroundColor(Color.parseColor("#E91E63"));
-                            break;
-                        default:
-                            break;
-                    }
-
+                    cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
                     tvDesignacao.setText(campanha.getDescricao());
@@ -130,37 +102,9 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDataFim = row.findViewById(R.id.data_fim);
                     cl_carimbos = row.findViewById(R.id.cl);
                     nr_carimbos = campanha.getUtilizacoes();
-                    Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
-                    //dar cor consoante a area empresa
-                    switch (campanha.getAreaInteresse()) {
-                        case "Agricultura":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#006600"));
-                            break;
-                        case "Ciência e Tecnologia":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#042C54"));
-                            break;
-                        case "Desporto":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#4d004d"));
-                            break;
-                        case "Educação":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#662200"));
-                            break;
-                        case "Saúde":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#5C7993"));
-                            break;
-                        case "Restauração":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#BD8E02"));
-                            break;
-                        case "Transportes e Mercadorias":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#3F51B5"));
-                            break;
-                        case "Turismo":
-                            cl_carimbos.setBackgroundColor(Color.parseColor("#E91E63"));
-                            break;
-                        default:
-                            break;
-                    }
+                    //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
+                    cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
                     //atualizar o nr de carimbos
                     switch (nr_carimbos){

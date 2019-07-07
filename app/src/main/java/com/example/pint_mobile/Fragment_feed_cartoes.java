@@ -94,7 +94,7 @@ public class Fragment_feed_cartoes extends Fragment {
             TextView nrDescontos = row.findViewById(R.id.nrdescontos);
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);
-            TextView email = row.findViewById(R.id.nome);
+            TextView email = row.findViewById(R.id.email);
             TextView nrPontos = row.findViewById(R.id.nrpontos);
 
             String cor = getItem(position).getCor();

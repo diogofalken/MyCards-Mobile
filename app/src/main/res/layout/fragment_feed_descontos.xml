@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_info"
             android:drawablePadding="10dp"
-            android:text="Não está fidelizado a nenhuma empresa, portanto não há cartões a apresentar. Fidelize-se a uma empresa e poderá visualizar o seu cartão."
+            android:text="Não se encontram descontos disponiveis neste momento. Se o problema persistir pode ser um erro de conexão, reinicie a aplicação!"
             android:textColor="@color/corPreta"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

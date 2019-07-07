@@ -86,7 +86,7 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         alterar_senha = view.findViewById(R.id.alterar_senha);
         distrito = view.findViewById(R.id.nome);
         data_nasc = view.findViewById(R.id.data_nasc);
-        email = view.findViewById(R.id.nome);
+        email = view.findViewById(R.id.etEmail);
         senha = view.findViewById(R.id.senha);
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);

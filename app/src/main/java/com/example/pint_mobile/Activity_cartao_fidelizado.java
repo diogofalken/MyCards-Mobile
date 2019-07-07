@@ -40,6 +40,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
     private ImageView menu;
     private JSONObject dados;
     private String localizacao, AreaInteresse, nome, cor, email, id_empresa, id_cartao, id_cliente, rating, ratingEmpresa;
+    public static ArrayList<Campanha> campanhas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         ratingEmpresa = cartao.getRating();
 
         // Todas as campanhas deste cartao
-        ArrayList<Campanha> campanhas = getIntent().getParcelableArrayListExtra("campanhas");
+        campanhas = getIntent().getParcelableArrayListExtra("campanhas");
 
         //abrir menu perfil
         menu.setOnClickListener(new View.OnClickListener() {
