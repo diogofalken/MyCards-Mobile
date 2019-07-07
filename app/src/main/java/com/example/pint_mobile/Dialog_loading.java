@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +41,9 @@ public class Dialog_loading extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_loading, container, false);
 
+        getDialog().requestWindowFeature(STYLE_NO_TITLE);
+        setCancelable(false);
+
         return view;
     }
 
@@ -47,8 +51,8 @@ public class Dialog_loading extends DialogFragment {
     public void onResume() {
         super.onResume();
         Window window = getDialog().getWindow();
-        float h =  325 * getResources().getDisplayMetrics().density;
-        float w =  160 * getResources().getDisplayMetrics().density;
+        float h =  300 * getResources().getDisplayMetrics().density;
+        float w =  130 * getResources().getDisplayMetrics().density;
         int height = Math.round(h);
         int width = Math.round(w);
         window.setLayout(height, width);

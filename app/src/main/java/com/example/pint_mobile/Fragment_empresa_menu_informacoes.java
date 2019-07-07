@@ -23,7 +23,7 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
 
         nome = view.findViewById(R.id.id_nome);
         area = view.findViewById(R.id.id_area);
-        email = view.findViewById(R.id.email);
+        email = view.findViewById(R.id.nome);
         distrito = view.findViewById(R.id.id_distrito);
 
 

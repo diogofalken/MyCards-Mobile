@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,12 +59,12 @@ public class Fragment_feed_descontos extends Fragment {
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = null;
-            TextView tvNomeEmpresa, tvDescricao, tvDesignacao, tvValor;
+            TextView tvNomeEmpresa, tvDescricao, tvDesignacao, tvValor, tvDataFim;
             Campanha campanha = getItem(position);
             switch (campanha.getTipoCampanha()) {
                 case "0":
                     row = layoutInflater.inflate(R.layout.desconto_cupoes, parent, false);
-                    tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
+                    tvNomeEmpresa = row.findViewById(R.id.nome);
                     tvDescricao = row.findViewById(R.id.area_empresa);
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
@@ -79,16 +77,19 @@ public class Fragment_feed_descontos extends Fragment {
                 case "1":
                     row = layoutInflater.inflate(R.layout.desconto_carimbos, parent, false);
 
-                    tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
+                    tvNomeEmpresa = row.findViewById(R.id.nome);
                     tvDescricao = row.findViewById(R.id.area_empresa);
+                    tvDataFim = row.findViewById(R.id.data_fim);
 
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
+                    tvDataFim.setText(campanha.getDataFim());
+
                     break;
                 case "2":
                     row = layoutInflater.inflate(R.layout.desconto_pontos, parent, false);
 
-                    tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
+                    tvNomeEmpresa = row.findViewById(R.id.nome);
                     tvDescricao = row.findViewById(R.id.area_empresa);
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);

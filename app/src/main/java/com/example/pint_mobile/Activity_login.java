@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +51,7 @@ public class Activity_login extends AppCompatActivity {
     private String email;
     private String senha;
     private String info;
-    private ProgressBar progressBar;
+    Dialog_loading loading = new Dialog_loading();
     static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
 
@@ -66,11 +65,8 @@ public class Activity_login extends AppCompatActivity {
 
         recuperar_senha = findViewById(R.id.recuperar);
         login = findViewById(R.id.entrar);
-        editText_email = findViewById(R.id.nome_empresa);
+        editText_email = findViewById(R.id.nome);
         editText_senha = findViewById(R.id.senha);
-        progressBar = findViewById(R.id.progressBar);
-
-        progressBar.setVisibility(View.GONE);
 
         //colocar "Registe-se já!" com onclick e cor diferente
         TextView textView = findViewById(R.id.registar);
@@ -99,7 +95,7 @@ public class Activity_login extends AppCompatActivity {
                 email = editText_email.getText().toString();
                 senha = editText_senha.getText().toString();
                 if(validateLogin(email, senha)){
-                    progressBar.setVisibility(View.VISIBLE);
+                    loading.show(getSupportFragmentManager(), "Dialog_loading");
                     login();
                 }
             }
@@ -197,18 +193,18 @@ public class Activity_login extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), Activity_feed.class);
                                 startActivity(intent);
                             } else {
-                                progressBar.setVisibility(View.GONE);
+                                loading.dismiss();
                                 Toast.makeText(getApplicationContext(), "Credenciais erradas!", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progressBar.setVisibility(View.GONE);
+                            loading.dismiss();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
+                loading.dismiss();
                 ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
                 if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
