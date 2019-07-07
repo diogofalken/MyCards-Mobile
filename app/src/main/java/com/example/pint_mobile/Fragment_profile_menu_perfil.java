@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -94,8 +95,13 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
         primeiroNome = view.findViewById(R.id.primeiro_nome);
         segundoNome = view.findViewById(R.id.segundo_nome);
         foto_user = view.findViewById(R.id.user_pic);
-        foto_user.setImageBitmap(bitmap
-);
+        foto_user.setImageBitmap(bitmap);
+
+        if(bitmap == null) {
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            foto_user.setImageBitmap(largeIcon);
+        }
+
         email.setText(sharedPreferences.getString("Email", ""));
         primeiroNome.setText(sharedPreferences.getString("PrimeiroNome", ""));
         segundoNome.setText(sharedPreferences.getString("UltimoNome", ""));

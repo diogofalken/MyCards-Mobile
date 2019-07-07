@@ -3,6 +3,7 @@ package com.example.pint_mobile;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,6 +48,11 @@ public class Fragment_feed_perfil extends Fragment {
         rating = view.findViewById(R.id.rating);
 
         image.setImageBitmap(bitmap);
+
+        if(bitmap == null) {
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            image.setImageBitmap(largeIcon);
+        }
 
         sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
 
