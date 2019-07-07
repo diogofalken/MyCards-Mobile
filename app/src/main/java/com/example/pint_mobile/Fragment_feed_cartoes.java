@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -102,11 +103,41 @@ public class Fragment_feed_cartoes extends Fragment {
 
             String cor = getItem(position).getCor();
 
+            
+
+            switch (getItem(position).getArea()) {
+                case "Agricultura":
+                    cl.setBackgroundResource(R.drawable.border_cartao_agricultura);
+                    break;
+                case "Ciência e Tecnologia":
+                    cl.setBackgroundResource(R.drawable.border_cartao_ciencia_tecnologia);
+                    break;
+                case "Desporto":
+                    cl.setBackgroundResource(R.drawable.border_cartao_desporto);
+                    break;
+                case "Educação":
+                    cl.setBackgroundResource(R.drawable.border_cartao_educacao);
+                    break;
+                case "Saúde":
+                    cl.setBackgroundResource(R.drawable.border_cartao_saude);
+                    break;
+                case "Restauração":
+                    cl.setBackgroundResource(R.drawable.border_cartao_restauracao);
+                    break;
+                case "Transportes e Mercadorias":
+                    cl.setBackgroundResource(R.drawable.border_cartao_transportes_mercadorias);
+                    break;
+                case "Turismo":
+                    cl.setBackgroundResource(R.drawable.border_cartao_turismo);
+                    break;
+                default:
+                    break;
+            }
+
             nomeEmpresa.setText(getItem(position).getNome());
             areaEmpresa.setText(getItem(position).getArea());
             nrDescontos.setText(getItem(position).getNr_descontos());
             distrito.setText(getItem(position).getDistrito());
-            cl.setBackgroundColor(Color.parseColor(cor));
             email.setText(getItem(position).getEmail());
             nrPontos.setText(getItem(position).getPontos());
 

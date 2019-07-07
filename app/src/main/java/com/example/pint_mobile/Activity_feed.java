@@ -1,6 +1,7 @@
 package com.example.pint_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -119,7 +120,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         icon_left.setVisibility(View.VISIBLE);
         icon_right.setVisibility(View.VISIBLE);
         icon_left.setImageResource(R.drawable.ic_filter);
-        icon_right.setImageResource(R.drawable.ic_search);
+        icon_right.setImageResource(R.drawable.ic_reload);
         barra_pesquisa.setVisibility(View.GONE);
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -133,17 +134,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
             }
         });
 
-        //abrir barra de pesquisa
         icon_right.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(barra_pesquisa.getVisibility() == View.GONE) {
-                    icon_right.setImageResource(R.drawable.ic_close);
-                    barra_pesquisa.setVisibility(View.VISIBLE);
-                }
-                else {
-                    barra_pesquisa.setVisibility(View.GONE);
-                    icon_right.setImageResource(R.drawable.ic_search);
-                }
+                refreshMyData();
             }
         });
     }
@@ -157,6 +150,13 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         icon_right.setImageResource(R.drawable.ic_reload);
         barra_pesquisa.setVisibility(View.GONE);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        icon_right.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                refreshMyData();
+            }
+        });
 
     }
 
@@ -316,8 +316,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                     String localizacao = dados.getString("Localizacao");
                     String AreaInteresse = dados.getString("AreaInteresse");
                     String nome = dados.getString("Nome");
-                    String cor = "";
+                    String cor = "verde";
                     String email = dados.getString("Email");
+
                     switch (AreaInteresse.toString()) {
                         case "Agricultura":
                             cor = "#006600";
@@ -501,5 +502,11 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         // requestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(postRequest);
+    }
+
+    public void refreshMyData(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
