@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,7 @@ public class Fragment_feed_descontos extends Fragment {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = null;
             TextView tvNomeEmpresa, tvDescricao, tvDesignacao, tvValor, tvDataFim;
+            ConstraintLayout cl_carimbos, cl_cupoes, cl_pontos;
             Campanha campanha = getItem(position);
             switch (campanha.getTipoCampanha()) {
                 case "0":
