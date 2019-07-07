@@ -41,6 +41,7 @@ public class Fragment_feed_descontos extends Fragment {
             for(Campanha campanha : cartao.getListaCampanhas()) {
                 campanha.setNomeEmpresa(cartao.getNome());
                 campanha.setAreaInteresse(cartao.getArea());
+                campanha.setUtilizacoes(cartao.getUtilizacoes());
                 listaDescontos.add(campanha);
             }
         }
@@ -128,7 +129,7 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDescricao = row.findViewById(R.id.area_empresa);
                     tvDataFim = row.findViewById(R.id.data_fim);
                     cl_carimbos = row.findViewById(R.id.cl);
-                    nr_carimbos = campanha.getValor();
+                    nr_carimbos = campanha.getUtilizacoes();
                     Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
                     //dar cor consoante a area empresa
@@ -163,7 +164,7 @@ public class Fragment_feed_descontos extends Fragment {
 
                     //atualizar o nr de carimbos
                     switch (nr_carimbos){
-                        case"0":
+                        case "0":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbo1);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbo2);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
@@ -175,7 +176,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"1":
+                        case "1":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbo2);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
@@ -187,7 +188,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"2":
+                        case "2":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
@@ -199,7 +200,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"3":
+                        case "3":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -211,7 +212,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"4":
+                        case "4":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -223,7 +224,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"5":
+                        case "5":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -235,7 +236,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"6":
+                        case "6":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -247,7 +248,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"7":
+                        case "7":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -259,7 +260,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"8":
+                        case "8":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -271,7 +272,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"9":
+                        case "9":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
@@ -283,7 +284,7 @@ public class Fragment_feed_descontos extends Fragment {
                             row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
                             break;
-                        case"10":
+                        case "10":
                             row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
                             row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
