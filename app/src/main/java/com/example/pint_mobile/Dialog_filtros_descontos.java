@@ -69,6 +69,10 @@ public class Dialog_filtros_descontos extends DialogFragment {
                     }
                 }
 
+                if(tipos.equals("0000")) {
+                    tipos = "1000";
+                }
+
                 // List View de Areas de Interesse
                 for (int i = 0; i < ll_empresas.getChildCount(); i++){
                     View vi = ll_empresas.getChildAt(i);
@@ -81,6 +85,10 @@ public class Dialog_filtros_descontos extends DialogFragment {
                             areasInteresse += 0;
                         }
                     }
+                }
+
+                if(areasInteresse.equals("000000000")) {
+                    areasInteresse = "100000000";
                 }
 
                 getDialog().dismiss();
