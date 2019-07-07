@@ -68,7 +68,7 @@ public class Dialog_cancelar_fidelizacao extends DialogFragment {
             @Override
             public void onClick(View v) {
                 cancelar_fidelizacao();
-                Intent i = new Intent(getActivity(), Activity_feed.class);
+                Intent i = new Intent(getActivity(), Activity_listar_empresas.class);
                 startActivity(i);
             }
         });
@@ -98,7 +98,7 @@ public class Dialog_cancelar_fidelizacao extends DialogFragment {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("true")) {
                                 Toast.makeText(getContext(), "Cancelou a fidelização com sucesso!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getContext(), Activity_feed.class);
+                                Intent intent = new Intent(getContext(), Activity_listar_empresas.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getContext(), "Não foi possivel cancelar a fidelização neste momento!", Toast.LENGTH_SHORT).show();
