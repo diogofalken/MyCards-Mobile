@@ -20,6 +20,7 @@ public class Fragment_feed_descontos extends Fragment {
     private ListView lv;
     private MyDescontosAdapter adapter;
     private ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
+    private ArrayList<Campanha> listaDescontos = new ArrayList<>();
 
     @Nullable
     @Override
@@ -29,11 +30,18 @@ public class Fragment_feed_descontos extends Fragment {
         final TextView barra_pesquisa = view.findViewById(R.id.barra_pesquisa);
 
         lv = view.findViewById(R.id.lista_descontos);
+        for(Cartao_empresa_fidelizada cartao : lista) {
+            for(Campanha campanha : cartao.getListaCampanhas()) {
+                campanha.setNomeEmpresa(cartao.getNome());
+                listaDescontos.add(campanha);
+            }
+        }
 
-        ArrayList<Campanha> teste = new ArrayList<>();
-        teste.add(new Campanha("1", "Iphone", "Iphone", "2019/20/20", "2019/20/20", "50", "0"));
+        if(listaDescontos.size() != 0) {
+            view.findViewById(R.id.sem_empresas).setVisibility(View.GONE);
+        }
 
-        adapter = new MyDescontosAdapter(getContext(), lista.get(0).getListaCampanhas());
+        adapter = new MyDescontosAdapter(getContext(), listaDescontos);
         lv.setAdapter(adapter);
 
         return view;
@@ -55,7 +63,7 @@ public class Fragment_feed_descontos extends Fragment {
             View row = null;
             TextView tvNomeEmpresa, tvDescricao, tvDesignacao, tvValor;
             Campanha campanha = getItem(position);
-            switch (campanha.getTipoCampanha().toString()) {
+            switch (campanha.getTipoCampanha()) {
                 case "0":
                     row = layoutInflater.inflate(R.layout.desconto_cupoes, parent, false);
                     tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
@@ -63,32 +71,32 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
 
-                    tvNomeEmpresa.setText("JEFF");
-                    tvDescricao.setText(campanha.getDescricao());
-                    tvDesignacao.setText(campanha.getDesignacao());
-                    tvValor.setText(campanha.getValor());
+                    tvNomeEmpresa.setText(campanha.getNomeEmpresa());
+                    tvDescricao.setText(campanha.getDesignacao());
+                    tvDesignacao.setText(campanha.getDescricao());
+                    tvValor.setText(campanha.getValor() + "%");
                     break;
                 case "1":
                     row = layoutInflater.inflate(R.layout.desconto_carimbos, parent, false);
 
                     tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
                     tvDescricao = row.findViewById(R.id.area_empresa);
-                    tvDesignacao = row.findViewById(R.id.designacao);
-                    tvValor = row.findViewById(R.id.valor);
 
-                    tvNomeEmpresa.setText("JEFF");
-                    tvDescricao.setText(campanha.getDescricao());
-                    tvDesignacao.setText(campanha.getDesignacao());
-                    tvValor.setText(campanha.getValor());
+                    tvNomeEmpresa.setText(campanha.getNomeEmpresa());
+                    tvDescricao.setText(campanha.getDesignacao());
                     break;
                 case "2":
                     row = layoutInflater.inflate(R.layout.desconto_pontos, parent, false);
 
                     tvNomeEmpresa = row.findViewById(R.id.nome_empresa);
                     tvDescricao = row.findViewById(R.id.area_empresa);
+                    tvDesignacao = row.findViewById(R.id.designacao);
+                    tvValor = row.findViewById(R.id.valor);
 
-                    tvNomeEmpresa.setText("JEFF");
-                    tvDescricao.setText(campanha.getDescricao());
+                    tvNomeEmpresa.setText(campanha.getNomeEmpresa());
+                    tvDescricao.setText(campanha.getDesignacao());
+                    tvDesignacao.setText(campanha.getDescricao());
+                    tvValor.setText(campanha.getValor());
                     break;
             }
             return row;

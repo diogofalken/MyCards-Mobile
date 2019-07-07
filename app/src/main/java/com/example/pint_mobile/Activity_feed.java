@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -58,6 +59,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     DrawerLayout drawerLayout;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    Dialog_loading loading = new Dialog_loading();
     Integer x = 0;
 
     @Override
@@ -65,6 +67,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         cartoesFidelizados.clear();
+        loading.show(getSupportFragmentManager(), "Dialog_loading");
 
         sharedPreferences = getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -79,6 +82,39 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         navigationView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
 
+        getCartoesFidelizados();
+
+        icon_left.setVisibility(View.VISIBLE);
+        icon_right.setVisibility(View.VISIBLE);
+        icon_left.setImageResource(R.drawable.ic_filter);
+        icon_right.setImageResource(R.drawable.ic_reload);
+        barra_pesquisa.setVisibility(View.GONE);
+
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        new CountDownTimer(5000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                //tornar o fragment dos descontos como fragment inicial
+                bottomNav.setOnNavigationItemSelectedListener(navListener);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_feed_descontos()).commit();
+
+                //colocar icon descontos checked do menu nav assim que inicia a activity
+                bottomNav.getMenu().findItem(R.id.nav_wallet).setChecked(false);
+                bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
+
+                open_fragment_descontos();
+                calcular_rating_cliente();
+                loading.dismiss();
+            }
+        }.start();
+
+
         //tornar o fragment dos descontos como fragment inicial
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_feed_descontos()).commit();
@@ -87,17 +123,11 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         bottomNav.getMenu().findItem(R.id.nav_wallet).setChecked(false);
         bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
 
-        calcular_rating_cliente();
-
-        getCartoesFidelizados();
-
-
         open_fragment_descontos();
+        calcular_rating_cliente();
 
         navigationView.setNavigationItemSelectedListener(this);
         String id = getIntent().getStringExtra("id");
-
-
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
