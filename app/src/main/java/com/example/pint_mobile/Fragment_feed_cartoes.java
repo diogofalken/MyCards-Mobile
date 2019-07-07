@@ -59,7 +59,7 @@ public class Fragment_feed_cartoes extends Fragment {
         });
 
         cardsList = new ArrayList<>();
-        lv = view.findViewById(R.id.lista_cartoes);
+        lv = view.findViewById(R.id.lista_descontos);
 
         adapter = new MyAdapter(getContext(), listaCartoes);
         lv.setAdapter(adapter);

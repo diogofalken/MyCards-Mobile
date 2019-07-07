@@ -55,7 +55,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.lista_cartoes);
+        listView = findViewById(R.id.lista_descontos);
         sem_empresas = findViewById(R.id.sem_empresas);
 
         String url = "https://www.mycards.dsprojects.pt/api/empresa";

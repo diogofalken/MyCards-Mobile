@@ -77,7 +77,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <ListView
-        android:id="@+id/lista_cartoes"
+        android:id="@+id/lista_descontos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
