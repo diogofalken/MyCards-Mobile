@@ -173,7 +173,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
                 <EditText
-                    android:id="@+id/nome_empresa"
+                    android:id="@+id/nome"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"
@@ -216,7 +216,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView20"
-                    app:layout_constraintTop_toBottomOf="@+id/nome_empresa" /><![CDATA[
+                    app:layout_constraintTop_toBottomOf="@+id/nome" /><![CDATA[
                     app:layout_constraintTop_toBottomOf="@+id/id_nome" />
 
                 ]]>
@@ -393,7 +393,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
 
                 <Button
-                    android:id="@+id/email"
+                    android:id="@+id/nome"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"

@@ -57,7 +57,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View v = navigationView.getHeaderView(0);
         cl_nome_empresa = v.findViewById(R.id.clEmpresa);
-        nome_empresa = v.findViewById(R.id.nome_empresa);
+        nome_empresa = v.findViewById(R.id.nome);
 
         final ImageView button = findViewById(R.id.voltar);
         button.setOnClickListener(new View.OnClickListener() {

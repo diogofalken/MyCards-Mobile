@@ -3,7 +3,6 @@ package com.example.pint_mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,9 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,12 +89,12 @@ public class Fragment_feed_cartoes extends Fragment {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.cartao_empresa_fidelizada, parent, false);
 
-            TextView nomeEmpresa = row.findViewById(R.id.nome_empresa);
+            TextView nomeEmpresa = row.findViewById(R.id.nome);
             TextView areaEmpresa = row.findViewById(R.id.area_empresa);
             TextView nrDescontos = row.findViewById(R.id.nrdescontos);
             TextView distrito = row.findViewById(R.id.distrito);
             ConstraintLayout cl = row.findViewById(R.id.cl);
-            TextView email = row.findViewById(R.id.email);
+            TextView email = row.findViewById(R.id.nome);
             TextView nrPontos = row.findViewById(R.id.nrpontos);
 
             String cor = getItem(position).getCor();
