@@ -92,11 +92,10 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(2000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-
             }
 
             public void onFinish() {

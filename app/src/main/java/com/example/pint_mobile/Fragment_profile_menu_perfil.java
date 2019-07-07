@@ -67,10 +67,6 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
     private static int Gallery = 2;
     private static int RESULT_CANCELED = 1;
 
-    /*ContextWrapper lw = new ContextWrapper(getContext());
-    // path to /data/data/PINT-Mobile/app_data/imageDir
-    File dir = lw.getDir("imageDir", Context.MODE_PRIVATE);*/
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -172,7 +168,6 @@ public class Fragment_profile_menu_perfil extends Fragment implements Dialog_lis
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Jeff", Toast.LENGTH_SHORT).show();
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     if (jsonObject.getString("status").equals("true")) {

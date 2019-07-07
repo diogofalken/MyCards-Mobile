@@ -157,6 +157,5 @@ public class Fragment_registo_preferencias extends Fragment {
             transportesMercadorias.setChecked(true);
         if(prefs.substring(7, 8).equals("1"))
             turismo.setChecked(true);
-
     }
  }
