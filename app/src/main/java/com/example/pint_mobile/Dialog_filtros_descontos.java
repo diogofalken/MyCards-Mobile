@@ -3,23 +3,31 @@ package com.example.pint_mobile;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Dialog_filtros_descontos extends DialogFragment {
 
-    Button close;
+    Button close, aplicar;
     LinearLayout ll_tipos;
     LinearLayout ll_empresas;
     TextView tv_tipos;
     TextView tv_empresas;
+    static public String tipos = "1000";
+    static public String areasInteresse = "100000000";
 
     @Nullable
     @Override
@@ -31,13 +39,54 @@ public class Dialog_filtros_descontos extends DialogFragment {
         tv_tipos = view.findViewById(R.id.textViewTipos);
         tv_empresas = view.findViewById(R.id.textViewEmpresas);
         close = view.findViewById(R.id.voltar);
-
+        aplicar = view.findViewById(R.id.sim);
 
         //fechar pop up
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDialog().dismiss();
+            }
+        });
+
+        aplicar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipos = "";
+                areasInteresse = "";
+
+                // List View de Tipos de descontos
+                for (int i = 0; i < ll_tipos.getChildCount(); i++){
+                    View vi = ll_tipos.getChildAt(i);
+                    if (vi instanceof CheckBox){
+                        CheckBox cb = (CheckBox)vi;
+                        if(cb.isChecked()) {
+                            tipos += 1;
+                        }
+                        else {
+                            tipos += 0;
+                        }
+                    }
+                }
+
+                // List View de Areas de Interesse
+                for (int i = 0; i < ll_empresas.getChildCount(); i++){
+                    View vi = ll_empresas.getChildAt(i);
+                    if (vi instanceof CheckBox){
+                        CheckBox cb = (CheckBox)vi;
+                        if(cb.isChecked()) {
+                            areasInteresse += 1;
+                        }
+                        else {
+                            areasInteresse += 0;
+                        }
+                    }
+                }
+
+                getDialog().dismiss();
+
+                Fragment fragment = new Fragment_feed_descontos();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
             }
         });
 
@@ -83,9 +132,5 @@ public class Dialog_filtros_descontos extends DialogFragment {
         window.setLayout(height, width);
         window.setGravity(Gravity.CENTER);
     }
-
-
-
-
 }
 

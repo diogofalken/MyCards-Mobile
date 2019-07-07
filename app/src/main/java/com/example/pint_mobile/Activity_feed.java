@@ -106,24 +106,11 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 //colocar icon descontos checked do menu nav assim que inicia a activity
                 bottomNav.getMenu().findItem(R.id.nav_wallet).setChecked(false);
                 bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
-
                 open_fragment_descontos();
                 calcular_rating_cliente();
                 loading.dismiss();
             }
         }.start();
-
-
-        //tornar o fragment dos descontos como fragment inicial
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_feed_descontos()).commit();
-
-        //colocar icon descontos checked do menu nav assim que inicia a activity
-        bottomNav.getMenu().findItem(R.id.nav_wallet).setChecked(false);
-        bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
-
-        open_fragment_descontos();
-        calcular_rating_cliente();
 
         navigationView.setNavigationItemSelectedListener(this);
         String id = getIntent().getStringExtra("id");

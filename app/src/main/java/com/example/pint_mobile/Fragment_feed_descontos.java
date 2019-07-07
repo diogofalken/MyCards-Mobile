@@ -15,12 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Fragment_feed_descontos extends Fragment {
     private ListView lv;
     private MyDescontosAdapter adapter;
     private ArrayList<Cartao_empresa_fidelizada> lista = Activity_feed.cartoesFidelizados;
     private ArrayList<Campanha> listaDescontos = new ArrayList<>();
+    private String tipos = Dialog_filtros_descontos.tipos;
+    private String filtrosArea = Dialog_filtros_descontos.areasInteresse;
+
 
     @Nullable
     @Override
@@ -30,13 +34,16 @@ public class Fragment_feed_descontos extends Fragment {
         final TextView barra_pesquisa = view.findViewById(R.id.barra_pesquisa);
 
         lv = view.findViewById(R.id.lista_descontos);
+        listaDescontos.clear();
         for(Cartao_empresa_fidelizada cartao : lista) {
             for(Campanha campanha : cartao.getListaCampanhas()) {
                 campanha.setNomeEmpresa(cartao.getNome());
+                campanha.setAreaInteresse(cartao.getArea());
                 listaDescontos.add(campanha);
             }
         }
-
+        aplicarFiltrosTipo(tipos);
+        aplicarFiltrosArea(filtrosArea);
         if(listaDescontos.size() != 0) {
             view.findViewById(R.id.sem_empresas).setVisibility(View.GONE);
         }
@@ -100,6 +107,94 @@ public class Fragment_feed_descontos extends Fragment {
                     break;
             }
             return row;
+        }
+    }
+
+    public void aplicarFiltrosTipo(String tipos) {
+        if(tipos.charAt(0) == '1') {
+            return;
+        }
+
+        // Se nao quiser cartoes de pontos
+        if(tipos.charAt(1) == '0') {
+            Iterator<Campanha> itr = listaDescontos.iterator();
+            while (itr.hasNext()) {
+                Campanha desconto = itr.next();
+                if (desconto.getTipoCampanha().equals("2")) {
+                    itr.remove();
+                }
+            }
+        }
+
+        // Se nao quiser cupoes
+        if(tipos.charAt(2) == '0') {
+            Iterator<Campanha> itr = listaDescontos.iterator();
+            while (itr.hasNext()) {
+                Campanha desconto = itr.next();
+                if (desconto.getTipoCampanha().equals("0")) {
+                    itr.remove();
+                }
+            }
+        }
+
+        // Se nao quiser cartoes de carimbos
+        if(tipos.charAt(3) == '0') {
+            Iterator<Campanha> itr = listaDescontos.iterator();
+            while (itr.hasNext()) {
+                Campanha desconto = itr.next();
+                if (desconto.getTipoCampanha().equals("1")) {
+                    itr.remove();
+                }
+            }
+        }
+    }
+
+    public void aplicarFiltrosArea(String filtrosArea) {
+        if(filtrosArea.charAt(0) == '1') {
+            return;
+        }
+
+        if(filtrosArea.charAt(1) == '0' ) {
+            removerDaLista("Agricultura");
+        }
+
+        if(filtrosArea.charAt(2) == '0' ) {
+            removerDaLista("Ciência e Tecnologia");
+        }
+
+        if(filtrosArea.charAt(3) == '0' ) {
+            removerDaLista("Desporto");
+        }
+
+        if(filtrosArea.charAt(4) == '0' ) {
+            removerDaLista("Educação");
+        }
+
+        if(filtrosArea.charAt(5) == '0' ) {
+            removerDaLista("Saúde");
+        }
+
+        if(filtrosArea.charAt(6) == '0' ) {
+            removerDaLista("Restauração");
+        }
+
+        if(filtrosArea.charAt(7) == '0' ) {
+            removerDaLista("Transportes e Mercadorias");
+        }
+
+        if(filtrosArea.charAt(8) == '0' ) {
+            removerDaLista("Turismo");
+        }
+    }
+
+    public void removerDaLista(String area) {
+
+        Iterator<Campanha> itr = listaDescontos.iterator();
+        while (itr.hasNext()) {
+            Campanha desconto = itr.next();
+            if (desconto.getAreaInteresse().equals(area)) {
+                itr.remove();
+            }
         }
     }
  }

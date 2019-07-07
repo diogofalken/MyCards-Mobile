@@ -12,6 +12,7 @@ public class Campanha implements Parcelable {
     private String valor;
     private String tipoCampanha;
     private String nomeEmpresa;
+    private String areaInteresse;
 
     public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha) {
         this.idCampanha = idCampanha;
@@ -123,5 +124,13 @@ public class Campanha implements Parcelable {
 
     public void setNomeEmpresa(String nomeEmpresa) {
         this.nomeEmpresa = nomeEmpresa;
+    }
+
+    public String getAreaInteresse() {
+        return areaInteresse;
+    }
+
+    public void setAreaInteresse(String areaInteresse) {
+        this.areaInteresse = areaInteresse;
     }
 }
