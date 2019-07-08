@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +60,7 @@ public class Dialog_desconto_qr extends DialogFragment {
     private Dialog_loading loading = new Dialog_loading();
     private String id_cliente, id_cartao, id_campanha;
     private ImageView qr;
-
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -70,6 +71,7 @@ public class Dialog_desconto_qr extends DialogFragment {
         notificar = view.findViewById(R.id.enviar);
         nome = view.findViewById(R.id.nome);
         qr = view.findViewById(R.id.QRCode);
+        progressBar = view.findViewById(R.id.progressBar);
 
         Bundle args = getArguments();
         nome.setText(args.getString("nome_empresa"));
@@ -140,7 +142,7 @@ public class Dialog_desconto_qr extends DialogFragment {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             setQrCode(bitmap);
-
+            progressBar.setVisibility(View.GONE);
         }
     }
 
