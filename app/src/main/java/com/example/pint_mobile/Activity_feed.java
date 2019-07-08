@@ -468,18 +468,21 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                     ArrayList<Campanha> lista = new ArrayList<Campanha>();
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject data = jsonArray.getJSONObject(i);
-                        lista.add(new Campanha(
-                                data.getString("ID_Campanha"),
-                                data.getString("Designacao"),
-                                data.getString("Descricao"),
-                                data.getString("DataInicio"),
-                                data.getString("DataFim"),
-                                data.getString("Valor"),
-                                data.getString("TipoCampanha"),
-                                cartao.getId_cartao(),
-                                cartao.getId_empresa(),
-                                utilizacoes.get(i)
-                        ));
+                        if(!(utilizacoes.get(i).equals("1") && data.getString("TipoCampanha").equals("0"))) {
+                            lista.add(new Campanha(
+                                    data.getString("ID_Campanha"),
+                                    data.getString("Designacao"),
+                                    data.getString("Descricao"),
+                                    data.getString("DataInicio"),
+                                    data.getString("DataFim"),
+                                    data.getString("Valor"),
+                                    data.getString("TipoCampanha"),
+                                    cartao.getId_cartao(),
+                                    cartao.getId_empresa(),
+                                    utilizacoes.get(i)
+                            ));
+                        }
+
 
                     }
                     cartao.setListaCampanhas(lista);

@@ -103,7 +103,7 @@ public class Fragment_empresa_menu_descontos extends Fragment {
             TextView tvNomeEmpresa, tvDescricao, tvDesignacao, tvValor, tvDataFim;
             String nr_carimbos;
             ConstraintLayout cl_carimbos, cl_cupoes, cl_pontos;
-            Campanha campanha = getItem(position);
+            Campanha campanha = listaCampanhas.get(position);
             switch (campanha.getTipoCampanha()) {
                 case "0":
                     row = layoutInflater.inflate(R.layout.desconto_cupoes, parent, false);
@@ -139,13 +139,12 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                     img8 = row.findViewById(R.id.carimbo8);
                     img9 = row.findViewById(R.id.carimbo9);
                     img10 = row.findViewById(R.id.carimbo10);
-                    Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
 
                     cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
                     //atualizar o nr de carimbos
-                    /*switch (nr_carimbos){
+                    switch (nr_carimbos){
                         case "0":
                             colocar_carimbos(0,0,0,0,0,0,0,0,0,0);
                             break;
@@ -179,7 +178,7 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                         case "10":
                             colocar_carimbos(1,1,1,1,1,1,1,1,1,1);
                             break;
-                    }*/
+                    }
 
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
