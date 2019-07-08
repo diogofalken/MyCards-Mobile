@@ -28,6 +28,8 @@ public class Dialog_filtros_descontos extends DialogFragment {
     TextView tv_empresas;
     static public String tipos = "1000";
     static public String areasInteresse = "100000000";
+    CheckBox tipo_todos, tipo1, tipo2, tipo3;
+    CheckBox area_todos, area1, area2, area3, area4, area5, area6, area7, area8;
 
     @Nullable
     @Override
@@ -40,6 +42,132 @@ public class Dialog_filtros_descontos extends DialogFragment {
         tv_empresas = view.findViewById(R.id.textViewEmpresas);
         close = view.findViewById(R.id.voltar);
         aplicar = view.findViewById(R.id.sim);
+
+        tipo_todos = view.findViewById(R.id.checkBox2);
+        tipo1 = view.findViewById(R.id.checkBox5);
+        tipo2 = view.findViewById(R.id.checkBox);
+        tipo3 = view.findViewById(R.id.checkBox3);
+
+        area_todos = view.findViewById(R.id.checkBox6);
+        area1 = view.findViewById(R.id.aaaaaa);
+        area2 = view.findViewById(R.id.bbbbbbb);
+        area3 = view.findViewById(R.id.checkBox7);
+        area4 = view.findViewById(R.id.checkBox8);
+        area5 = view.findViewById(R.id.checkBox9);
+        area6 = view.findViewById(R.id.checkBox10);
+        area7 = view.findViewById(R.id.checkBox11);
+        area8 = view.findViewById(R.id.checkBox12);
+
+        tipo_todos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo_todos.isChecked()){
+                    tipo1.setChecked(false);
+                    tipo2.setChecked(false);
+                    tipo3.setChecked(false);
+                }
+            }
+        });
+        tipo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo_todos.isChecked())
+                    tipo_todos.setChecked(false);
+            }
+        });
+        tipo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo_todos.isChecked())
+                    tipo_todos.setChecked(false);
+            }
+        });
+        tipo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo_todos.isChecked())
+                    tipo_todos.setChecked(false);
+            }
+        });
+
+
+
+        area_todos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked()){
+                    area1.setChecked(false);
+                    area2.setChecked(false);
+                    area3.setChecked(false);
+                    area4.setChecked(false);
+                    area5.setChecked(false);
+                    area6.setChecked(false);
+                    area7.setChecked(false);
+                    area8.setChecked(false);
+                }
+            }
+        });
+        area1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+        area8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(area_todos.isChecked())
+                    area_todos.setChecked(false);
+            }
+        });
+
+
+
+
+
 
         //fechar pop up
         close.setOnClickListener(new View.OnClickListener() {
