@@ -50,7 +50,6 @@ public class Fragment_feed_descontos extends Fragment {
             for(Campanha campanha : cartao.getListaCampanhas()) {
                 campanha.setNomeEmpresa(cartao.getNome());
                 campanha.setAreaInteresse(cartao.getArea());
-                campanha.setUtilizacoes(cartao.getUtilizacoes());
                 campanha.setCor(cartao.getCor());
                 listaDescontos.add(campanha);
             }
@@ -58,8 +57,8 @@ public class Fragment_feed_descontos extends Fragment {
 
         aplicarFiltrosTipo(tipos);
         aplicarFiltrosArea(filtrosArea);
-        if(listaDescontos.size() != 0) {
-            view.findViewById(R.id.sem_empresas).setVisibility(View.GONE);
+        if(listaDescontos.size() == 0) {
+            view.findViewById(R.id.sem_empresas).setVisibility(View.VISIBLE);
         }
 
         adapter = new MyDescontosAdapter(getContext(), listaDescontos);
@@ -69,10 +68,10 @@ public class Fragment_feed_descontos extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle arg = new Bundle();
-                arg.putString("nome_empresa", nome_empresa);
+                arg.putString("nome_empresa", listaDescontos.get(position).getNomeEmpresa());
                 arg.putString("id_cliente", sharedPreferences.getString("Id", ""));
-                arg.putString("id_campanha", id_campanha);
-                arg.putString("id_cartao", id_cartao);
+                arg.putString("id_campanha", listaDescontos.get(position).getIdCampanha());
+                arg.putString("id_cartao", listaDescontos.get(position).getId_cartao());
                 Dialog_desconto_qr dialog = new Dialog_desconto_qr();
                 dialog.setArguments(arg);
                 dialog.setTargetFragment(Fragment_feed_descontos.this, 1);
@@ -146,13 +145,10 @@ public class Fragment_feed_descontos extends Fragment {
                     id_cartao = campanha.getId_cartao();
                     id_empresa = campanha.getId_empresa();
 
-                    //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
-
-
                     cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
                     //atualizar o nr de carimbos
-                    switch (nr_carimbos.toString()){
+                    switch (nr_carimbos){
                         case "0":
                             colocar_carimbos(0,0,0,0,0,0,0,0,0,0);
                             break;
@@ -186,8 +182,6 @@ public class Fragment_feed_descontos extends Fragment {
                         case "10":
                             colocar_carimbos(1,1,1,1,1,1,1,1,1,1);
                             break;
-
-
                     }
 
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
@@ -318,46 +312,46 @@ public class Fragment_feed_descontos extends Fragment {
         if(v2 == 0)
             img2.setImageResource(R.drawable.carimbo2);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img2.setImageResource(R.drawable.carimbado);
 
         if(v3 == 0)
             img3.setImageResource(R.drawable.carimbo3);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img3.setImageResource(R.drawable.carimbado);
 
         if(v4 == 0)
             img4.setImageResource(R.drawable.carimbo4);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img4.setImageResource(R.drawable.carimbado);
 
         if(v5 == 0)
             img5.setImageResource(R.drawable.carimbo5);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img5.setImageResource(R.drawable.carimbado);
 
         if(v6 == 0)
             img6.setImageResource(R.drawable.carimbo6);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img6.setImageResource(R.drawable.carimbado);
 
         if(v7 == 0)
             img7.setImageResource(R.drawable.carimbo7);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img7.setImageResource(R.drawable.carimbado);
 
         if(v8 == 0)
             img8.setImageResource(R.drawable.carimbo8);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img8.setImageResource(R.drawable.carimbado);
 
         if(v9 == 0)
             img9.setImageResource(R.drawable.carimbo9);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img9.setImageResource(R.drawable.carimbado);
 
         if(v10 == 0)
             img10.setImageResource(R.drawable.carimbo10);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img10.setImageResource(R.drawable.carimbado);
     }
  }

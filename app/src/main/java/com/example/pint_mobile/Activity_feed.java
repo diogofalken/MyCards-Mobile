@@ -419,10 +419,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     int nUtilizacoes = 0;
-                    for(int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject data = jsonArray.getJSONObject(i);
-                        nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
-                    }
+                    ArrayList<String> utilizacoes = new ArrayList<>();
                     Cartao_empresa_fidelizada auxCartao = new Cartao_empresa_fidelizada(
                             id,
                             idCartao,
@@ -432,13 +429,19 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                             Integer.toString(jsonArray.length()),
                             localizacao,
                             cor,
-                            Integer.toString(nUtilizacoes),
                             pontos
                     );
+                    for(int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject data = jsonArray.getJSONObject(i);
+                        nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
+                        utilizacoes.add(data.getString("Utilizado"));
+                    }
+
+
                     cartoesFidelizados.add(auxCartao);
                     calcularRatingEmpresa(id, auxCartao);
                     editor.commit();
-                    getDescontos(auxCartao);
+                    getDescontos(auxCartao, utilizacoes);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
@@ -455,7 +458,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue.add(getCampanhas);
     }
 
-    void getDescontos(final Cartao_empresa_fidelizada cartao) {
+    void getDescontos(final Cartao_empresa_fidelizada cartao, final ArrayList<String> utilizacoes) {
         String url = "https://www.mycards.dsprojects.pt/api/empresa/" + cartao.getId_empresa() + "/campanha";
         StringRequest getDescontos = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -474,8 +477,10 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                                 data.getString("Valor"),
                                 data.getString("TipoCampanha"),
                                 cartao.getId_cartao(),
-                                cartao.getId_empresa()
+                                cartao.getId_empresa(),
+                                utilizacoes.get(i)
                         ));
+
                     }
                     cartao.setListaCampanhas(lista);
                 } catch (JSONException e) {

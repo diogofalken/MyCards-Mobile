@@ -19,7 +19,7 @@ public class Cartao_empresa_fidelizada implements Parcelable {
     private String rating;
     private ArrayList<Campanha> listaCampanhas;
 
-    public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String nome, String email, String area, String nr_descontos, String distrito, String cor, String utilizacoes, String pontos) {
+    public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String nome, String email, String area, String nr_descontos, String distrito, String cor, String pontos) {
         this.id_empresa = id_empresa;
         this.id_cartao = id_cartao;
         this.nome = nome;
@@ -28,7 +28,6 @@ public class Cartao_empresa_fidelizada implements Parcelable {
         this.nr_descontos = nr_descontos;
         this.distrito = distrito;
         this.cor = cor;
-        this.utilizacoes = utilizacoes;
         this.pontos = pontos;
     }
 

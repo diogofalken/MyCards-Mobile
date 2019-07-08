@@ -48,6 +48,7 @@ public class Fragment_empresa_menu_descontos extends Fragment {
 
     private ArrayList<Campanha> listaCampanhas = Activity_cartao_fidelizado.campanhas;
     private ImageView img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
+    SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
@@ -56,6 +57,8 @@ public class Fragment_empresa_menu_descontos extends Fragment {
 
         ListView lv = view.findViewById(R.id.listaDescontos);
 
+        sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
+
         if(listaCampanhas.size() != 0) {
             view.findViewById(R.id.textView7).setVisibility(View.GONE);
         }
@@ -63,10 +66,17 @@ public class Fragment_empresa_menu_descontos extends Fragment {
         MyDescontosAdapter adapter = new MyDescontosAdapter(getContext(), listaCampanhas);
         lv.setAdapter(adapter);
 
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle arg = new Bundle();
+                arg.putString("nome_empresa", listaCampanhas.get(position).getNomeEmpresa());
+                arg.putString("id_cliente", sharedPreferences.getString("Id", ""));
+                arg.putString("id_campanha", listaCampanhas.get(position).getIdCampanha());
+                arg.putString("id_cartao", listaCampanhas.get(position).getId_cartao());
                 Dialog_desconto_qr dialog = new Dialog_desconto_qr();
+                dialog.setArguments(arg);
                 dialog.setTargetFragment(Fragment_empresa_menu_descontos.this, 1);
                 dialog.show(getFragmentManager(), "Dialog_desconto_qr");
             }
@@ -102,17 +112,14 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
                     tvDataFim = row.findViewById(R.id.dataFim);
-                    //cl_cupoes = row.findViewById(R.id.cl);
+                    cl_cupoes = row.findViewById(R.id.cl);
 
-                    //cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
+                    cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
                     tvDesignacao.setText(campanha.getDescricao());
                     tvValor.setText(campanha.getValor() + "%");
                     tvDataFim.setText(campanha.getDataFim());
-
-                    //Toast.makeText(getContext(), campanha.getNomeEmpresa(), Toast.LENGTH_SHORT).show();
-
                     break;
                 case "1":
                     row = layoutInflater.inflate(R.layout.desconto_carimbos, parent, false);
@@ -120,7 +127,7 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                     tvNomeEmpresa = row.findViewById(R.id.nome);
                     tvDescricao = row.findViewById(R.id.area_empresa);
                     tvDataFim = row.findViewById(R.id.data_fim);
-                    //cl_carimbos = row.findViewById(R.id.cl);
+                    cl_carimbos = row.findViewById(R.id.cl);
                     nr_carimbos = campanha.getUtilizacoes();
                     img1 = row.findViewById(R.id.carimbo1);
                     img2 = row.findViewById(R.id.carimbo2);
@@ -132,14 +139,13 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                     img8 = row.findViewById(R.id.carimbo8);
                     img9 = row.findViewById(R.id.carimbo9);
                     img10 = row.findViewById(R.id.carimbo10);
+                    Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
-                    //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
-
-                    //cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
+                    cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
                     //atualizar o nr de carimbos
-                    /*switch (nr_carimbos.toString()){
+                    /*switch (nr_carimbos){
                         case "0":
                             colocar_carimbos(0,0,0,0,0,0,0,0,0,0);
                             break;
@@ -173,8 +179,6 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                         case "10":
                             colocar_carimbos(1,1,1,1,1,1,1,1,1,1);
                             break;
-
-
                     }*/
 
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
@@ -190,9 +194,9 @@ public class Fragment_empresa_menu_descontos extends Fragment {
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
                     tvDataFim = row.findViewById(R.id.data_Fim);
-                    //cl_pontos = row.findViewById(R.id.cl);
+                    cl_pontos = row.findViewById(R.id.cl);
 
-                    //cl_pontos.setBackgroundColor(Color.parseColor(campanha.getCor()));
+                    cl_pontos.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
                     tvDesignacao.setText(campanha.getDescricao());
@@ -213,46 +217,46 @@ public class Fragment_empresa_menu_descontos extends Fragment {
         if(v2 == 0)
             img2.setImageResource(R.drawable.carimbo2);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img2.setImageResource(R.drawable.carimbado);
 
         if(v3 == 0)
             img3.setImageResource(R.drawable.carimbo3);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img3.setImageResource(R.drawable.carimbado);
 
         if(v4 == 0)
             img4.setImageResource(R.drawable.carimbo4);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img4.setImageResource(R.drawable.carimbado);
 
         if(v5 == 0)
             img5.setImageResource(R.drawable.carimbo5);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img5.setImageResource(R.drawable.carimbado);
 
         if(v6 == 0)
             img6.setImageResource(R.drawable.carimbo6);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img6.setImageResource(R.drawable.carimbado);
 
         if(v7 == 0)
             img7.setImageResource(R.drawable.carimbo7);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img7.setImageResource(R.drawable.carimbado);
 
         if(v8 == 0)
             img8.setImageResource(R.drawable.carimbo8);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img8.setImageResource(R.drawable.carimbado);
 
         if(v9 == 0)
             img9.setImageResource(R.drawable.carimbo9);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img9.setImageResource(R.drawable.carimbado);
 
         if(v10 == 0)
             img10.setImageResource(R.drawable.carimbo10);
         else
-            img1.setImageResource(R.drawable.carimbado);
+            img10.setImageResource(R.drawable.carimbado);
     }
 }
