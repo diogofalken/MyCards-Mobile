@@ -3,9 +3,12 @@ package com.example.pint_mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,11 +36,19 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Downloader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +58,7 @@ public class Dialog_desconto_qr extends DialogFragment {
     private TextView nome;
     private Dialog_loading loading = new Dialog_loading();
     private String id_cliente, id_cartao, id_campanha;
+    private ImageView qr;
 
 
     @Nullable
@@ -57,6 +69,7 @@ public class Dialog_desconto_qr extends DialogFragment {
         cancelar = view.findViewById(R.id.voltar);
         notificar = view.findViewById(R.id.enviar);
         nome = view.findViewById(R.id.nome);
+        qr = view.findViewById(R.id.QRCode);
 
         Bundle args = getArguments();
         nome.setText(args.getString("nome_empresa"));
@@ -65,8 +78,10 @@ public class Dialog_desconto_qr extends DialogFragment {
         id_campanha = args.getString("id_campanha");
         id_cartao = args.getString("id_cartao");
 
+        String aux = "https://mycards.dsprojects.pt/ativarCampanha#codigocartao="+id_cartao+"&codigocampanha="+id_campanha;
+        String url = "https://api.qrserver.com/v1/create-qr-code/?data="+URLEncoder.encode(aux)+"&size=100x100";
 
-
+        new AsyncGettingBitmapFromUrl().execute(url);
 
 
         //fechar pop up ao carregar em cancelar
@@ -86,6 +101,47 @@ public class Dialog_desconto_qr extends DialogFragment {
 
 
         return view;
+    }
+
+    private static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
+    public void setQrCode(Bitmap bitmap) {
+        qr.setImageBitmap(bitmap);
+    }
+
+    private class AsyncGettingBitmapFromUrl extends AsyncTask<String, Void, Bitmap> {
+
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+
+            System.out.println("doInBackground");
+
+            Bitmap bitmap = null;
+
+            bitmap = Dialog_desconto_qr.getBitmapFromURL(params[0]);
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            setQrCode(bitmap);
+
+        }
     }
 
     @Override
