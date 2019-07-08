@@ -43,8 +43,11 @@ import java.util.Map;
 
 public class Dialog_desconto_qr extends DialogFragment {
 
-    Button cancelar, notificar;
-    TextView nome;
+    private Button cancelar, notificar;
+    private TextView nome;
+    private Dialog_loading loading = new Dialog_loading();
+    private String id_cliente, id_cartao, id_campanha;
+
 
     @Nullable
     @Override
@@ -58,6 +61,13 @@ public class Dialog_desconto_qr extends DialogFragment {
         Bundle args = getArguments();
         nome.setText(args.getString("nome_empresa"));
 
+        id_cliente = args.getString("id_cliente");
+        id_campanha = args.getString("id_campanha");
+        id_cartao = args.getString("id_cartao");
+
+
+
+
 
         //fechar pop up ao carregar em cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +79,8 @@ public class Dialog_desconto_qr extends DialogFragment {
         notificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //o breno la sabe
+                loading.show(getFragmentManager(), "Dialog_loading");
+                notificar_empresa();
             }
         });
 
@@ -94,6 +105,69 @@ public class Dialog_desconto_qr extends DialogFragment {
 
         getDialog().getWindow().setLayout(width, height);
         getDialog().getWindow().setGravity(Gravity.CENTER);
+    }
+
+    private void notificar_empresa(){
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + id_cliente + "/cartao/" + id_cartao + "/instanciacampanha/" + id_campanha;
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getString("status").equals("true")) {
+                                Toast.makeText(getContext(), "Empresa notificada com sucesso!", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getContext(), Activity_feed.class);
+                                startActivity(i);
+                            } else {
+                                loading.dismiss();
+                                Toast.makeText(getContext(), "Não foi possível notificar a empresa!", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {Toast.makeText(getContext(), "catch", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                            loading.dismiss();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+
+                ConnectivityManager conMgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+                if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+                    Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    //This indicates that the request has either time out or there is no connection
+                    Log.i("VolleyError::", error.toString());
+                } else if (error instanceof AuthFailureError) {
+                    //Error indicating that there was an Authentication Failure while performing the request
+                    Log.i("AuthFailureError::", error.toString());
+                } else if (error instanceof ServerError) {
+                    //Indicates that the server responded with a error response
+                    Log.i("ServerError::", error.toString());
+                    Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    //Indicates that there was network error while performing the request
+                    Log.i("NetworkError::", error.toString());
+                    Toast.makeText(getContext(), "Sem ligação à Internet!", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    //Indicates that the server response could not be parsed
+                    Log.i("ParseError::", error.toString());
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Notificacao", "1");
+                return params;
+            }
+        };
+        // requestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(postRequest);
     }
 }
 

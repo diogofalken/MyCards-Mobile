@@ -53,7 +53,7 @@ public class Activity_registo extends AppCompatActivity{
     private String senha_conf = null;
     private String primeiro_nome = null;
     private String ultimo_nome = null;
-    Dialog_loading loading = new Dialog_loading();
+    private Dialog_loading loading = new Dialog_loading();
     private String data_nasc = null;
     private String distrito = null;
     private String info;

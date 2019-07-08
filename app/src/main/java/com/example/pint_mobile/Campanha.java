@@ -15,8 +15,10 @@ public class Campanha implements Parcelable {
     private String areaInteresse;
     private String utilizacoes;
     private String cor;
+    private String id_cartao;
+    private String id_empresa;
 
-    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha) {
+    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha, String id_cartao, String id_empresa) {
         this.idCampanha = idCampanha;
         this.designacao = designacao;
         this.descricao = descricao;
@@ -24,6 +26,16 @@ public class Campanha implements Parcelable {
         this.dataFim = dataFim;
         this.valor = valor;
         this.tipoCampanha = tipoCampanha;
+        this.id_cartao = id_cartao;
+        this.id_empresa = id_empresa;
+    }
+
+    public String getId_cartao() {
+        return id_cartao;
+    }
+
+    public void setId_cartao(String id_cartao) {
+        this.id_cartao = id_cartao;
     }
 
     protected Campanha(Parcel in) {
@@ -34,6 +46,8 @@ public class Campanha implements Parcelable {
         dataFim = in.readString();
         valor = in.readString();
         tipoCampanha = in.readString();
+        id_cartao = in.readString();
+        id_empresa = in.readString();
     }
 
     public static final Creator<Campanha> CREATOR = new Creator<Campanha>() {
@@ -118,6 +132,8 @@ public class Campanha implements Parcelable {
         dest.writeString(dataFim);
         dest.writeString(valor);
         dest.writeString(tipoCampanha);
+        dest.writeString(id_cartao);
+        dest.writeString(id_empresa);
     }
 
     public String getNomeEmpresa() {
@@ -150,5 +166,13 @@ public class Campanha implements Parcelable {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public String getId_empresa() {
+        return id_empresa;
+    }
+
+    public void setId_empresa(String id_empresa) {
+        this.id_empresa = id_empresa;
     }
 }

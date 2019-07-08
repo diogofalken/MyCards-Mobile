@@ -472,7 +472,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                                 data.getString("DataInicio"),
                                 data.getString("DataFim"),
                                 data.getString("Valor"),
-                                data.getString("TipoCampanha")
+                                data.getString("TipoCampanha"),
+                                cartao.getId_cartao(),
+                                cartao.getId_empresa()
                         ));
                     }
                     cartao.setListaCampanhas(lista);

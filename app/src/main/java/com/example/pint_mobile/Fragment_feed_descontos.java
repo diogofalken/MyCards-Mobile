@@ -2,6 +2,7 @@ package com.example.pint_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,8 +30,9 @@ public class Fragment_feed_descontos extends Fragment {
     private String tipos = Dialog_filtros_descontos.tipos;
     private String filtrosArea = Dialog_filtros_descontos.areasInteresse;
     private ImageView img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
-    private String nome_empresa = "";
-
+    private String nome_empresa = "", id_cartao = "", id_campanha = "", id_empresa = "";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Nullable
     @Override
@@ -38,6 +40,9 @@ public class Fragment_feed_descontos extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_feed_descontos, container, false);
         final TextView barra_pesquisa = view.findViewById(R.id.barra_pesquisa);
+
+        sharedPreferences = getContext().getSharedPreferences(Activity_login.MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         lv = view.findViewById(R.id.lista_descontos);
         listaDescontos.clear();
@@ -50,6 +55,7 @@ public class Fragment_feed_descontos extends Fragment {
                 listaDescontos.add(campanha);
             }
         }
+
         aplicarFiltrosTipo(tipos);
         aplicarFiltrosArea(filtrosArea);
         if(listaDescontos.size() != 0) {
@@ -64,6 +70,9 @@ public class Fragment_feed_descontos extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle arg = new Bundle();
                 arg.putString("nome_empresa", nome_empresa);
+                arg.putString("id_cliente", sharedPreferences.getString("Id", ""));
+                arg.putString("id_campanha", id_campanha);
+                arg.putString("id_cartao", id_cartao);
                 Dialog_desconto_qr dialog = new Dialog_desconto_qr();
                 dialog.setArguments(arg);
                 dialog.setTargetFragment(Fragment_feed_descontos.this, 1);
@@ -102,6 +111,9 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDataFim = row.findViewById(R.id.dataFim);
                     cl_cupoes = row.findViewById(R.id.cl);
                     nome_empresa = campanha.getNomeEmpresa();
+                    id_campanha = campanha.getIdCampanha();
+                    id_cartao = campanha.getId_cartao();
+                    id_empresa = campanha.getId_empresa();
 
                     cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
@@ -130,7 +142,9 @@ public class Fragment_feed_descontos extends Fragment {
                     img9 = row.findViewById(R.id.carimbo9);
                     img10 = row.findViewById(R.id.carimbo10);
                     nome_empresa = campanha.getNomeEmpresa();
-
+                    id_campanha = campanha.getIdCampanha();
+                    id_cartao = campanha.getId_cartao();
+                    id_empresa = campanha.getId_empresa();
 
                     //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
 
@@ -191,7 +205,9 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDataFim = row.findViewById(R.id.data_Fim);
                     cl_pontos = row.findViewById(R.id.cl);
                     nome_empresa = campanha.getNomeEmpresa();
-
+                    id_campanha = campanha.getIdCampanha();
+                    id_cartao = campanha.getId_cartao();
+                    id_empresa = campanha.getId_empresa();
 
                     cl_pontos.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
