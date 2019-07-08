@@ -436,7 +436,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                         nUtilizacoes += Integer.parseInt(data.getString("Utilizado"));
                         utilizacoes.add(data.getString("Utilizado"));
                     }
-
+                    auxCartao.setUtilizacoes(Integer.toString(nUtilizacoes));
 
                     cartoesFidelizados.add(auxCartao);
                     calcularRatingEmpresa(id, auxCartao);
