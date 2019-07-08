@@ -26,6 +26,7 @@ public class Fragment_feed_descontos extends Fragment {
     private ArrayList<Campanha> listaDescontos = new ArrayList<>();
     private String tipos = Dialog_filtros_descontos.tipos;
     private String filtrosArea = Dialog_filtros_descontos.areasInteresse;
+    private ImageView img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
 
 
     @Nullable
@@ -102,144 +103,55 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDataFim = row.findViewById(R.id.data_fim);
                     cl_carimbos = row.findViewById(R.id.cl);
                     nr_carimbos = campanha.getUtilizacoes();
+                    img1 = row.findViewById(R.id.carimbo1);
+                    img2 = row.findViewById(R.id.carimbo2);
+                    img3 = row.findViewById(R.id.carimbo3);
+                    img4 = row.findViewById(R.id.carimbo4);
+                    img5 = row.findViewById(R.id.carimbo5);
+                    img6 = row.findViewById(R.id.carimbo6);
+                    img7 = row.findViewById(R.id.carimbo7);
+                    img8 = row.findViewById(R.id.carimbo8);
+                    img9 = row.findViewById(R.id.carimbo9);
+                    img10 = row.findViewById(R.id.carimbo10);
 
-                    //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
                     cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
                     //atualizar o nr de carimbos
-                    switch (nr_carimbos){
+                    switch (nr_carimbos.toString()){
                         case "0":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbo1);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbo2);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbo4);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbo5);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(0,0,0,0,0,0,0,0,0,0);
                             break;
                         case "1":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbo2);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbo4);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbo5);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,0,0,0,0,0,0,0,0,0);
                             break;
                         case "2":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbo3);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbo4);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbo5);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,0,0,0,0,0,0,0,0);
                             break;
                         case "3":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbo4);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbo5);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,0,0,0,0,0,0,0);
                             break;
                         case "4":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbo5);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,0,0,0,0,0,0);
                             break;
                         case "5":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbo6);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,1,0,0,0,0,0);
                             break;
                         case "6":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbo7);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,1,1,0,0,0,0);
                             break;
                         case "7":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbo8);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,1,1,1,0,0,0);
                             break;
                         case "8":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbo9);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,1,1,1,1,0,0);
                             break;
                         case "9":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbo10);
+                            colocar_carimbos(1,1,1,1,1,1,1,1,1,0);
                             break;
                         case "10":
-                            row.findViewById(R.id.carimbo1).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo2).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo3).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo4).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo5).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo6).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo7).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo8).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo9).setBackgroundResource(R.drawable.carimbado);
-                            row.findViewById(R.id.carimbo10).setBackgroundResource(R.drawable.carimbado);
+                            colocar_carimbos(1,1,1,1,1,1,1,1,1,1);
                             break;
+
 
                     }
 
@@ -255,11 +167,15 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDescricao = row.findViewById(R.id.area_empresa);
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
+                    tvDataFim = row.findViewById(R.id.data_Fim);
+                    cl_cupoes = row.findViewById(R.id.cl);
 
+                    cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
                     tvDesignacao.setText(campanha.getDescricao());
-                    tvValor.setText(campanha.getValor());
+                    tvValor.setText(campanha.getValor() + " pontos");
+                    tvDataFim.setText(campanha.getDataFim());
                     break;
             }
             return row;
@@ -352,5 +268,57 @@ public class Fragment_feed_descontos extends Fragment {
                 itr.remove();
             }
         }
+    }
+
+    private void colocar_carimbos(int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, int v9, int v10 ){
+        if(v1 == 0)
+            img1.setImageResource(R.drawable.carimbo1);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v2 == 0)
+            img2.setImageResource(R.drawable.carimbo2);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v3 == 0)
+            img3.setImageResource(R.drawable.carimbo3);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v4 == 0)
+            img4.setImageResource(R.drawable.carimbo4);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v5 == 0)
+            img5.setImageResource(R.drawable.carimbo5);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v6 == 0)
+            img6.setImageResource(R.drawable.carimbo6);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v7 == 0)
+            img7.setImageResource(R.drawable.carimbo7);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v8 == 0)
+            img8.setImageResource(R.drawable.carimbo8);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v9 == 0)
+            img9.setImageResource(R.drawable.carimbo9);
+        else
+            img1.setImageResource(R.drawable.carimbado);
+
+        if(v10 == 0)
+            img10.setImageResource(R.drawable.carimbo10);
+        else
+            img1.setImageResource(R.drawable.carimbado);
     }
  }
