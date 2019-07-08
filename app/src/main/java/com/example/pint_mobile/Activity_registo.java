@@ -53,10 +53,10 @@ public class Activity_registo extends AppCompatActivity{
     private String senha_conf = null;
     private String primeiro_nome = null;
     private String ultimo_nome = null;
+    Dialog_loading loading = new Dialog_loading();
     private String data_nasc = null;
     private String distrito = null;
     private String info;
-    private ProgressBar progressBar;
 
 
     @Override
@@ -87,9 +87,6 @@ public class Activity_registo extends AppCompatActivity{
         final Button inf = findViewById(R.id.Informações);
         final Button pref = findViewById(R.id.Preferências);
         final Button not = findViewById(R.id.Notificações);
-        progressBar = findViewById(R.id.progressBar);
-
-        progressBar.setVisibility(View.GONE);
 
 
         //ajustar tamanho dos botoes consoante o tamanho da tela (telemovel)
@@ -175,7 +172,7 @@ public class Activity_registo extends AppCompatActivity{
                      break;
 
                  case 3: //notificaçoes -> concluir Activity_registo
-                     progressBar.setVisibility(View.VISIBLE);
+                     loading.show(getSupportFragmentManager(), "Dialog_loading");
                      registo();
                      break;
              }
@@ -301,18 +298,20 @@ public class Activity_registo extends AppCompatActivity{
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             } else {
-                                progressBar.setVisibility(View.GONE);
+                                loading.dismiss();
                                 Toast.makeText(getApplicationContext(), "O email '" + sharedPreferences.getString("email", "") + "' já existe!", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
-                            progressBar.setVisibility(View.GONE);
+                            loading.dismiss();
+
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
+                loading.dismiss();
+
                 ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
                 if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){

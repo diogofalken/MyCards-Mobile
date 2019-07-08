@@ -51,8 +51,8 @@ public class Activity_concluir_registo extends AppCompatActivity {
     TextView email;
     CheckBox checkBox;
     ImageButton concluir;
-    ProgressBar progressBar;
     EditText codigo;
+    Dialog_loading loading = new Dialog_loading();
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -68,10 +68,7 @@ public class Activity_concluir_registo extends AppCompatActivity {
         email = findViewById(R.id.nome);
         checkBox = findViewById(R.id.politicas);
         concluir = findViewById(R.id.concluir);
-        progressBar = findViewById(R.id.progressBar);
         codigo = findViewById(R.id.codigo);
-
-        progressBar.setVisibility(View.GONE);
 
         //remover action bar
         getSupportActionBar().hide();
@@ -134,10 +131,10 @@ public class Activity_concluir_registo extends AppCompatActivity {
 
         concluir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
+                loading.show(getSupportFragmentManager(), "Dialog_loading");
                 if(!checkBox.isChecked()){
                     Toast.makeText(getApplicationContext(), "Leia a política de privacidade!", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
+                    loading.dismiss();
                 }
                 else {
                     String url = "https://www.mycards.dsprojects.pt/authentication/activate_cliente";
@@ -154,19 +151,21 @@ public class Activity_concluir_registo extends AppCompatActivity {
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         } else {
-                                            progressBar.setVisibility(View.GONE);
+                                            loading.dismiss();
+
                                             Toast.makeText(getApplicationContext(), "Código de confirmação errado!", Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {
                                         Toast.makeText(getApplicationContext(), "catch", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
-                                        progressBar.setVisibility(View.GONE);
+                                        loading.dismiss();
+
                                     }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            progressBar.setVisibility(View.GONE);
+                            loading.dismiss();
                             ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                             NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
                             if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
