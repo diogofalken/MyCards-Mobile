@@ -83,6 +83,11 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         // Todas as campanhas deste cartao
         campanhas = getIntent().getParcelableArrayListExtra("campanhas");
 
+        for(Campanha campanha : campanhas) {
+            campanha.setNomeEmpresa(cartao.getNome());
+            campanha.setCor(cartao.getCor());
+        }
+
         //abrir menu perfil
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -18,7 +18,7 @@ public class Campanha implements Parcelable {
     private String id_cartao;
     private String id_empresa;
 
-    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha, String id_cartao, String id_empresa) {
+    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha, String id_cartao, String id_empresa, String utilizacoes) {
         this.idCampanha = idCampanha;
         this.designacao = designacao;
         this.descricao = descricao;
@@ -28,6 +28,11 @@ public class Campanha implements Parcelable {
         this.tipoCampanha = tipoCampanha;
         this.id_cartao = id_cartao;
         this.id_empresa = id_empresa;
+        this.utilizacoes = utilizacoes;
+    }
+
+    public Campanha(String utilizacoes) {
+        this.utilizacoes = utilizacoes;
     }
 
     public String getId_cartao() {
@@ -48,6 +53,7 @@ public class Campanha implements Parcelable {
         tipoCampanha = in.readString();
         id_cartao = in.readString();
         id_empresa = in.readString();
+        utilizacoes = in.readString();
     }
 
     public static final Creator<Campanha> CREATOR = new Creator<Campanha>() {
@@ -134,6 +140,7 @@ public class Campanha implements Parcelable {
         dest.writeString(tipoCampanha);
         dest.writeString(id_cartao);
         dest.writeString(id_empresa);
+        dest.writeString(utilizacoes);
     }
 
     public String getNomeEmpresa() {
