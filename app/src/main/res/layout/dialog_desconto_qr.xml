@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/corBaseAzul"
+    android:background="@color/corBranca"
     tools:context=".Activity_registo">
 
 
@@ -12,11 +12,12 @@
         android:id="@+id/nome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/corLaranjaIcon"
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="Continente"
-        android:textColor="@color/corBranca"
+        android:textColor="@color/corBaseAzul"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,9 +58,8 @@
         android:id="@+id/voltar"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@drawable/border_cancel_pop_up"
-        android:backgroundTint="@color/corBranca"
         android:text="Cancelar"
+        android:background="@drawable/border_pop_up_descontos"
         android:textAllCaps="false"
         android:textColor="@color/corIconNav"
         android:textSize="14sp"
@@ -71,8 +71,7 @@
         android:id="@+id/enviar"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@drawable/border_ok_pop_up"
-        android:backgroundTint="@color/corBranca"
+        android:background="@drawable/border_pop_up_descontos"
         android:text="Notificar"
         android:textAllCaps="false"
         android:textColor="@color/corIconNav"
@@ -81,5 +80,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/voltar"
         app:layout_constraintTop_toBottomOf="@+id/scroll" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:srcCompat="@drawable/qrcode_ex" />
 
 </android.support.constraint.ConstraintLayout>

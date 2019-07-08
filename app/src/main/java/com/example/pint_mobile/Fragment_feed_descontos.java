@@ -1,6 +1,7 @@
 package com.example.pint_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,6 +29,7 @@ public class Fragment_feed_descontos extends Fragment {
     private String tipos = Dialog_filtros_descontos.tipos;
     private String filtrosArea = Dialog_filtros_descontos.areasInteresse;
     private ImageView img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
+    private String nome_empresa = "";
 
 
     @Nullable
@@ -55,6 +58,18 @@ public class Fragment_feed_descontos extends Fragment {
 
         adapter = new MyDescontosAdapter(getContext(), listaDescontos);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle arg = new Bundle();
+                arg.putString("nome_empresa", nome_empresa);
+                Dialog_desconto_qr dialog = new Dialog_desconto_qr();
+                dialog.setArguments(arg);
+                dialog.setTargetFragment(Fragment_feed_descontos.this, 1);
+                dialog.show(getFragmentManager(), "Dialog_desconto_qr");
+            }
+        });
 
         return view;
     }
@@ -86,6 +101,7 @@ public class Fragment_feed_descontos extends Fragment {
                     tvValor = row.findViewById(R.id.valor);
                     tvDataFim = row.findViewById(R.id.dataFim);
                     cl_cupoes = row.findViewById(R.id.cl);
+                    nome_empresa = campanha.getNomeEmpresa();
 
                     cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
@@ -113,6 +129,11 @@ public class Fragment_feed_descontos extends Fragment {
                     img8 = row.findViewById(R.id.carimbo8);
                     img9 = row.findViewById(R.id.carimbo9);
                     img10 = row.findViewById(R.id.carimbo10);
+                    nome_empresa = campanha.getNomeEmpresa();
+
+
+                    //Toast.makeText(getContext(), nr_carimbos, Toast.LENGTH_SHORT).show();
+
 
                     cl_carimbos.setBackgroundColor(Color.parseColor(campanha.getCor()));
 
@@ -168,9 +189,11 @@ public class Fragment_feed_descontos extends Fragment {
                     tvDesignacao = row.findViewById(R.id.designacao);
                     tvValor = row.findViewById(R.id.valor);
                     tvDataFim = row.findViewById(R.id.data_Fim);
-                    cl_cupoes = row.findViewById(R.id.cl);
+                    cl_pontos = row.findViewById(R.id.cl);
+                    nome_empresa = campanha.getNomeEmpresa();
 
-                    cl_cupoes.setBackgroundColor(Color.parseColor(campanha.getCor()));
+
+                    cl_pontos.setBackgroundColor(Color.parseColor(campanha.getCor()));
                     tvNomeEmpresa.setText(campanha.getNomeEmpresa());
                     tvDescricao.setText(campanha.getDesignacao());
                     tvDesignacao.setText(campanha.getDescricao());
