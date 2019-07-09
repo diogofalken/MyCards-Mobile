@@ -51,7 +51,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Activity_feed extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
@@ -475,7 +479,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                     ArrayList<Campanha> lista = new ArrayList<Campanha>();
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject data = jsonArray.getJSONObject(i);
-                        if(!(utilizacoes.get(i).equals("1") && data.getString("TipoCampanha").equals("0"))) {
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        if(!(utilizacoes.get(i).equals("1") && data.getString("TipoCampanha").equals("0") && format.parse(format.format(Calendar.getInstance().getTime())).after(format.parse(data.getString("DataFim"))))) {
                             lista.add(new Campanha(
                                     data.getString("ID_Campanha"),
                                     data.getString("Designacao"),
@@ -496,6 +502,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Erro nos cartões!", Toast.LENGTH_SHORT).show();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
