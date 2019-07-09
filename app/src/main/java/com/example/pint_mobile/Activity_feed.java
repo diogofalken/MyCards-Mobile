@@ -492,7 +492,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                                     data.getString("TipoCampanha"),
                                     cartao.getId_cartao(),
                                     cartao.getId_empresa(),
-                                    utilizacoes.get(i)
+                                    utilizacoes.get(i),
+                                    sharedPreferences.getString("Preferencias","")
                             ));
                         }
 
