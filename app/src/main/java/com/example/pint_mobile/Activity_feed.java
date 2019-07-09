@@ -65,6 +65,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
     DrawerLayout drawerLayout;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    int idNot = 1;
     Dialog_loading loading = new Dialog_loading();
     Integer x = 0;
 
@@ -578,14 +579,13 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if(jsonObject.getString("status").equals("true")){
+                    if(jsonObject.getString("status").equals("true") && sharedPreferences.getString("Notificacoes", "").equals("3")){
                         JSONArray jsonArray = new JSONArray(jsonObject.getString("message"));
                         for(int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
                             String title = data.getString("Titulo");
-                            String text = data.getString("Texto");
-                            if(sharedPreferences.getString("Notificacoes", "").equals("3"))
-                                notificar_cliente(title, text);
+                            //String text = data.getString("Texto");
+                            notificar_cliente(title);
                         }
 
 
@@ -606,7 +606,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue.add(getNotificacoes);
     }
 
-    private void notificar_cliente(String title, String text){
+    private void notificar_cliente(String title){
         Intent intent = new Intent(getApplicationContext(), Activity_login.class);
         PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -624,6 +624,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 .setContentInfo("Info");
 
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, b.build());
+        notificationManager.notify(idNot, b.build());
+        idNot++;
     }
 }
