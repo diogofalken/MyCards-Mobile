@@ -54,27 +54,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:checked="true"
                     android:buttonTint="@color/corBaseAzul"
                     android:contentDescription="0"
                     android:text="Não receber notificações" />
-
-                <RadioButton
-                    android:id="@+id/not1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:buttonTint="@color/corBaseAzul"
-                    android:contentDescription="1"
-                    android:text="Receber notificações apenas das preferências atuais" />
-
-                <RadioButton
-                    android:id="@+id/not2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:buttonTint="@color/corBaseAzul"
-                    android:contentDescription="2"
-                    android:text="Receber notificações de todas as empresas à qual estou fidelizado" />
 
                 <RadioButton
                     android:id="@+id/not3"
