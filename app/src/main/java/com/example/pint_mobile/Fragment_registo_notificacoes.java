@@ -18,7 +18,7 @@ public class Fragment_registo_notificacoes extends Fragment {
     SharedPreferences.Editor editor;
 
     private RadioGroup rg;
-    private RadioButton rb, rb0, rb1, rb2, rb3;
+    private RadioButton rb, rb0, rb3;
     private String not;
 
     @Nullable
@@ -29,26 +29,12 @@ public class Fragment_registo_notificacoes extends Fragment {
 
         rg = view.findViewById(R.id.rg);
         rb0 = view.findViewById(R.id.not0);
-        rb1 = view.findViewById(R.id.not1);
-        rb2 = view.findViewById(R.id.not2);
         rb3 = view.findViewById(R.id.not3);
 
         sharedPreferences = getContext().getSharedPreferences(Activity_registo.PREFERENCES_REGISTO, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         rb0.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                saveInfSharedNotificacoes(view);
-            }
-        });
-
-        rb1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                saveInfSharedNotificacoes(view);
-            }
-        });
-
-        rb2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 saveInfSharedNotificacoes(view);
             }
@@ -77,10 +63,6 @@ public class Fragment_registo_notificacoes extends Fragment {
         String notific = sharedPreferences.getString("notificacoes", "");
         if(notific.equals("0")){
             rg.check(R.id.not0);
-        } else if(notific.equals("1")){
-            rg.check(R.id.not1);
-        } else if(notific.equals("2")){
-            rg.check(R.id.not2);
         } else if(notific.equals("3")){
             rg.check(R.id.not3);
         }

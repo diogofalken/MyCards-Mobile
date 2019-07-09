@@ -59,12 +59,6 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
             case "0":
                 radioGroupaux.check(R.id.radioButton1);
                 break;
-            case "1":
-                radioGroupaux.check(R.id.radioButton2);
-                break;
-            case "2":
-                radioGroupaux.check(R.id.radioButton3);
-                break;
             case "3":
                 radioGroupaux.check(R.id.radioButton4);
                 break;
@@ -95,12 +89,6 @@ public class Fragment_profile_menu_notificacoes extends Fragment {
                 switch (selectedtext) {
                     case "Não receber notificações":
                         Notificacoes = "0";
-                        break;
-                    case "Receber notificações apenas das preferências atuais":
-                        Notificacoes = "1";
-                        break;
-                    case "Receber notificações de todas as empresas à qual estou fidelizado":
-                        Notificacoes = "2";
                         break;
                     case "Receber todas as notificações":
                         Notificacoes = "3";
