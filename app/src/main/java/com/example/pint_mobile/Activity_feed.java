@@ -393,7 +393,8 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                             cor = "#5A613A";
                     }
 
-                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor, email, pontos);
+
+                    getCampanhas(id,idCartao,localizacao,nome,AreaInteresse,cor, email, pontos, dados.getString("Facebook"), dados.getString("LinkedIn"), dados.getString("Twitter"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -411,7 +412,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         requestQueue_inf.add(getDadosEmpresa);
     }
 
-    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email, final String pontos) {
+    void getCampanhas(final String id, final String idCartao, final String localizacao, final String nome, final String AreaInteresse, final String cor, final String email, final String pontos, final String facebook, final String linkedin, final String twitter) {
         String url = "https://www.mycards.dsprojects.pt/api/cliente/" + sharedPreferences.getString("Id", "") + "/cartao/" + idCartao + "/instanciacampanha";
         final StringRequest getCampanhas = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -437,6 +438,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                         utilizacoes.add(data.getString("Utilizado"));
                     }
                     auxCartao.setUtilizacoes(Integer.toString(nUtilizacoes));
+                    auxCartao.setFacebook(facebook);
+                    auxCartao.setLinkedin(linkedin);
+                    auxCartao.setTwitter(twitter);
 
                     cartoesFidelizados.add(auxCartao);
                     calcularRatingEmpresa(id, auxCartao);

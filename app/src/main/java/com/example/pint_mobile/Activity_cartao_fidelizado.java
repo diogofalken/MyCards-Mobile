@@ -39,7 +39,7 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
     private DrawerLayout drawerLayout;
     private ImageView menu;
     private JSONObject dados;
-    private String localizacao, AreaInteresse, nome, cor, email, id_empresa, id_cartao, id_cliente, rating, ratingEmpresa;
+    private String localizacao, AreaInteresse, nome, cor, email, id_empresa, id_cartao, id_cliente, rating, ratingEmpresa, facebook, twitter, linkedIn;
     public static ArrayList<Campanha> campanhas;
 
     @Override
@@ -79,6 +79,9 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         id_cartao = cartao.getId_cartao();
         id_cliente = getIntent().getExtras().getString("idCliente");
         ratingEmpresa = cartao.getRating();
+        facebook = cartao.getFacebook();
+        twitter = cartao.getTwitter();
+        linkedIn = cartao.getLinkedin();
 
         // Todas as campanhas deste cartao
         campanhas = getIntent().getParcelableArrayListExtra("campanhas");
@@ -110,7 +113,6 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
         int cor = getResources().getColor(R.color.corCancelarFidelizacao);
         s.setSpan(new ForegroundColorSpan(cor), 0, s.length(), 0);
         menuItem.setTitle(s);
-
     }
 
     @Override
@@ -150,6 +152,9 @@ public class Activity_cartao_fidelizado extends AppCompatActivity implements  Na
                 bundle_inf.putString("area", AreaInteresse);
                 bundle_inf.putString("distrito", localizacao);
                 bundle_inf.putString("rating", ratingEmpresa);
+                bundle_inf.putString("facebook", facebook);
+                bundle_inf.putString("twitter", twitter);
+                bundle_inf.putString("linkedIn", linkedIn);
                 fragment = new Fragment_empresa_menu_informacoes();
                 fragment.setArguments(bundle_inf);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

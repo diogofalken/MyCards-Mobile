@@ -17,6 +17,9 @@ public class Cartao_empresa_fidelizada implements Parcelable {
     private String utilizacoes;
     private String pontos;
     private String rating;
+    private String facebook;
+    private String linkedin;
+    private String twitter;
     private ArrayList<Campanha> listaCampanhas;
 
     public Cartao_empresa_fidelizada(String id_empresa, String id_cartao, String nome, String email, String area, String nr_descontos, String distrito, String cor, String pontos) {
@@ -43,6 +46,9 @@ public class Cartao_empresa_fidelizada implements Parcelable {
         utilizacoes = in.readString();
         pontos = in.readString();
         rating = in.readString();
+        facebook = in.readString();
+        twitter = in.readString();
+        linkedin = in.readString();
     }
 
     public static final Creator<Cartao_empresa_fidelizada> CREATOR = new Creator<Cartao_empresa_fidelizada>() {
@@ -171,5 +177,32 @@ public class Cartao_empresa_fidelizada implements Parcelable {
         dest.writeString(utilizacoes);
         dest.writeString(pontos);
         dest.writeString(rating);
+        dest.writeString(facebook);
+        dest.writeString(twitter);
+        dest.writeString(linkedin);
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
     }
 }
