@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PINT-Mobile</string>
+    <string name="app_name">MyCards</string>
     <string name="nav_wallet">Wallet</string>
     <string name="nav_home">Home</string>
     <string name="nav_person">Person</string>
