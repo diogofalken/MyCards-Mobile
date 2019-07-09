@@ -1,15 +1,21 @@
 package com.example.pint_mobile;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -17,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +53,7 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Button cancel, fidelizar;
+    ImageButton facebook, twitter, linkedin;
     String valor;
     int nCarimbos = 0, nCupoes = 0, nPontos = 0, x;
     TextView tvCarimbos, tvPontos, tvCupoes;
@@ -58,6 +66,9 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
 
         cancel = view.findViewById(R.id.voltar);
         fidelizar = view.findViewById(R.id.enviar);
+        facebook = view.findViewById(R.id.facebook);
+        twitter = view.findViewById(R.id.twitter);
+        linkedin = view.findViewById(R.id.linkedin);
 
         TextView tvNome = view.findViewById(R.id.fe_nome);
         TextView tvEmail = view.findViewById(R.id.email);
@@ -75,15 +86,47 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getDialog().dismiss();
             }
         });
         fidelizar.setOnClickListener(new View.OnClickListener() {
+            private static final String CHANNEL_ID = "1" ;
+
             @Override
             public void onClick(View v) {
                 fidelizarEmpresa(sharedPreferences.getString("Id", ""), getArguments().getString("id"));
             }
         });
+
+        if(!(Uri.parse(getArguments().getString("facebook")) == null)) {
+            facebook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("facebook")));
+                    startActivity(browserIntent);
+                }
+            });
+        }
+        if(!(Uri.parse(getArguments().getString("twitter")) == null)) {
+            twitter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("twitter")));
+                    startActivity(browserIntent);
+                }
+            });
+        }
+        if(!(Uri.parse(getArguments().getString("linkedIn")) == null)) {
+            linkedin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("linkedIn")));
+                    startActivity(browserIntent);
+                }
+            });
+        }
+
 
         tvNome.setText(getArguments().getString("nome"));
         tvEmail.setText(getArguments().getString("email"));
@@ -300,5 +343,6 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(postRequest);
     }
+
 }
 

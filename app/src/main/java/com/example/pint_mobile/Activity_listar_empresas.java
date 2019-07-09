@@ -68,7 +68,7 @@ public class Activity_listar_empresas extends AppCompatActivity {
                         JSONObject empresa = jsonArray.getJSONObject(i);
                         if(empresaFidelizada(empresa) == false) {
                                 sem_empresas.setVisibility(View.GONE);
-                            listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email")));
+                            listaEmpresas.add(new Empresa(empresa.getString("ID_Empresa"), empresa.getString("Nome"), empresa.getString("AreaInteresse"), empresa.getString("Localizacao"), empresa.getString("Email"), empresa.getString("Facebook"), empresa.getString("LinkedIn"), empresa.getString("Twitter")));
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -100,6 +100,9 @@ public class Activity_listar_empresas extends AppCompatActivity {
                 args.putString("area", listaEmpresas.get(position).getArea());
                 args.putString("distrito", listaEmpresas.get(position).getDistrito());
                 args.putString("email", listaEmpresas.get(position).getEmail());
+                args.putString("facebook", listaEmpresas.get(position).getFacebook());
+                args.putString("linkedIn", listaEmpresas.get(position).getLinkedIn());
+                args.putString("twitter", listaEmpresas.get(position).getTwitter());
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "Dialog_fidelizar_empresa");
             }
