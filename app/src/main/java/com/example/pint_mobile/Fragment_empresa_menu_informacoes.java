@@ -55,6 +55,8 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("facebook")));
                         startActivity(browserIntent);
                     }
+                    else
+                        Toast.makeText(getContext(), "A empresa não tem facebook!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -65,6 +67,8 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("twitter")));
                         startActivity(browserIntent);
                     }
+                    else
+                        Toast.makeText(getContext(), "A empresa não tem twitter!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -75,6 +79,8 @@ public class Fragment_empresa_menu_informacoes extends Fragment {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("linkedIn")));
                         startActivity(browserIntent);
                     }
+                    else
+                        Toast.makeText(getContext(), "A empresa não tem linkedIn!", Toast.LENGTH_SHORT).show();
                 }
             });
 
