@@ -91,7 +91,6 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
             }
         });
         fidelizar.setOnClickListener(new View.OnClickListener() {
-            private static final String CHANNEL_ID = "1" ;
 
             @Override
             public void onClick(View v) {
@@ -99,33 +98,41 @@ public class Dialog_fidelizar_empresa extends DialogFragment {
             }
         });
 
-        if(!(Uri.parse(getArguments().getString("facebook")) == null)) {
-            facebook.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!(getArguments().getString("facebook").equals("null"))) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("facebook")));
                     startActivity(browserIntent);
                 }
-            });
-        }
-        if(!(Uri.parse(getArguments().getString("twitter")) == null)) {
-            twitter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                else
+                    Toast.makeText(getContext(), "A empresa não tem facebook!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!(getArguments().getString("twitter").equals("null"))) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("twitter")));
                     startActivity(browserIntent);
                 }
-            });
-        }
-        if(!(Uri.parse(getArguments().getString("linkedIn")) == null)) {
-            linkedin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                else
+                    Toast.makeText(getContext(), "A empresa não tem twitter!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        linkedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!(getArguments().getString("linkedIn").equals("null"))) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getArguments().getString("linkedIn")));
                     startActivity(browserIntent);
                 }
-            });
-        }
+                else
+                    Toast.makeText(getContext(), "A empresa não tem linkedIn!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         tvNome.setText(getArguments().getString("nome"));
