@@ -1,9 +1,11 @@
 package com.example.pint_mobile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Campanha implements Parcelable {
+public class Campanha implements Parcelable, Comparable<Campanha> {
     private String idCampanha;
     private String designacao;
     private String descricao;
@@ -17,8 +19,9 @@ public class Campanha implements Parcelable {
     private String cor;
     private String id_cartao;
     private String id_empresa;
+    private String preferencias;
 
-    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha, String id_cartao, String id_empresa, String utilizacoes) {
+    public Campanha(String idCampanha, String designacao, String descricao, String dataInicio, String dataFim, String valor, String tipoCampanha, String id_cartao, String id_empresa, String utilizacoes, String preferencias) {
         this.idCampanha = idCampanha;
         this.designacao = designacao;
         this.descricao = descricao;
@@ -29,6 +32,7 @@ public class Campanha implements Parcelable {
         this.id_cartao = id_cartao;
         this.id_empresa = id_empresa;
         this.utilizacoes = utilizacoes;
+        this.preferencias = preferencias;
     }
 
     public Campanha(String utilizacoes) {
@@ -181,5 +185,32 @@ public class Campanha implements Parcelable {
 
     public void setId_empresa(String id_empresa) {
         this.id_empresa = id_empresa;
+    }
+
+    private int getIndexAreaPreferencia(String area) {
+        if (area.equals("Agricultura"))
+            return 0;
+        if (area.equals("Ciência e Tecnologia"))
+            return 1;
+        if (area.equals("Desporto"))
+            return 2;
+        if (area.equals("Educação"))
+            return 3;
+        if (area.equals("Saúde"))
+            return 4;
+        if (area.equals("Restauração"))
+            return 5;
+        if(area.equals("Transportes e Mercadorias"))
+            return 6;
+        return 7;
+    }
+    public int compareTo(Campanha c) {
+        int index1 = getIndexAreaPreferencia(this.areaInteresse);
+        int index2 = getIndexAreaPreferencia(c.getAreaInteresse());
+        if (preferencias.charAt(index1) == '1' && preferencias.charAt(index2) == '0')
+            return -1;
+        if (preferencias.charAt(index1) == '0' && preferencias.charAt(index2) == '1')
+            return 1;
+        return  0;
     }
 }

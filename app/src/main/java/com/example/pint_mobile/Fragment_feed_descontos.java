@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Fragment_feed_descontos extends Fragment {
@@ -58,6 +60,7 @@ public class Fragment_feed_descontos extends Fragment {
         aplicarFiltrosTipo(tipos);
         aplicarFiltrosArea(filtrosArea);
 
+        Collections.sort(listaDescontos);
         adapter = new MyDescontosAdapter(getContext(), listaDescontos);
         lv.setAdapter(adapter);
 
