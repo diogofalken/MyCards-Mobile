@@ -1,6 +1,9 @@
 package com.example.pint_mobile;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,6 +97,9 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
 
         getCartoesFidelizados();
 
+        getNotificacoes(sharedPreferences.getString("Id", ""));
+
+
         icon_left.setVisibility(View.VISIBLE);
         icon_right.setVisibility(View.VISIBLE);
         icon_left.setImageResource(R.drawable.ic_filter);
@@ -121,7 +128,6 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 loading.dismiss();
             }
         }.start();
-
 
         //tornar o fragment dos descontos como fragment inicial
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -571,5 +577,61 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+    }
+
+    public void getNotificacoes(String id_cliente){
+        String url = "https://www.mycards.dsprojects.pt/api/cliente/" + id_cliente + "/notificacao";
+        final StringRequest getNotificacoes = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if(jsonObject.getString("status").equals("true")){
+                        JSONArray jsonArray = new JSONArray(jsonObject.getString("message"));
+                        for(int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject data = jsonArray.getJSONObject(i);
+                            String title = data.getString("Titulo");
+                            String text = data.getString("Texto");
+                            if(sharedPreferences.getString("Notificacoes", "").equals("3"))
+                                notificar_cliente(title, text);
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Erro nas notificacoes!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "GET sem sucesso!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(getNotificacoes);
+    }
+
+    private void notificar_cliente(String title, String text){
+        Intent intent = new Intent(getApplicationContext(), Activity_login.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(getApplicationContext());
+
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.logo)
+                .setTicker("MyCards")
+                .setContentTitle(title)
+                .setContentText("Foi criada uma nova campanha!")
+                .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+                .setContentIntent(contentIntent)
+                .setContentInfo("Info");
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
     }
 }
