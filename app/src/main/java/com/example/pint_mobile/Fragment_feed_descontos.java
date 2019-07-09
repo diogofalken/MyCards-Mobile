@@ -57,9 +57,6 @@ public class Fragment_feed_descontos extends Fragment {
 
         aplicarFiltrosTipo(tipos);
         aplicarFiltrosArea(filtrosArea);
-        if(listaDescontos.size() == 0) {
-            view.findViewById(R.id.sem_empresas).setVisibility(View.VISIBLE);
-        }
 
         adapter = new MyDescontosAdapter(getContext(), listaDescontos);
         lv.setAdapter(adapter);
@@ -78,6 +75,10 @@ public class Fragment_feed_descontos extends Fragment {
                 dialog.show(getFragmentManager(), "Dialog_desconto_qr");
             }
         });
+
+        if(listaDescontos.size() == 0) {
+            view.findViewById(R.id.sem_empresas).setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            animation_loading.stop();
             AlertDialog.Builder a_builder = new AlertDialog.Builder(MainActivity.this);
             a_builder.setMessage("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.")
                     .setCancelable(false)
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity{
                             Intent intent = getIntent();
                             finish();
                             startActivity(intent);
+                            animation_loading.start();
                         }
                     });
             AlertDialog alert = a_builder.create();

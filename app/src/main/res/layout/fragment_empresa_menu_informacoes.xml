@@ -195,7 +195,7 @@
                     android:paddingLeft="16dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:text="Rating"
+                    android:text="Rating da empresa"
                     android:textColor="@color/corPreta"
                     android:textSize="14sp"
                     app:fontFamily="@font/roboto"
