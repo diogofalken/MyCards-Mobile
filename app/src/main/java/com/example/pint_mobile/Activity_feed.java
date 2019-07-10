@@ -279,24 +279,20 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        String valor = "0";
+                        float x = 0;
                         try {
                             JSONArray ratings = new JSONArray(response);
                             if(ratings.length() != 0){
                                 for (int i = 0; i < ratings.length(); i++) {
                                     JSONObject r = ratings.getJSONObject(i);
-                                    String valor = r.getString("Rating");
-                                    Integer integer = Integer.parseInt(valor);
-                                    x += integer;
+                                    valor = r.getString("Rating");
+                                    x += Float.parseFloat(valor);
                                 }
-                                x = x / ratings.length();
-                                String valor = String.valueOf(x);
-                                editor.putString("Rating", valor);
-                                editor.commit();
+                                valor = Integer.toString(Math.round(x / ratings.length()));
                             }
-                            else{
-                                editor.putString("Rating", "0");
-                                editor.commit();
-                            }
+                            editor.putString("Rating", valor);
+                            editor.commit();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
