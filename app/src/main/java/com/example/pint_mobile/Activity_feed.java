@@ -481,7 +481,7 @@ public class Activity_feed extends AppCompatActivity implements  NavigationView.
                         JSONObject data = jsonArray.getJSONObject(i);
 
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                        if(!(utilizacoes.get(i).equals("1") && data.getString("TipoCampanha").equals("0") && format.parse(format.format(Calendar.getInstance().getTime())).after(format.parse(data.getString("DataFim"))))) {
+                        if(!(utilizacoes.get(i).equals("1") && data.getString("TipoCampanha").equals("0")) && !format.parse(format.format(Calendar.getInstance().getTime())).after(format.parse(data.getString("DataFim")))) {
                             lista.add(new Campanha(
                                     data.getString("ID_Campanha"),
                                     data.getString("Designacao"),
