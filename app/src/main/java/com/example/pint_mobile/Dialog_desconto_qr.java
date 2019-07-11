@@ -81,7 +81,7 @@ public class Dialog_desconto_qr extends DialogFragment {
         id_cartao = args.getString("id_cartao");
 
         String aux = "https://mycards.dsprojects.pt/ativarCampanha#codigocartao="+id_cartao+"&codigocampanha="+id_campanha;
-        String url = "https://api.qrserver.com/v1/create-qr-code/?data="+URLEncoder.encode(aux)+"&size=100x100";
+        String url = "https://api.qrserver.com/v1/create-qr-code/?data="+URLEncoder.encode(aux)+"&size=200x200";
 
         new AsyncGettingBitmapFromUrl().execute(url);
 
